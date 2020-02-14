@@ -1,0 +1,41 @@
+fi_thnitek_homepage:
+    path:     /
+    defaults: { _controller: FiThnitekBundle:Default:index }
+
+
+fi_thnitek_event:
+    path:     /event/mm
+    defaults: { _controller: FiThnitekBundle:Event:mm }
+
+fi_thnitek_ajouterEvent:
+    path:     /event/ajouterEvent
+    defaults: { _controller: FiThnitekBundle:Event:ajouterEvent}
+fi_thnitek_readEvent:
+    path:     /event/read
+    defaults: { _controller: FiThnitekBundle:Event:read}
+fi_thnitek_deleteEvent:
+    path:     /event/delete/{id}
+    defaults: { _controller: FiThnitekBundle:Event:delete}
+fi_thnitek_updateEvent:
+    path:     /event/update/{id}
+    defaults: { _controller: FiThnitekBundle:Event:update}
+
+fi_thnitek_readques:
+    path:     /questionnaire/read
+    defaults: { _controller: FiThnitekBundle:Questionnaire:read}
+fi_thnitek_ajouterques:
+  path:     /questionnaire/ajouterQuestionnaire
+  defaults: { _controller: FiThnitekBundle:Questionnaire:ajouterQestionnaire}
+
+fi_thnitek_deleteQuest:
+    path:     /questionnaire/delete/{id}
+    defaults: { _controller: FiThnitekBundle:Questionnaire:delete}
+fi_thnitek_updateQuest:
+    path:     /questionnaire/update/{id}
+    defaults: { _controller: FiThnitekBundle:Questionnaire:update}
+fi_thnitek_readoneevent:
+    path:     /event/readone/{id}
+    defaults: { _controller: FiThnitekBundle:Event:readOne}
+fi_thnitek_readone2event:
+    path:     /event/readone2/{id}
+    defaults: { _controller: FiThnitekBundle:Event:readOne2}

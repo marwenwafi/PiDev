@@ -1,0 +1,20 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block Sidebar %}
+{% endblock %}
+{% block container %}
+   <form method="post">
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Répondre au reclamation</h3>
+        </div>
+        <div class="col-sm-6">
+            <!-- textarea -->
+            <div class="form-group">
+                <label>Reponse</label>
+                <textarea class="form-control" placeholder="Enter ..." name="reponse"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+   </form>
+{% endblock %}

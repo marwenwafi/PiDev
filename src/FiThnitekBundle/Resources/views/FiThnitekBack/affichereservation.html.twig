@@ -1,0 +1,65 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+
+  {% block content %}
+
+
+
+      <section class="content">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <h3 class="card-title"> Les  demandes Taxi</h3>
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body p-0">
+                              <table class="table table-sm">
+                                  <thead>
+                                  <tr>
+                                      <th >ID reservation </th>
+                                      <th>Lieu de depart </th>
+                                      <th>Lieu d arrive </th>
+
+                                      <th > ID Taxi </th>
+                                      <th >Id Client </th>
+                                      <th>Etat</th>
+
+                                      <th>Supprimer</th>
+                                  </tr>
+                                  </thead>
+                                  {% for i in a %}
+                                  <tbody>
+                                  <tr>
+                                      <td>{{ i.id }}</td>
+                                      <td>{{ i.iddemande.lieudedepart }}</td>
+                                      <td>{{ i.iddemande.lieudarrive }}</td>
+                                      <td>{{ i.iduser.id }}</td>
+
+                                      <td>{{ i.iddemande.iduser.id }}</td>
+                                      <td> {{ i.iddemande.etat }}</td>
+
+                                      <td> <a  href="{{ path('fi_thnitek_supprimerreservationB',{'id': i.id }) }}" >  <button type="button" class="btn btn-block btn-outline-danger">Supprimer</button>
+                                          </a> </td>
+                                  </tr>
+
+                                  </tbody>
+                                  {% endfor %}
+                              </table>
+                          </div>
+                          <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                  </div>
+              </div>
+              <!-- /.row -->
+          </div><!-- /.container-fluid -->
+
+      </section>
+
+  {% endblock %}
+
+{#
+{{ block("javascripts", "fithnitek/baseFrontFiThnitek.html.twig") }}
+{{ block("navbar", "fithnitek/baseFrontFiThnitek.html.twig") }}
+#}

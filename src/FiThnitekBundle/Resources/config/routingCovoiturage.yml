@@ -1,0 +1,47 @@
+################Front####################################
+fi_thnitek_ajoutcovoiturageutilisateur:
+    path:     /ajoutcovoiturage
+    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovoiturage }
+fi_thnitek_affichcovoiturageutilisateur:
+    path:     /affichagebase
+    defaults: { _controller: FiThnitekBundle:Covoiturage:readoffre }
+fi_thnitek_supprimeroffrecov:
+    path:     /supprimeroffrecov/{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimeroffre }
+fi_thnitek_modifieroffrecov:
+    path:     /modifieroffrecov/{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:modifieroffrecovoiturage }
+fi_thnitek_afficheall:
+    path:     /afficheall
+    defaults: { _controller: FiThnitekBundle:Covoiturage:afficheall }
+fi_thnitek_ajoutreservation:
+    path:     /ajoutreserv/{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutreservation }
+fi_thnitek_readreservation:
+    path:     /readres
+    defaults: { _controller: FiThnitekBundle:Covoiturage:readreserver }
+fi_thnitek_supprimerReservCov:
+    path:     /supprimerrescov{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescov }
+#######################Back################################
+fi_thnitek_ajoutcovback:
+    path:     /ajoutcovback
+    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovback }
+fi_thnitek_affichagecovback:
+    path:     /affichagecovback
+    defaults: { _controller: FiThnitekBundle:Covoiturage:afficheallcovback }
+fi_thnitek_supprimercovback:
+    path:     /supprimercovback/{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimercovback }
+fi_thnitek_modifierrcovback:
+    path:     /modifiercovback/{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:modifiercovback }
+fi_thnitek_resevcovback:
+    path:     /reservcovback/{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutreservationBack }
+fi_thnitek_affichageresevcovback:
+    path:     /affichageresback
+    defaults: { _controller: FiThnitekBundle:Covoiturage:afficheallreservationBack }
+fi_thnitek_suppresevcovback:
+    path:     /supprimerrescovback/{id}
+    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescovback }

@@ -1,0 +1,45 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+
+  {% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Quick Example</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Lieu de depart </label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="lieu de depart " name="lieud">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Lieu d arrive </label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="lieu d arrive " name="lieua">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Periode </label>
+                                <input type="time" class="form-control" id="exampleInputPassword1" placeholder="periode d attente  " name="periode">
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Ajouter une demande </button>
+                        </div>
+                    </form>
+                </div>
+{% endblock %}
+
+
+{#
+{{ block("javascripts", "fithnitek/baseFrontFiThnitek.html.twig") }}
+{{ block("navbar", "fithnitek/baseFrontFiThnitek.html.twig") }}
+#}

@@ -1,0 +1,48 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block Sidebar %}
+{% endblock %}
+{% block container %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Les reclamations</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Type</th>
+                    <th>Sujet</th>
+                    <th>Description</th>
+                    <th>Date d'envoie</th>
+                    <th>Répondre</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in reclamation %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.type }}</td>
+                    <td>{{ c.sujet }}</td>
+                    <td>{{ c.description }}</td>
+                    <td>{{ c.date }}</td>
+                    <td><a href="{{ path('fi_thnitek_repondrereclamation' , { 'id':c.id} ) }}">repondre</a> </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Type</th>
+                    <th>Sujet</th>
+                    <th>Description</th>
+                    <th>Date d'envoie</th>
+                    <th>Répondre</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+{% endblock %}

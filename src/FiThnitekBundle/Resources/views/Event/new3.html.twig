@@ -1,0 +1,102 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+
+{% block container %}
+    <!-- Content Wrapper. Contains page content -->
+    <section class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">ajouter un evenement</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+
+
+        <!-- Ajouter -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-6">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Ajouter un évènement</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form method="post">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Date de début</label>
+                                        <input type="date" class="form-control" name="datedebut"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Date de fin </label>
+                                        <input type="date" class="form-control"   >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label >Promotion: </label>
+                                        <input type="number" class="form-control"  placeholder="Ajouter les points à gangner" name="promo">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label >Description: </label>
+                                        <input type="text" class="form-control"  placeholder="Ajouter une description" name="description">
+                                    </div>
+
+
+                                        <div class="form-group">
+                                            <label>Etat</label>
+                                            <select class="form-control" name="etat">
+                                                <option>Disponible</option>
+                                                <option>En attente</option>
+                                                <option>Non disponble</option>
+
+                                            </select>
+                                        </div>
+
+                                    <div class="form-group">
+                                        <label >Destinataire: </label>
+                                        <input type="number" class="form-control"  placeholder="Destinataire" >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Image:</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="exampleInputFile" name="image">
+                                                <label class="custom-file-label" for="exampleInputFile">image.jpeg </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </section>
+    </div>
+
+
+{% endblock %}

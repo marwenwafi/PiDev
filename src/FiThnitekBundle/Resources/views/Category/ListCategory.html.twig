@@ -1,0 +1,48 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block event %}
+
+{% endblock %}
+{% block container %}
+    <section class="content">
+    <div class="container-fluid">
+    <div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Categories</h1>
+                 </div><!-- /.row -->
+             </div><!-- /.container-fluid -->
+         </div>
+    </div>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Type</th>
+                <th scope="col">Nature</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+
+            {% for c in table %}
+
+
+                <tr>
+                    <th scope="col">{{ c.IdCategory }}  </th>
+                    <td>{{ c.title }} </td>
+                    <td>{{ c.description }} </td>
+                    <td>{{ c.type }} </td>
+                    <td>{{ c.nature }} </td>
+                    <td><a href="{{ path('fi_thnitek_modifyCategory', {'id': c.IdCategory}) }}"> <input type="button" value="Modifier"></a></td>
+                    <td><a href="{{ path('fi_thnitek_deleteCategory', {'id': c.IdCategory}) }}"> <input type="button" value="Supprimer"></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+    </section>
+{% endblock %}

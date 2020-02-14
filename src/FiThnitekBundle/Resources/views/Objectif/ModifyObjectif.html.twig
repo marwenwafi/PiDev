@@ -1,0 +1,23 @@
+{% form_theme f 'bootstrap_4_horizontal_layout.html.twig' %}
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block event %}
+
+{% endblock %}
+{% block container %}
+    <section class="content">
+    <div class="container-fluid">
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Objectifs</h1>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    {{ form(f) }}
+    </div>
+    </div>
+    </section>
+{% endblock %}

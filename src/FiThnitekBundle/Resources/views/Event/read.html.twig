@@ -1,0 +1,81 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block container %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Editer les évènements</h1>
+
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+    <section class="content">
+        <div class="row">
+            <div >
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Mes évennements</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Date début</th>
+                                <th>Date Fin</th>
+                                <th>Description</th>
+                                <th>Promotion</th>
+                                <th>Etat</th>
+                                <th>Image</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for tab in event %}
+
+                            <tr>
+                                <td>{{ tab.titre }}</td>
+                                <td>{{ tab.dateDebut  | date("d/m/y") }}</td>
+                                <td>{{  tab.dateFin | date("d/m/y")}}</td>
+                                <td>{{tab.description}}</td>
+                                <td>{{tab.promotion}}</td>
+                                <td>{{tab.etat}}</td>
+                                <td>{{tab.image}}</td>
+
+
+
+
+
+
+
+
+                                <td class="text-right py-0 align-middle">
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ path('fi_thnitek_updateEvent' , { 'id':tab.id} ) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                        <a  href="{{ path('fi_thnitek_deleteEvent' , { 'id':tab.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </section>
+                <!-- /.card -->
+
+{% endblock %}

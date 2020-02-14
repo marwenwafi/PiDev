@@ -1,0 +1,39 @@
+{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% block event %}
+
+{% endblock %}
+{% block container %}
+
+        <section class="ad-post bg-gray py-5">
+            <div class="container">
+                <form method="post">
+                    <!-- Post Your ad start -->
+                    <fieldset class="border border-gary p-4 mb-5">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3>Post Your ad</h3>
+                            </div>
+                            <div class="col-lg-6">
+                                <h6 class="font-weight-bold pt-4 pb-1">Lieu de depart
+                                    :</h6>
+                                <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="{{ demande.lieudedepart }}" name="lieud">
+                                <h6 class="font-weight-bold pt-4 pb-1">Destination:</h6>
+                                <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder= "{{ demande.lieudarrive }}"name="lieua">
+                                <h6 class="font-weight-bold pt-4 pb-1"> Periode</h6>
+                                <input  class="border w-100 p-2 bg-white text-capitalize" placeholder="{{ demande.periode }}" name="periode">
+
+                            </div>
+
+
+                        </div>
+                    </fieldset>
+                    <!-- Post Your ad end -->
+                    <!-- submit button -->
+                    <button type="submit" class="btn btn-primary d-block mt-2">Modifier Une Demande</button>
+                </form>
+            </div>
+        </section>
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+fi_thnitek_homepage:
+    path:     /
+    defaults: { _controller: FiThnitekBundle:Default:index }
+
+fi_thnitek_login:
+    path:     /login
+    defaults: { _controller: FiThnitekBundle:Default:login }
+
+fi_thnitek_ajouterreclamation:
+    path:     /ajout
+    defaults: { _controller: FiThnitekBundle:Reclamation:ajouterreclamation }
+
+fi_thnitek_afficherreclamation:
+    path:     /afficher
+    defaults: { _controller: FiThnitekBundle:Reclamation:afficherreclamation }
+
+fi_thnitek_supprimerreclamation:
+    path:     /supprimer/{id}
+    defaults: { _controller: FiThnitekBundle:Reclamation:supprimerreclamation }
+
+fi_thnitek_afficherbackreclamation:
+    path:     /afficherback
+    defaults: { _controller: FiThnitekBundle:Reclamation:afficherbackreclamation }
+
+fi_thnitek_repondrereclamation:
+    path:     /repondrerec/{id}
+    defaults: { _controller: FiThnitekBundle:Reclamation:repondrereclamation }
+
+fi_thnitek_afficherreponse:
+    path:     /afficherreponse/{id}
+    defaults: { _controller: FiThnitekBundle:Reclamation:afficherreponse }

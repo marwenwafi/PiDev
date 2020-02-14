@@ -1,0 +1,59 @@
+#######################
+##  ObjectifRouting  ##
+#######################
+
+fi_thnitek_addObjectif:
+  path:     /addObjectif
+  defaults: { _controller: FiThnitekBundle:Objectif:addObjectif }
+
+fi_thnitek_listObjectif:
+  path:     /listObjectif
+  defaults: { _controller: FiThnitekBundle:Objectif:listObjectif }
+
+fi_thnitek_modifyObjectif:
+  path:     /modifyObjectif/{id}
+  defaults: { _controller: FiThnitekBundle:Objectif:modifyObjectif }
+
+fi_thnitek_deleteObjectif:
+  path:     /listObjectif/{id}
+  defaults: { _controller: FiThnitekBundle:Objectif:deleteObjectif }
+
+#######################
+##  CategoryRouting  ##
+#######################
+
+fi_thnitek_addCategory:
+  path:     /addCategory
+  defaults: { _controller: FiThnitekBundle:Category:addCategory }
+
+fi_thnitek_listCategory:
+  path:     /listCategory
+  defaults: { _controller: FiThnitekBundle:Category:listCategory }
+
+fi_thnitek_modifyCategory:
+  path:     /admin/modifyCategory/{id}
+  defaults: { _controller: FiThnitekBundle:Category:modifyCategory }
+
+fi_thnitek_deleteCategory:
+  path:     /listCategory/{id}
+  defaults: { _controller: FiThnitekBundle:Category:deleteCategory }
+
+##########################
+##  LeaderBoardRouting  ##
+##########################
+
+fi_thnitek_addLeaderBoard:
+  path:     /addLeaderBoard
+  defaults: { _controller: FiThnitekBundle:LeaderBoard:addLeaderBoard }
+
+fi_thnitek_listLeaderBoard:
+  path:     /listLeaderBoard
+  defaults: { _controller: FiThnitekBundle:LeaderBoard:listLeaderBoard }
+
+fi_thnitek_modifyLeaderBoard:
+  path:     /modifyLeaderBoard/{id}
+  defaults: { _controller: FiThnitekBundle:LeaderBoard:modifyLeaderBoard }
+
+fi_thnitek_deleteLeaderBoard:
+  path:     /listLeaderBoard/{id}
+  defaults: { _controller: FiThnitekBundle:LeaderBoard:deleteLeaderBoard }

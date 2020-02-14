@@ -1,0 +1,52 @@
+{% extends 'FiThnitek/basebackFiThnitek.html.twig' %}
+{% block content %}
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Add Colis offer</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form method="post">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Departure</label>
+                   <input type="text" class="form-control" id="exampleInputPassword1" name="Depart" value="{{ Offre.lieuDepart }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Destination</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" name="Arrive" value="{{ Offre.lieuArrive }}">
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Date</label>
+                    <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Date">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Modelle</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Modele" value="{{ Offre.Voiture }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Hauteur</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1"  name="Hauteur" value="{{ Offre.Hauteur}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Largeur</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1"  name="Largeur" value="{{ Offre.Largeur}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Price</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1"  name="Prix" value="{{ Offre.prix}}">
+                </div>
+                </div>
+
+
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.card -->
+{% endblock %}

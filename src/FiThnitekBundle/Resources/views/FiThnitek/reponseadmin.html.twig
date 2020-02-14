@@ -1,0 +1,29 @@
+{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% block container %}
+    <div class="widget dashboard-container my-adslist">
+        <h3 class="widget-header">Mes Reclamations</h3>
+        <table class="table table-responsive product-dashboard-table">
+            <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Reponse</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for c in Reponse %}
+                <tr>
+
+                    <td class="product-thumb"> <h2>{{ c.IdRec.id }}</h2></td>
+                    <td class="product-details">
+                        <p>{{ c.reponseRec }}</p>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

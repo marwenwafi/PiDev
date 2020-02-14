@@ -1,0 +1,51 @@
+############        FRONT                   ##################
+fi_thnitek_affiche:
+    path:     /affiche
+    defaults: { _controller: FiThnitekBundle:Default:affiche }
+fi_thnitek_affichedemande:
+  path:     /affichedemande
+  defaults: { _controller: FiThnitekBundle:Taxi:affichedemande }
+fi_thnitek_ajouterdemande:
+  path:     /ajouterdemande
+  defaults: { _controller: FiThnitekBundle:Taxi:ajouterdemande }
+fi_thnitek_affichedemandeuser:
+  path:     /affichedemandeuser
+  defaults: { _controller: FiThnitekBundle:Taxi:affichedemandeuser }
+fi_thnitek_supprimerdemande:
+  path:     /supprimer{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:supprimer }
+fi_thnitek_modifierdemande:
+  path:     /modifier{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:modifier }
+fi_thnitek_reservertaxi:
+  path:     /reserver{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:reserver}
+fi_thnitek_affichereservation:
+  path:     /affichereservation
+  defaults: { _controller: FiThnitekBundle:Taxi:affichereservation}
+fi_thnitek_supprimerreservation:
+  path:     /supprimerres/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:supprimerres }
+
+############          BACK                    ##################
+fi_thnitek_affichedemandeB:
+  path:     /affichedemandeB
+  defaults: { _controller: FiThnitekBundle:Taxi:affichedemandeB }
+fi_thnitek_ajouterdemandeB:
+  path:     /ajouterdemandeB
+  defaults: { _controller: FiThnitekBundle:Taxi:ajouterdemandeB }
+fi_thnitek_affichereservationB:
+  path:     /affichereservationB
+  defaults: { _controller: FiThnitekBundle:Taxi:affichereservationB}
+fi_thnitek_supprimerreservationB:
+  path:     /supprimerresB/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:supprimerresB }
+fi_thnitek_supprimerdemandeB:
+  path:     /supprimerB/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:supprimerB }
+fi_thnitek_reservertaxiB:
+  path:     /reserverB/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:reserverB}
+fi_thnitek_modifierdemandeB:
+  path:     /modifierB/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:modifierB }

@@ -1,0 +1,50 @@
+{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% block event %}
+{% endblock %}
+{% block container %}
+
+
+    <section >
+        <div class="container">
+            <form method="post">
+
+
+                <!-- Post Your ad start -->
+                <fieldset class="border border-gary p-4 mb-5">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Post Your ad</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h6 class="font-weight-bold pt-4 pb-1">Departure
+                                :</h6>
+                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="departure">
+                            <h6 class="font-weight-bold pt-4 pb-1">Destination:</h6>
+                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="destination">
+                            <h6 class="font-weight-bold pt-4 pb-1">Date</h6>
+                            <input type="date" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="datee">
+                            <h6 class="font-weight-bold pt-4 pb-1">Car:</h6>
+                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There">
+                            </div>
+
+                        <div class="col-lg-6">
+                            <h6 class="font-weight-bold pt-4 pb-1">number of places
+                                :</h6>
+                            <input type="number" min="1" max="5" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="nbr">
+                            <div class="price">
+                                <h6 class="font-weight-bold pt-4 pb-1">Price :</h6>
+                                <input type="number" min="1"  class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="prix">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- Post Your ad end -->
+                <!-- submit button -->
+                <button type="submit" class="btn btn-primary d-block mt-2">Post Your Ad</button>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}
