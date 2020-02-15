@@ -57,3 +57,7 @@ fi_thnitek_modifyLeaderBoard:
 fi_thnitek_deleteLeaderBoard:
   path:     /listLeaderBoard/{id}
   defaults: { _controller: FiThnitekBundle:LeaderBoard:deleteLeaderBoard }
+
+fi_thnitek_showLeaderBoard:
+  path:     /showLeaderBoard
+  defaults: { _controller: FiThnitekBundle:LeaderBoard:showLeaderBoard }
