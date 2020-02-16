@@ -19,7 +19,7 @@ class ReservationCovoiturage
 private $idutilisateurr;
     /**
 
-     * @ORM\ManyToOne(targetEntity="OffreCovoiturage")
+     * @ORM\ManyToOne(targetEntity="offreCovoiturage")
      * @ORM\JoinColumn(name="idoffrer",
      *  referencedColumnName="idoffrecovoiturage")
      */

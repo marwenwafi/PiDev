@@ -17,8 +17,8 @@ class CategoryType extends AbstractType
     {
         $builder->add('title')
             ->add('description')
-            ->add('type', ChoiceType::class, array("choices"=>["Taxi"=>"Taxi","Covoiturage"=>"Covoiturage","Colis"=>"Colis","Tous"=>"Tous"]))
-            ->add('nature', ChoiceType::class, array("choices"=>["Avis"=>"Avis","Revenu"=>"Revenu","Destination"=>"Destination"]))
+            ->add('type', ChoiceType::class, array("choices"=>["Taxi"=>"Taxi","Covoiturage"=>"Covoiturage","Colis"=>"Colis"]))
+            ->add('nature', ChoiceType::class, array("choices"=>["Avis"=>"Avis","Revenu"=>"Revenu","Activite"=>"Activite"]))
             ->add($options["label"],SubmitType::class);
     }/**
      * {@inheritdoc}
