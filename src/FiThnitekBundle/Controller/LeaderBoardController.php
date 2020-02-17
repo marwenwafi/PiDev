@@ -73,7 +73,7 @@ class LeaderBoardController extends Controller
         }
 
 
-        return $this->render('@FiThnitek/LeaderBoard/ShowLeaderBoard.html.twig', array('table'=>$results));
+        return $this->render('@FiThnitek/LeaderBoard/ShowLeaderBoard.html.twig', array('results'=>$results,'boards'=>$leaderBoardS));
     }
 
 }
