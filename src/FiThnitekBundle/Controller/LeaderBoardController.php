@@ -71,9 +71,6 @@ class LeaderBoardController extends Controller
             $l = $this->getDoctrine()->getRepository(LeaderBoard:: class)->find($leaderBoardS[$i]->getIdleaderboard());
             $results[] = $repo->customQuery($l->getCategory(),$l->getSize(),$l->getStartDate()->format('Y-m-d'),$l->getEndDate()->format('Y-m-d'));
         }
-
-
         return $this->render('@FiThnitek/LeaderBoard/ShowLeaderBoard.html.twig', array('results'=>$results,'boards'=>$leaderBoardS));
     }
-
 }
