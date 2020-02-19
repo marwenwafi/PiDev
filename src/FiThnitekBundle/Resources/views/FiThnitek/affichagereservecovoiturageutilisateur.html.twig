@@ -18,8 +18,8 @@
                                 <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
                             </div>
                             <!-- User Name -->
-                            <h5 class="text-center">Samanta Doe</h5>
-                            <p>Joined February 06, 2017</p>
+                            <h5 class="text-center">{{ user.prenom }} {{ user.username }}</h5>
+                            <p>{{ user.email }}</p>
                             <a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
                         </div>
                         <!-- Dashboard Links -->
@@ -68,6 +68,7 @@
                                 <th>Driver number</th>
                                 <th class="text-center">Date</th>
                                 <th>Nomber of places</th>
+                                <th>Price</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -88,6 +89,9 @@
                                 <td class="product-category"><span class="categories">{{ i.idoffrer.date }}</span></td>
                                 <td class="product-details">
                                    <center>{{ i.nbrplacer }}</center>
+                                </td>
+                                <td class="product-details">
+                                    <center>{{ i.prixt }}</center>
                                 </td>
                                 <td class="action" data-title="Action">
                                     <div class="">

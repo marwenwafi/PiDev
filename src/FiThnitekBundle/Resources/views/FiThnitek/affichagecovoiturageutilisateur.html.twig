@@ -19,8 +19,8 @@
                             </div>
                             
                             <!-- User Name -->
-                            <h5 class="text-center">Samanta Doe</h5>
-                            <p>Joined February 06, 2017</p>
+                            <h5 class="text-center">{{ user.prenom }} {{ user.username }}</h5>
+                            <p>{{ user.email }}</p>
                             <a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
                         </div>
                         <!-- Dashboard Links -->
@@ -63,8 +63,11 @@
                         <table class="table table-responsive product-dashboard-table">
                             <thead>
                             <tr>
-                                <th>Departure</th>
-                                <th>Destination</th>
+                                <th class="text-center">Departure</th>
+                                <th class="text-center">Destination</th>
+                                <th class="text-center">Car</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">places</th>
                                 <th class="text-center">Date</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -75,7 +78,16 @@
                                 <td class="product-thumb">
                                     {{ i.depart }}</td>
                                 <td class="product-details">
-                                    {{ i.destination }}
+                                   <center> {{ i.destination }}</center>
+                                </td>
+                                <td class="product-details">
+                                  <center>  {{ i.voiture }} </center>
+                                </td>
+                                <td class="product-details">
+                                    <center>  {{ i.prix }} </center>
+                                </td>
+                                <td class="product-details">
+                                    <center>  {{ i.nbrplaceo }} </center>
                                 </td>
                                 <td class="product-category"><span class="categories">{{ i.date }}</span></td>
                                 <td class="action" data-title="Action">

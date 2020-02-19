@@ -1,3 +1,4 @@
+
 {% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
 {% block event %}
 
@@ -9,21 +10,25 @@
                 <div class="col-md-12">
                     <!-- Advance Search -->
                     <div class="advance-search">
-                        <form>
+                        <form method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
+                                    <input required type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="Departure" name="departrecherche">
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
+                                    <input required type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Destination" name="destinationrecherche">
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
+                                    <input  required type="number" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Number of places" name="nbrplacerecherche">
                                 </div>
-                                <div class="form-group col-md-2">
 
-                                    <button type="submit" class="btn btn-primary">Search Now</button>
+                                <div class="form-group col-md-2">
+                                    <input  type="submit" class="btn btn-primary" formaction="{{ path("fi_thnitek_rechercheReservCov") }}" value="Search Now">
+
                                 </div>
+
+
+
                             </div>
                         </form>
                     </div>
@@ -35,70 +40,94 @@
         <div class="container">
 
             <div class="row">
+                <div class="col-md-3">
+                    <div class="category-sidebar">
+                        <div class="widget category-list">
+                            <h4 class="widget-header">Sorts</h4>
+<form method="post">
+    <div class="form-group col-md-2">
+        <input type="submit" class="btn btn-primary" formaction="{{ path("fi_thnitek_ordonneroffreCov") }}" value="Highest prices">
+
+    </div>
+    <div class="form-group col-md-2">
+        <input type="submit" class="btn btn-primary" formaction="{{ path("fi_thnitek_ordonneroffreCov1") }}" value="Lower prices">
+
+    </div>
+
+</form>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-md-9">
                     {% for i in cov %}
-                    <div class="product-grid-list">
+                        <div class="product-grid-list">
 
-                        <div class="row mt-30">
+                            <div class="row mt-30">
 
-                            <div class="col-sm-12 col-lg-4 col-md-6">
-                                <!-- product card -->
-                                <div class="product-item bg-light">
-                                    <div class="card">
-                                        <div class="thumb-content">
-                                            <!-- <div class="price">$200</div> -->
-                                           <img src="{{ i.idutilisateur.image }}" >
+                                <div class="col-sm-12 col-lg-4 col-md-6">
+                                    <!-- product card -->
+                                    <div class="product-item bg-light">
+                                        <div class="card">
+                                            <div class="thumb-content">
+                                                <!-- <div class="price">$200</div> -->
+                                                <img src="{{ i.idutilisateur.image }}" >
+                                            </div>
+                                            <div >
+                                                <h3 class="card-title">{{ i.idutilisateur.username }} {{ i.idutilisateur.prenom }}</h3>
+
+
+                                            </div>
+                                            <div>
+                                                <h6 class="card-title">Departure : {{ i.depart }}</h6>
+
+                                            </div>
+                                            <div>
+                                                <h6 class="card-title">Destination : {{ i.destination }}</h6>
+
+                                            </div>
+                                            <div>
+                                                <h6 class="card-title">Car : {{ i.voiture }}</h6>
+
+                                            </div>
+                                            <div>
+                                                <h6 class="card-title">Date : {{ i.date }}</h6>
+
+                                            </div>
+                                            <div>
+                                                <h6 class="card-title">Prix : {{ i.prix }}</h6>
+
+                                            </div>
+                                            <div>
+                                                <h6 class="card-title">Nomber of places : {{ i.nbrplaceo }}</h6>
+
+                                            </div>
+                                            <form method="POST" >
+                                                <div>
+                                                    <h6 class="font-weight-bold pt-4 pb-1">number of places
+                                                        :</h6>
+                                                    <input required type="number" min="1" max="{{ i.nbrplaceo }}"  class="border w-100 p-2 bg-white text-capitalize" placeholder="Reserve places" name="nbrr">
+
+
+
+                                                 <center>   <input  value="Reserve" class="btn btn-primary d-block mt-2" type="submit" formaction="{{ path('fi_thnitek_ajoutreservation',{'id': i.idoffrecovoiturage })}}"  ></center>
+
+                                                </div>
+
+                                            </form>
+
                                         </div>
-                                        <div >
-                                            <h3 class="card-title">{{ i.idutilisateur.username }} {{ i.idutilisateur.prenom }}</h3>
-
-
-                                        </div>
-                                        <div>
-                                            <h6 class="card-title">Departure : {{ i.depart }}</h6>
-
-                                        </div>
-                                        <div>
-                                            <h6 class="card-title">Destination : {{ i.destination }}</h6>
-
-                                        </div>
-                                        <div>
-                                            <h6 class="card-title">Date : {{ i.date }}</h6>
-
-                                        </div>
-                                        <div>
-                                            <h6 class="card-title">Prix : {{ i.prix }}</h6>
-
-                                        </div>
-                                        <div>
-                                            <h6 class="card-title">Nomber of places : {{ i.nbrplaceo }}</h6>
-
-                                        </div>
-                                       <form method="POST" >
-                                        <div>
-                                            <h6 class="font-weight-bold pt-4 pb-1">number of places
-                                                :</h6>
-                                            <input type="number" min="1" max="5" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="nbrr">
-
-
-
-                                            <input value="Reserve" class="btn btn-primary d-block mt-2" type="submit" formaction="{{ path('fi_thnitek_ajoutreservation',{'id': i.idoffrecovoiturage })}}"  >
-
-                                        </div>
-
-                                       </form>
 
                                     </div>
+
+
+
                                 </div>
 
-
-
                             </div>
-
+                            {% endfor %}
                         </div>
-                    </div>
-                    {% endfor %}
+
                     <div class="pagination justify-content-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
