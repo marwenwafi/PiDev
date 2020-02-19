@@ -64,6 +64,7 @@ class LeaderBoardController extends Controller
         $leaderBoardS = $this->getDoctrine()->getRepository(LeaderBoard::class)->findAll();
         $repo = $this->getDoctrine()->getManager()->getRepository(LeaderBoard:: class);
         $size = sizeof($leaderBoardS);
+        $results = "";
         for ($i=0;$i<$size;$i++)
         {
             $l = $this->getDoctrine()->getRepository(LeaderBoard:: class)->find($leaderBoardS[$i]->getIdleaderboard());

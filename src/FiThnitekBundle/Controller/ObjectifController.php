@@ -62,7 +62,6 @@ class ObjectifController extends Controller
             if ($request->get('_submit')) {
                 $objectif = $this->getDoctrine()->getRepository(Objectif:: class)->find($id);
                 $te = $request->get('_submit');
-                var_dump($te);
                 if ($te == "true")
                     $objectif->setEtat(false);
                 else if ($te == "false")
@@ -75,8 +74,10 @@ class ObjectifController extends Controller
         if ($objectif->getEtat())
         {
             $repo = $this->getDoctrine()->getManager()->getRepository(Objectif:: class);
-            $results[] = $repo->customQuery($objectif->getType(),$objectif->getStartDate()->format('Y-m-d'),$objectif->getEndDate()->format('Y-m-d'));
-            return $this->render('@FiThnitek/Objectif/DetailsObjectif.html.twig', array('table'=>$objectif, 'results'=>$results));
+            $res = $repo->customQuery($objectif->getType(),$objectif->getStartDate()->format('Y-m-d'),$objectif->getEndDate()->format('Y-m-d'));
+            $percent = ($res[0][1] / $objectif->getBut())*100;
+            $total = $res[0][1];
+            return $this->render('@FiThnitek/Objectif/DetailsObjectif.html.twig', array('table'=>$objectif, 'percent'=>$percent,'total'=>$total));
         }
         return $this->render('@FiThnitek/Objectif/DetailsObjectif.html.twig', array('table'=>$objectif));
     }
