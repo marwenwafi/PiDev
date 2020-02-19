@@ -5,7 +5,7 @@ namespace FiThnitekBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FiThnitekBundle\Repository\OffreRepository")
  */
 class OffreColis
 {
@@ -49,7 +49,10 @@ class OffreColis
      * @ORM\Column(type="float")
      */
     private $largeur;
-
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $longueur;
     /**
      * @return mixed
      */
@@ -193,6 +196,22 @@ class OffreColis
     public function setLargeur($largeur)
     {
         $this->largeur = $largeur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongueur()
+    {
+        return $this->longueur;
+    }
+
+    /**
+     * @param mixed $longueur
+     */
+    public function setLongueur($longueur)
+    {
+        $this->longueur = $longueur;
     }
 
 }

@@ -28,10 +28,13 @@
                             <th>Date</th>
                             <th>largeur</th>
                             <th>hauteur</th>
+                            <th>Longueur</th>
+
                             <th>price</th>
 
                             <th>largeur</th>
                             <th>hauteur</th>
+                            <th>Longueur</th>
 
                             <th>Delete</th>
                             <th>Update</th>
@@ -47,11 +50,14 @@
                             <td>{{ i.dateCol }}</td>
                             <td>{{i.largeur  }}</td>
                             <td>{{i.hauteur  }}</td>
+                            <td>{{i.Longueur  }}</td>
                             <td>{{ i.prix }}</td>
 <form method="post">
-                            <td><input type="number"  name="Hauteur"></td>
-                            <td> <input type="number"  name="Largeur"></td>
-                            <td>
+                            <td><input type="number" min="1" name="Largeur"></td>
+                            <td> <input type="number" min="1" name="Hauteur"></td>
+                           <td> <input type="number" min="1" name="Longueur"></td>
+
+    <td>
                                 <a class="btn btn-block btn-outline-danger" href="{{  path('fi_thnitek_supprimerOffreback',{'id':i.idOffreCol }) }}">Delete</a>
 
                             </td>
