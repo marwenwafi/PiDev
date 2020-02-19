@@ -22,6 +22,7 @@ class Event2Type extends AbstractType
     {
         $builder->add('titre')->add('dateDebut')->add('dateFin')->add('description')
             ->add('promotion')
+
             ->add('url',UrlType::class)
 
             ->add('operation',ChoiceType::class, [

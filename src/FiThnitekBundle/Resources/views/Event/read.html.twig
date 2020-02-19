@@ -68,8 +68,12 @@
 
                                 <td class="text-right py-0 align-middle">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="{{ path('fi_thnitek_updateEvent' , { 'id':tab.id} ) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                        <a  href="{{ path('fi_thnitek_updateEvent' , { 'id':tab.id} ) }}" class="btn btn-danger"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ path('fi_thnitek_readoneevent' , { 'id':tab.id} ) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+
                                         <a  href="{{ path('fi_thnitek_deleteEvent' , { 'id':tab.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+
+
                                     </div>
                                 </td>
                             </tr>

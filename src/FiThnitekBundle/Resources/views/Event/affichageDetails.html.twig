@@ -1,4 +1,4 @@
-{% extends 'FiThnitek/baseFiThnitek.html.twig' %}
+{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
 {% block navbar %}
 <section>
     <div class="container">
@@ -82,7 +82,7 @@
             <div class="row justify-content-md-center text-center">
                 <div class="col-md-8">
                     <div class="content-holder">
-                        {{ dump(app.user) }}
+
 
                         <h1 class="specialEventText">  {{ me.titre }}</h1>
                         <table>
@@ -121,8 +121,8 @@
                             </table >
                         <ul class="list-inline mt-30">
                             <li class="list-inline-item"><a class="btn btn-main"  href="{{ path('fi_thnitek_participation' , { 'id':me.id} ) }}" class="btn btn-info">Participer</a></li>
-                            <li class="list-inline-item"><a class="btn btn-secondary" href="category.html">Ignorer</a></li>
-                        </ul>
+                            <li class="list-inline-item"><a class="btn btn-secondary" href="/PiDev/web/app_dev.php/">Ignorer</a></li>
+                        </ul>/
                     </div>
                 </div>
             </div>

@@ -66,6 +66,7 @@ class Event
      *
      * @ORM\Column(name="promotion", type="integer")
      * @Assert\NotBlank(message="Le champ promotion est obligatoire")
+     * @Assert\GreaterThanOrEqual("1")
      */
     private $promotion;
 

@@ -38,21 +38,14 @@ class EventController extends Controller
         $event=$paginator->paginate(
           $query,
             $request->query->getInt('page', 1), /*page number*/
-            $request->query->getInt('limit', 2) /*limit per page*/
+            $request->query->getInt('limit', 4) /*limit per page*/
 
         );
 
         return $this->render('@FiThnitek/Event/read.html.twig',array('event'=>$event));
     }
 
-    /***************Users*******************/
 
-    public function readAllUsersAction()
-    {
-        $em= $this->getDoctrine()->getManager();
-        $users = $em->getRepository(User::class)->findAll();
-        return $users;
-    }
 
 
 
@@ -123,11 +116,14 @@ class EventController extends Controller
     public function updateAction(Request $request, $id){
         $em = $this->getDoctrine()->getManager();
         $event= $em->getRepository(Event::class)->find($id);
-        $form= $this->createForm(Event2Type::class, $event);
+       // $image=$event->getImage();
+        //$event->setImage("sourour");
         dump($request);
+        $form= $this->createForm(Event2Type::class, $event);
         $form= $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() ){
+
 
 
 
@@ -146,50 +142,64 @@ class EventController extends Controller
     public function participerAction($id)
     {
 
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();//->getId();
-        //dump($user);
-       // $idu=$user->getId();
-
-
+        $user = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
         $mn = $this->getDoctrine()->getManager();
         $event= $mn->getRepository(Event::class)->find($id);
-        //$user= $mn->getRepository(User::class)->find(1);
+        $myUser= $mn->getRepository(User::class)->find($user);
+        //dump($myUser);
+
+
 
         $url=$event->getUrl();
         if($event->getOperation()=='Questionnaire')
         {
-            return $this->redirectToRoute("fi_thnitek_readonequest", array(
+            return $this->redirectToRoute("fi_thnitek_repondre", array(
                 'id' => $id));
         }
         elseif ($event->getOperation()=='Publicité'){
+            $myUser->setPoints($myUser->getPoints() + $event->getPromotion());
+
+            $mn->persist($event);
+            $mn->flush();
 
             return $this->redirect($url);
-      //
-            //$promo=$user->getPromotion();
-            //$user->setPoints($user->getPoints()+$promo);
+
+
 
         }
 
-
-
-
     }
-    public function repondreAction($id)
+
+    public function repondreAction(Request $request, $id)
     {
 
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();//->getId();
-        //dump($user);
-
-
+        $user = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
         $mn = $this->getDoctrine()->getManager();
         $event= $mn->getRepository(Event::class)->find($id);
+        $myUser= $mn->getRepository(User::class)->find($user);
+        $events2 = $mn->getRepository(Questionnaire::class)->findBy(array('idevent'=>$id));
+        //$reponse=new Response();
+
+
+        if ($request->isMethod('POST') ) {
+
+
+                $myUser->setPoints($myUser->getPoints() + $event->getPromotion());
+
+                $mn->persist($event);
+                $mn->flush();
+
+
+            return $this->redirectToRoute('fi_thnitek_homepage');
 
 
 
-            //
-            //$promo=$user->getPromotion();
-            //$user->setPoints($user->getPoints()+$promo);
-        return $this->redirectToRoute('fi_thnitek_homepage');
+
+
+        }
+
+       // return $this->render('@FiThnitek/Event/affichageDetailsQ.html.twig');
+       return $this->render('@FiThnitek/Event/affichageDetailsQ.html.twig',array('quest'=>$event,'events2'=>$events2));
 
 
 

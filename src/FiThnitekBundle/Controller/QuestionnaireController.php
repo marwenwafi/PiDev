@@ -94,6 +94,7 @@ class QuestionnaireController extends Controller
     public function createAction(Request $request,$id){
 
         $forma = new Questionnaire();
+        $forma->setIdevent($id);
         $form= $this->createForm(QuestionnaireType::class, $forma);
         $em=$this->getDoctrine()->getManager();
         $events=$em->getRepository(Event::class)->findAll();
@@ -141,9 +142,10 @@ class QuestionnaireController extends Controller
         $ev = $em->getRepository(Event::class)->find($id);
 
         $events2 = $em->getRepository(Questionnaire::class)->findBy(array('idevent'=>$id));
-        dump($events2);
+        //dump($events2);
 
-        return $this->render('@FiThnitek/Event/affichageDetailsQ.html.twig',array('quest'=>$ev,'events2'=>$events2));
+        return new  Response("hi");
+            //$this->render('@FiThnitek/Event/affichageDetailsQ.html.twig',array('quest'=>$ev,'events2'=>$events2));
     }
 
 
