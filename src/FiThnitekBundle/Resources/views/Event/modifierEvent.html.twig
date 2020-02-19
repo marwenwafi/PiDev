@@ -48,11 +48,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Date de début:</label>
-                                        <input type="date" class="form-control" name="datedebut"  value={{event.dateDebut  | date("d/m/y")}}>
+                                        <input type="date" class="form-control" name="datedebut"  value={{event.dateDebut  | date("yy-m-d")}}>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Date de fin :</label>
-                                        <input type="date" class="form-control"   value={{event.dateFin  | date("d/m/y")}}>
+                                        <input type="date" class="form-control"   value={{event.dateFin  | date("yy-m-d")}}>
                                     </div>
 
                                     <div class="form-group">
@@ -68,15 +68,7 @@
                                     </div>
 
 
-                                        <div class="form-group">
-                                            <label>Etat:</label>
-                                            <select class="form-control" name="etat" >
-                                                <option>Disponible</option>
-                                                <option>En attente</option>
-                                                <option>Non disponble</option>
 
-                                            </select>
-                                        </div>
 
                                     <div class="form-group">
                                         <label >  Destinataire: </label>

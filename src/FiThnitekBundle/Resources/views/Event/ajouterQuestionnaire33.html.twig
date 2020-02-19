@@ -1,0 +1,162 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+
+{% block container %}
+    <!-- Content Wrapper. Contains page content -->
+    <section class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1></h1>
+                    </div>
+                    <div class="col-sm-6">
+
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+
+
+        <!-- Ajouter -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-6">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Ajouter un questionnaire</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+
+                            {{ form_start(f, {'attr': {'class': 'form-horizontal'}}) }}
+
+
+                            <div class="card-body">
+                                <div class="form-con">
+
+                                    <div class="form-group">
+                                        {{ form_label(f.idevent, "Evénèment :", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
+                                        {{ form_widget(f.idevent, {'attr': {'class': 'form-control'}}) }}
+
+                                    </div>
+
+                                <div class="form-group">
+                                    {{ form_label(f.question, "Question :", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
+
+                                    {{ form_widget(f.question, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(f.question) }}
+                                </div>
+
+
+                                <div class="form-group">
+                                    {{ form_label(f.reponse1, "Reponse1 :", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
+
+                                    {{ form_widget(f.reponse1, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(f.reponse1) }}
+                                </div>
+
+
+
+                                <p class="form-group">
+                                    {{ form_label(f.reponse2, "Reponse2 :", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
+                                    {{ form_widget(f.reponse2, {'attr': {'class': 'form-control'}}) }}
+
+
+                                     {{ form_errors(f.reponse2, {'attr': {'class': 'form-control'}}) }}
+
+
+
+                                </div>
+
+
+                            {#
+                                <div >
+
+                                    {% for i in ev %}
+                                    {{i.titre}}
+                                    {% endfor %}
+                                </div>
+
+                             #}
+
+
+
+
+
+
+
+
+                            <div class="card-footer">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-6">
+
+
+
+                                    {{ form_widget(f.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+                                </div>
+                                    <div class="col-lg-6">
+                                        {{ form_widget(f.Plus) }}
+                                    </div>
+
+
+
+                            </div>
+                            </div>
+
+                        </div>
+                            <!-- /.card-body -->
+
+
+                            {{ form_end(f) }}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </section>
+
+{% endblock %}
+
+ {% block stylesheets %}
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <title>AdminLTE 3 | Dashboard</title>
+     <!-- Tell the browser to be responsive to screen width -->
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- Font Awesome -->
+     <link rel="stylesheet" href="{{ asset ('backend/plugins/fontawesome-free/css/all.min.css') }}">
+     <!-- Ionicons -->
+     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+     <!-- Tempusdominus Bbootstrap 4 -->
+     <link rel="stylesheet" href="{{ asset ('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+     <!-- BootStrapTable -->
+     <link rel="stylesheet" href="{{ asset ('backend/dist/css/bootstrap.scss') }}">
+     <!-- iCheck -->
+     <link rel="stylesheet" href="{{ asset ('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+     <!-- JQVMap -->
+     <link rel="stylesheet" href="{{ asset ('backend/plugins/jqvmap/jqvmap.min.css') }}">
+     <!-- Theme style -->
+     <link rel="stylesheet" href="{{ asset ('backend/dist/css/adminlte.min.css') }}">
+     <!-- overlayScrollbars -->
+     <link rel="stylesheet" href="{{ asset ('backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+     <!-- Daterange picker -->
+     <link rel="stylesheet" href="{{ asset ('backend/plugins/daterangepicker/daterangepicker.css') }}">
+     <!-- summernote -->
+     <link rel="stylesheet" href="{{ asset ('backend/plugins/summernote/summernote-bs4.css') }}">
+     <!-- Google Font: Source Sans Pro -->
+     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+     <style >
+         .erreeur { color: #336699; }
+     </style>
+
+ {% endblock %}

@@ -5,7 +5,7 @@ namespace FiThnitekBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Questionnaire
  *
@@ -27,6 +27,9 @@ class Questionnaire
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=255)
+     * @Assert\NotBlank(message="Le champ question est obligatoire")
+     * @Assert\Length(min=5,max=255)
+     *
      */
     private $question;
 
@@ -35,6 +38,7 @@ class Questionnaire
      *
      *
      * @ORM\Column(name="reponse1", type="string", length=255)
+     * @Assert\NotBlank(message="Le champ reponse1 est obligatoire")
      */
     private $reponse1;
     /**
@@ -42,6 +46,7 @@ class Questionnaire
      *
      *
      * @ORM\Column(name="reponse2", type="string", length=255)
+     * @Assert\NotBlank(message="Le champ reponse2 est obligatoire")
      */
     private $reponse2;
 
@@ -55,9 +60,10 @@ class Questionnaire
 
     /**
      * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="idevent", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idevent"),
+     * ReferencedColumnName="id")
      */
-    private $event;
+    private $idevent;
 
 
 
@@ -144,18 +150,23 @@ class Questionnaire
     /**
      * @return mixed
      */
-    public function getEvent()
+    public function getIdevent()
     {
-        return $this->event;
+        return $this->idevent;
     }
 
     /**
-     * @param mixed $event
+     * @param mixed $idevent
      */
-    public function setEvent($event)
+    public function setIdevent($idevent)
+
     {
-        $this->event = $event;
+        $this->idevent = $idevent;
     }
+
+
+
+
 
 
 }

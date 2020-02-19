@@ -1,0 +1,48 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+<h3>Formulaire d'annonce</h3>
+
+<div class="well">
+    {{ form_start(f, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(f) }}
+
+    {# Génération du label + error + widget pour un champ. #}
+    {{ form_row(f.dateDebut) }}
+
+    {# Génération manuelle et éclatée : #}
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(f.titre, "Titre de l'annonce", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+
+
+        <div class="col-sm-10">
+            {# Génération de l'input. #}
+            {{ form_widget(f.titre, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    {# Idem pour un autre champ. #}
+    <div class="form-group">
+        {{ form_label(f.etat, "Contenu de l'annonce", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(f.etat) }}
+        <div class="col-sm-10">
+            {{ form_widget(f.etat, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+
+
+    {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+    {{ form_widget(f.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+
+    {# Génération automatique des champs pas encore écrits.
+       Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+       et tous les champs cachés (type « hidden »). #}
+    {{ form_rest(f) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+    {{ form_end(f) }}
+</div>

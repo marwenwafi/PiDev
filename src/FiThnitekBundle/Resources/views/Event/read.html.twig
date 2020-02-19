@@ -6,9 +6,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Editer les évènements</h1>
+                        <h1></h1>
 
                 </div>
+            </div>
             </div><!-- /.container-fluid -->
         </section>
 
@@ -35,6 +36,9 @@
                                 <th>Promotion</th>
                                 <th>Etat</th>
                                 <th>Image</th>
+                                <th>Opération</th>
+                                <th>URL</th>
+
                                 <th></th>
                             </tr>
                             </thead>
@@ -48,7 +52,12 @@
                                 <td>{{tab.description}}</td>
                                 <td>{{tab.promotion}}</td>
                                 <td>{{tab.etat}}</td>
-                                <td>{{tab.image}}</td>
+                                <td><img src="{{asset('uploads/eventsImages/'~ tab.image ) }}" style="width:50px;max-width:50px"></td>
+                                <td>{{tab.operation}}</td>
+                                <td>{{tab.url}}</td>
+
+
+
 
 
 
@@ -69,6 +78,10 @@
 
                             </tbody>
                         </table>
+
+                    <div class="navigation">
+                        {{ knp_pagination_render(event) }}
+                    </div>
 
                     <!-- /.card-body -->
                 </div>

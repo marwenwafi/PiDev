@@ -10,4 +10,11 @@ namespace FiThnitekBundle\Repository;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function envoyerParDestinataire()
+    {
+        $qb =$this->getEntityManager()
+            ->createQuery("select c from FiThnitekBundle:Event c where c.titre='event'");
+        return $query=$qb->getResult();
+
+    }
 }

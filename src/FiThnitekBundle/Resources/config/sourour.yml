@@ -3,9 +3,7 @@ fi_thnitek_homepage:
     defaults: { _controller: FiThnitekBundle:Default:index }
 
 
-fi_thnitek_event:
-    path:     /event/mm
-    defaults: { _controller: FiThnitekBundle:Event:mm }
+
 
 fi_thnitek_ajouterEvent:
     path:     /event/ajouterEvent
@@ -23,9 +21,7 @@ fi_thnitek_updateEvent:
 fi_thnitek_readques:
     path:     /questionnaire/read
     defaults: { _controller: FiThnitekBundle:Questionnaire:read}
-fi_thnitek_ajouterques:
-  path:     /questionnaire/ajouterQuestionnaire
-  defaults: { _controller: FiThnitekBundle:Questionnaire:ajouterQestionnaire}
+
 
 fi_thnitek_deleteQuest:
     path:     /questionnaire/delete/{id}
@@ -36,6 +32,19 @@ fi_thnitek_updateQuest:
 fi_thnitek_readoneevent:
     path:     /event/readone/{id}
     defaults: { _controller: FiThnitekBundle:Event:readOne}
-fi_thnitek_readone2event:
-    path:     /event/readone2/{id}
-    defaults: { _controller: FiThnitekBundle:Event:readOne2}
+
+fi_thnitek_ajouterques2:
+  path:     /questionnaire/ajouterQuestionnaire2/{id}
+  defaults: { _controller: FiThnitekBundle:Questionnaire:create}
+
+fi_thnitek_readonequest:
+      path:     /questionnaire/readone/{id}
+      defaults: { _controller: FiThnitekBundle:Questionnaire:readOne}
+
+fi_thnitek_participation:
+    path:     /event/participer/{id}
+    defaults: { _controller: FiThnitekBundle:Event:participer}
+
+fi_thnitek_repondre:
+    path:     /event/repondre/{id}
+    defaults: { _controller: FiThnitekBundle:Event:repondre}

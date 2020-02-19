@@ -2,6 +2,7 @@
 
 namespace FiThnitekBundle\Entity;
 
+use AppBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,30 +26,18 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="titre", type="string", length=255,unique=true)
+     *  @Assert\NotBlank(message="Le champ titre est obligatoire")
+     * @Assert\Length(min=3,max=20)
      */
     private $titre;
-
-    /**
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
-
-    /**
-     * @param string $titre
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-    }
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateDebut", type="date")
+     *
+     * @Assert\GreaterThanOrEqual("today")
      */
     private $dateDebut;
 
@@ -56,6 +45,11 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="dateFin", type="date")
+     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\Expression(
+     *     "this.getDateDebut() <= this.getDateFin()",
+     *     message="La date fin ne doit pas être inférieur à la date début"
+     * )
      */
     private $dateFin;
 
@@ -63,6 +57,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
+     * @Assert\NotBlank(message="Le champ description est obligatoire")
      */
     private $description;
 
@@ -70,6 +65,7 @@ class Event
      * @var int
      *
      * @ORM\Column(name="promotion", type="integer")
+     * @Assert\NotBlank(message="Le champ promotion est obligatoire")
      */
     private $promotion;
 
@@ -79,27 +75,56 @@ class Event
      * @ORM\Column(name="etat", type="string", length=255)
      */
     private $etat;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=255, nullable=true)
+     *  @Assert\Url(
+     *     protocols = {"http"}
+     *     )
+     *
+     */
+    private $url;
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255,nullable=true)
+     * @ORM\Column(name="image", type="string", length=255)
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
+     * @Assert\NotBlank(message="Le champ image est obligatoire")
      */
     private $image;
-    /*****************************************************/
-    /*********************************************************/
+
     /**
      * @var string
      *
-     * @ORM\Column(name="destinataires", type="string", length=255, nullable=true)
+     * @ORM\Column(name="operation", type="string", length=255, nullable=true)
      *
      */
 
-    private $destinataires;
+    private $operation;
+
 
     /***************************************************/
-    /********************************************************/
+
+
+    /********************************************************
     /**
 
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
@@ -114,12 +139,7 @@ class Event
     private $admins;
 
 
-    /***************************************************/
-    /*******************************************************/
-    private $questionnaire;
 
-    /***************************************************/
-    /********************************************************/
     /**
 
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
@@ -134,18 +154,18 @@ class Event
     private $participants;
     /***************************************************/
     /*******************************************************/
-
-
     /**
-     * Event constructor.
+
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinTable(name="destinataires",
+     *     joinColumns={@ORM\JoinColumn(name="eventId" ,
+     *     referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="userId" ,
+     *     referencedColumnName="id")}
+     *     )
+     *
      */
-    public function __construct()
-    {
-        $this->admins = new ArrayCollection();
-        $this->questionnaires = new ArrayCollection();
-        $this->participants = new ArrayCollection();
-        $this->destinataires = new ArrayCollection();
-    }
+    private $destinataires;
 
     /**
      * @return ArrayCollection
@@ -162,6 +182,20 @@ class Event
     {
         $this->destinataires = $destinataires;
     }
+
+
+
+    /**
+     * Event constructor.
+     */
+    public function __construct()
+    {
+        $this->dateDebut = new \Datetime();
+        $this->dateFin = new \Datetime();
+
+    }
+
+
     /**
      * @return ArrayCollection
      */
@@ -339,6 +373,53 @@ class Event
     {
         return $this->image;
     }
+
+
+    /**
+     * @return string
+     */
+    public function getOperation()
+    {
+        return $this->operation;
+    }
+
+    /**
+     * @param string $operation
+     */
+    public function setOperation($operation)
+    {
+        $this->operation = $operation;
+    }
+    /**
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * @param string $titre
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
