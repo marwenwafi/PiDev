@@ -18,6 +18,10 @@ fi_thnitek_deleteObjectif:
   path:     /listObjectif/{id}
   defaults: { _controller: FiThnitekBundle:Objectif:deleteObjectif }
 
+fi_thnitek_detailsObjectif:
+  path:     /detailsObjectif/{id}
+  defaults: { _controller: FiThnitekBundle:Objectif:detailsObjectif }
+
 #######################
 ##  CategoryRouting  ##
 #######################

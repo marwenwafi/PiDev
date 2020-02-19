@@ -61,8 +61,6 @@ class LeaderBoardController extends Controller
     {
         //ALL Ordered By nbr of all offers
         $mod1 = $this->getDoctrine()->getRepository(User:: class)->findBy(array(),array('nbroffre'=>'DESC'));
-
-        //TODO Do this bit in a for loop to get all the leaderBoards configured by the admin
         $leaderBoardS = $this->getDoctrine()->getRepository(LeaderBoard::class)->findAll();
         $repo = $this->getDoctrine()->getManager()->getRepository(LeaderBoard:: class);
         $size = sizeof($leaderBoardS);
@@ -71,6 +69,9 @@ class LeaderBoardController extends Controller
             $l = $this->getDoctrine()->getRepository(LeaderBoard:: class)->find($leaderBoardS[$i]->getIdleaderboard());
             $results[] = $repo->customQuery($l->getCategory(),$l->getSize(),$l->getStartDate()->format('Y-m-d'),$l->getEndDate()->format('Y-m-d'));
         }
+
+        //TODO If there are no leaderboards or results, work on a displayable result instead of error messages
+
         return $this->render('@FiThnitek/LeaderBoard/ShowLeaderBoard.html.twig', array('results'=>$results,'boards'=>$leaderBoardS));
     }
 }

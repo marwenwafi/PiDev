@@ -4,9 +4,11 @@
 namespace FiThnitekBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
- * @ORM\Entity
+ * @ORM\Entity (repositoryClass="FiThnitekBundle\Repository\ObjectifRepository")
  */
 class Objectif
 {
@@ -28,13 +30,13 @@ class Objectif
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
-     * @ORM\JoinColumn(name="category", referencedColumnName="id_category")
+     * @ORM\Column(type="string",length=255)
      */
-    private $category;
+    private $type;
 
     /**
      * @ORM\Column(type="integer")
+     * * @Assert\GreaterThan(0)
      */
     private $but;
 
@@ -43,11 +45,28 @@ class Objectif
      */
     private $etat;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="idadmin", referencedColumnName="id")
+     * @ORM\Column(type="date")
      */
-    private $admin;
+    private $start_date;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\GreaterThan(propertyPath="start_date")
+     */
+    private $end_date;
+
+
+    /**
+     * Objectif constructor.
+     */
+    public function __construct()
+    {
+        $this->start_date = new \DateTime();
+        $this->end_date = new \DateTime();
+        $this->etat=false;
+    }
 
     /**
      * @return mixed
@@ -101,24 +120,6 @@ class Objectif
     /**
      * @return mixed
      */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param mixed $category
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
-
-
-
-    /**
-     * @return mixed
-     */
     public function getBut()
     {
         return $this->but;
@@ -148,20 +149,53 @@ class Objectif
         $this->etat = $etat;
     }
 
+
     /**
-     * @return mixed
+     * @return \DateTime
      */
-    public function getAdmin()
+    public function getStartDate()
     {
-        return $this->admin;
+        return $this->start_date;
     }
 
     /**
-     * @param mixed $admin
+     * @param \DateTime $start_date
      */
-    public function setAdmin($admin)
+    public function setStartDate($start_date)
     {
-        $this->admin = $admin;
+        $this->start_date = $start_date;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->end_date;
+    }
+
+    /**
+     * @param \DateTime $end_date
+     */
+    public function setEndDate($end_date)
+    {
+        $this->end_date = $end_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
 

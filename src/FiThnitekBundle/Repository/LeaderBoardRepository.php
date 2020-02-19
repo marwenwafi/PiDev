@@ -72,9 +72,4 @@ class LeaderBoardRepository extends EntityRepository
         return $query = $q->getResult();
     }
 
-    private function queryDecider($cat)
-    {
-
-    }
-
 }

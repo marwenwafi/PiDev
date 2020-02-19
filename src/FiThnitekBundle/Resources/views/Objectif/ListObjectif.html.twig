@@ -1,9 +1,5 @@
 {% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
-{% block event %}
-
-{% endblock %}
 {% block container %}
-
     <section class="content">
     <div class="container-fluid">
     <div class="content-wrapper">
@@ -22,26 +18,27 @@
                 <th scope="col">ID</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Description</th>
-                <th scope="col">Categorie</th>
+                <th scope="col">Type</th>
                 <th scope="col">But</th>
-                <th scope="col">Etat</th>
+                <th scope="col">Date début</th>
+                <th scope="col">Date fin</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             </thead>
-
             {% for o in table %}
-
-
                 <tr>
                     <th scope="col">{{ o.IdOjectif }}  </th>
                     <td>{{ o.titre }} </td>
                     <td>{{ o.description }} </td>
-                    <td>{{ o.category.title }} </td>
+                    <td>{{ o.type }} </td>
                     <td>{{ o.but }} </td>
-                    <td>{{ o.etat }} </td>
-                    <td><a href="{{ path('fi_thnitek_modifyObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Modifier"></a></td>
-                    <td><a href="{{ path('fi_thnitek_deleteObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Supprimer"></a></td>
+                    <td>{{ o.StartDate|date("d/m/Y") }} </td>
+                    <td>{{ o.EndDate|date("d/m/Y") }} </td>
+                    <td><a href="{{ path('fi_thnitek_detailsObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Details" class="btn btn-block btn-outline-primary btn-sm"></a></td>
+                    <td><a href="{{ path('fi_thnitek_modifyObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Modifier" class="btn btn-block btn-outline-primary btn-sm"></a></td>
+                    <td><a href="{{ path('fi_thnitek_deleteObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Supprimer" class="btn btn-block btn-outline-primary btn-sm"></a></td>
                 </tr>
             {% endfor %}
         </table>

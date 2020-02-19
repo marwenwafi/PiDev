@@ -2,11 +2,13 @@
 
 namespace FiThnitekBundle\Form;
 
+use FOS\UserBundle\Event\FormEvent;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ObjectifType extends AbstractType
@@ -18,10 +20,21 @@ class ObjectifType extends AbstractType
     {
         $builder->add('titre')
             ->add('description')
-            ->add('category',ChoiceType::class, array("choices"=>["Taxi"=>"Taxi","Covoiturage"=>"Covoiturage","Colis"=>"Colis","Tous"=>"Tous"]))
+            ->add('start_date')
+            ->add('end_date')
+            ->add('type', ChoiceType::class,
+                array("choices"=>["Nombre Utilisateurs"=>"Nombre Utilisateurs",
+                "Revenues Taxi"=>"Revenues Taxi",
+                "Activite Taxi"=>"Activite Taxi",
+                "Revenues Covoiturage"=>"Revenues Covoiturage",
+                "Activite Covoiturage"=>"Activite Covoiturage",
+                "Revenues Colis"=>"Revenu Colis",
+                "Activites Colis"=>"Activite Colis",
+                "Revenues Totales"=>"Revenues Totales",
+                "Activites Totales"=>"Activites Totales"]))
             ->add('but')
-            ->add('etat')
             ->add($options["label"],SubmitType::class);
+
     }/**
      * {@inheritdoc}
      */

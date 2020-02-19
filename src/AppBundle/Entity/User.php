@@ -38,8 +38,13 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="date")
      */
+    protected $datedenaissance;
 
-    protected $datedenaissance ;
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $registrationdate;
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -50,14 +55,10 @@ class User extends BaseUser
      */
     protected $points = 0 ;
 
-    /**
-     * @ORM\Column(type="string",length=255)
-     */
-    protected $type ;
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->registrationdate = new \DateTime();
     }
 
     /**
@@ -173,22 +174,6 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
      * @return int
      */
     public function getPoints()
@@ -203,5 +188,22 @@ class User extends BaseUser
     {
         $this->points = $points;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistrationdate()
+    {
+        return $this->registrationdate;
+    }
+
+    /**
+     * @param \DateTime $registrationdate
+     */
+    public function setRegistrationdate($registrationdate)
+    {
+        $this->registrationdate = $registrationdate;
+    }
+
 
 }

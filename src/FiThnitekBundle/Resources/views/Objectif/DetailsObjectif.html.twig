@@ -1,0 +1,46 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+
+{% block container %}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">{{ table.titre }}</h1>
+                            </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                    </div>
+                </div>
+                <div class="card card-default">
+                    <div class="card-body">
+                        <label>Description: </label> {{ table.description }} <br>
+                        <label>Type: </label> {{ table.type }}<br>
+                        <label>But: </label> {{ table.but }} <br>
+                        <label>Date de début: </label> {{ table.StartDate|date("d/m/Y") }} <br>
+                        <label>Date de Fin: </label> {{ table.StartDate|date("d/m/Y") }} <br>
+                        <label>Activation: </label> {{ table.etat ? 'Suivi activé': 'Suivi désactivé'}}
+                        <form action="{{ path('fi_thnitek_detailsObjectif', {'id': table.IdOjectif}) }}" method="post">
+                            <button type="submit" id="_submit" name="_submit"
+                                {% if table.etat %}
+                                    value="true"
+                                {% else %}
+                                    value="false"
+                                {% endif %}>
+                                {{ table.etat ? 'Desactiver' : 'Activer'}}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% if table.etat %}
+                <div class="card card-default">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

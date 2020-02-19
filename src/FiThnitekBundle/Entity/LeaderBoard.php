@@ -53,27 +53,12 @@ class LeaderBoard
      */
     private $category;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinTable(name="leaderboard_users",
-     *      joinColumns={@ORM\JoinColumn(name="idleaderb", referencedColumnName="idleaderboard")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="iduser", referencedColumnName="id")}
-     *      )
-     */
-    private $utilisateurs;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="idadmin", referencedColumnName="id")
-     */
-    private $admin;
 
     /**
      * LeaderBoard constructor.
      */
     public function __construct()
     {
-        $this->utilisateurs = new ArrayCollection();
         $this->start_date = new \DateTime();
         $this->end_date = new \DateTime();
     }
@@ -189,39 +174,6 @@ class LeaderBoard
     {
         $this->category = $category;
     }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getUtilisateurs()
-    {
-        return $this->utilisateurs;
-    }
-
-    /**
-     * @param ArrayCollection $utilisateurs
-     */
-    public function setUtilisateurs($utilisateurs)
-    {
-        $this->utilisateurs = $utilisateurs;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-
-    /**
-     * @param mixed $admin
-     */
-    public function setAdmin($admin)
-    {
-        $this->admin = $admin;
-    }
-
 
 
 }

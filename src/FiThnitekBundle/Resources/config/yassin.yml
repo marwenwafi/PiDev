@@ -1,7 +1,3 @@
-fi_thnitek_homepage:
-    path:     /
-    defaults: { _controller: FiThnitekBundle:Default:index }
-
 fi_thnitek_login:
     path:     /login
     defaults: { _controller: FiThnitekBundle:Default:login }
