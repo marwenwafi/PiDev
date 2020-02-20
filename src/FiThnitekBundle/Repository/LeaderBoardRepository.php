@@ -30,7 +30,7 @@ class LeaderBoardRepository extends EntityRepository
         {
             //TODO According to what siwar does
 
-            $query = "select T.username, COUNT(O.id_offre_col) AS value from FiThnitekBundle:OffreColis O, AppBundle:User U WHERE O.idU = U.id AND O.date BETWEEN '$start' AND '$end' ORDER BY value DESC";
+            $query = "select T.username, COUNT(O.id_offre_col) AS value from FiThnitekBundle:OffreColis O, AppBundle:User U WHERE O.idU = U.id AND O.date BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
         }
         elseif ($cat->getType() == "Covoiturage" && $cat->getNature() == "Avis")
         {
@@ -44,7 +44,7 @@ class LeaderBoardRepository extends EntityRepository
          }
         elseif ($cat->getType() == "Covoiturage" && $cat->getNature() == "Activite")
         {
-            $query = "select U.username, COUNT(O.idoffrecovoiturage) AS value from FiThnitekBundle:offreCovoiturage O, AppBundle:User U WHERE O.idutilisateur = U.id AND O.date BETWEEN '$start' AND '$end' ORDER BY value DESC";
+            $query = "select U.username, COUNT(O.idoffrecovoiturage) AS value from FiThnitekBundle:offreCovoiturage O, AppBundle:User U WHERE O.idutilisateur = U.id AND O.date BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
         }
         elseif ($cat->getType() == "Colis" && $cat->getNature() == "Avis")
         {
@@ -55,11 +55,11 @@ class LeaderBoardRepository extends EntityRepository
         }
         elseif ($cat->getType() == "Colis" && $cat->getNature() == "Revenu")
         {
-            $query = "select U.username, SUM(R.prix) AS value from FiThnitekBundle:OffreColis O, FiThnitekBundle:ReservationColis R, AppBundle:User U WHERE R.idOffre = O.id_offre_col AND U.id = O.idU AND O.date_col BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
+            $query = "select U.username, SUM(R.Prix) AS value from FiThnitekBundle:OffreColis O, FiThnitekBundle:ReservationColis R, AppBundle:User U WHERE R.idOffre = O.idOffreCol AND U.id = O.idU AND O.dateCol BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
         }
         elseif ($cat->getType() == "Colis" && $cat->getNature() == "Activite")
         {
-            $query = "select U.username, COUNT(O.id_offre_col) AS value from FiThnitekBundle:OffreColis O, AppBundle:User U WHERE O.idU = U.id AND O.date BETWEEN '$start' AND '$end' ORDER BY value DESC";
+            $query = "select U.username, COUNT(O.idOffreCol) AS value from FiThnitekBundle:OffreColis O, AppBundle:User U WHERE O.idU = U.id AND O.dateCol BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
         }
         else
         {
@@ -69,6 +69,7 @@ class LeaderBoardRepository extends EntityRepository
         //select o from FiThnitekBundle:offreCovoiturage o Where o.date BETWEEN '$start' AND '$end'
         $q = $this->getEntityManager()
             ->createQuery($query);
+        $q->setMaxResults($size);
         return $query = $q->getResult();
     }
 

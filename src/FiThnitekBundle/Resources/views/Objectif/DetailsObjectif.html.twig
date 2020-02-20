@@ -19,7 +19,7 @@
                         <label>Type: </label> {{ table.type }}<br>
                         <label>But: </label> {{ table.but }} <br>
                         <label>Date de début: </label> {{ table.StartDate|date("d/m/Y") }} <br>
-                        <label>Date de Fin: </label> {{ table.StartDate|date("d/m/Y") }} <br>
+                        <label>Date de Fin: </label> {{ table.EndDate|date("d/m/Y") }} <br>
                         <label>Activation: </label> {{ table.etat ? 'Suivi activé': 'Suivi désactivé'}}
                         <form action="{{ path('fi_thnitek_detailsObjectif', {'id': table.IdOjectif}) }}" method="post">
                             <button type="submit" id="_submit" name="_submit"

@@ -33,6 +33,7 @@ class LeaderBoard
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThan(0)
      */
     private $size;
 

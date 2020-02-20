@@ -28,7 +28,7 @@ class ObjectifType extends AbstractType
                 "Activite Taxi"=>"Activite Taxi",
                 "Revenues Covoiturage"=>"Revenues Covoiturage",
                 "Activite Covoiturage"=>"Activite Covoiturage",
-                "Revenues Colis"=>"Revenu Colis",
+                "Revenues Colis"=>"Revenues Colis",
                 "Activites Colis"=>"Activite Colis",
                 "Revenues Totales"=>"Revenues Totales",
                 "Activites Totales"=>"Activites Totales"]))

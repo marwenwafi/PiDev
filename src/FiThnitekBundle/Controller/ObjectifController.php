@@ -2,6 +2,8 @@
 
 namespace FiThnitekBundle\Controller;
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Options\PieChart\PieChartOptions;
 use FiThnitekBundle\Entity\Objectif;
 use FiThnitekBundle\Form\ObjectifType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,7 +53,27 @@ class ObjectifController extends Controller
     public function listObjectifAction()
     {
         $mod = $this->getDoctrine()->getRepository(Objectif:: class)->findAll();
-        return $this->render('@FiThnitek/Objectif/ListObjectif.html.twig', array('table'=>$mod));
+        $repo = $this->getDoctrine()->getManager()->getRepository(Objectif:: class);
+        $rescov = $repo->customQuery("Revenues Covoiturage",date("yy-m-d", mktime(0,0,0,2,1,2020)),date("yy-m-d", mktime(0,0,0,2,28,2020)));
+        $rescol = $repo->customQuery("Revenues Colis",date("yy-m-d", mktime(0,0,0,2,1,2020)),date("yy-m-d", mktime(0,0,0,2,28,2020)));
+        $pieChart = new PieChart();
+        var_dump($rescov[0][1]);
+        $pieChart->getData()->setArrayToDataTable(
+            [['Source', 'Revenues'],
+                ['Covoiturage',  (int)$rescov[0][1]],
+                ['Colis',   (int) $rescol[0][1]],
+            ]
+        );
+        $pieChart->getOptions()->setTitle('Distribution Revenues');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+        return $this->render('@FiThnitek/Objectif/ListObjectif.html.twig', array('table'=>$mod,'piechart'=>$pieChart));
     }
 
     public function detailsObjectifAction(Request $request, $id)
@@ -75,6 +97,7 @@ class ObjectifController extends Controller
         {
             $repo = $this->getDoctrine()->getManager()->getRepository(Objectif:: class);
             $res = $repo->customQuery($objectif->getType(),$objectif->getStartDate()->format('Y-m-d'),$objectif->getEndDate()->format('Y-m-d'));
+            var_dump($res);
             $percent = ($res[0][1] / $objectif->getBut())*100;
             $total = $res[0][1];
             return $this->render('@FiThnitek/Objectif/DetailsObjectif.html.twig', array('table'=>$objectif, 'percent'=>$percent,'total'=>$total));

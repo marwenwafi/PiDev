@@ -12,7 +12,9 @@
              </div><!-- /.container-fluid -->
          </div>
     </div>
-        <table class="table">
+        <div class="card card-default">
+            <div class="card-body">
+                <table class="table">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>
@@ -42,6 +44,27 @@
                 </tr>
             {% endfor %}
         </table>
+            </div>
+        </div>
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Performance</h1>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+        </div>
+        <div class="card card-default">
+            <div class="card-body">
+                <div id="div_chart"></div>
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    {{ gc_draw(piechart, 'div_chart') }}
+                </script>
+            </div>
+        </div>
+
     </div>
     </div>
     </section>
