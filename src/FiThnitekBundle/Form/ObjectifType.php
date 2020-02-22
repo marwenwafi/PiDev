@@ -25,11 +25,11 @@ class ObjectifType extends AbstractType
             ->add('type', ChoiceType::class,
                 array("choices"=>["Nombre Utilisateurs"=>"Nombre Utilisateurs",
                 "Revenues Taxi"=>"Revenues Taxi",
-                "Activite Taxi"=>"Activite Taxi",
+                "Activites Taxi"=>"Activites Taxi",
                 "Revenues Covoiturage"=>"Revenues Covoiturage",
-                "Activite Covoiturage"=>"Activite Covoiturage",
+                "Activites Covoiturage"=>"Activites Covoiturage",
                 "Revenues Colis"=>"Revenues Colis",
-                "Activites Colis"=>"Activite Colis",
+                "Activites Colis"=>"Activites Colis",
                 "Revenues Totales"=>"Revenues Totales",
                 "Activites Totales"=>"Activites Totales"]))
             ->add('but')

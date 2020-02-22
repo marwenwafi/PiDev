@@ -17,14 +17,13 @@ class ObjectifRepository extends EntityRepository
         }
         elseif ($type == "Revenues Totales")
         {
-            $query = "Select SUM(TOT) from ((Select RC.Prix AS TOT from FiThnitekBundle:ReservationColis RC, FiThnitekBundle:OffreColis OC
-             WHERE RC.idOffre = OC.idOffreCol AND OC.dateCol Between '$start' AND '$end') UNION ALL (Select R.prixt as TOT from FiThnitekBundle:ReservationCovoiturage R,
-            FiThnitekBundle:offreCovoiturage O WHERE R.idoffrer = O.idoffrecovoiturage  AND O.date Between '$start' AND '$end')) t";
-
+            //TODO still needs to add taxi
+            return array_merge($this->customQuery("Revenues Covoiturage",$start,$end), $this->customQuery("Revenues Colis",$start,$end));
         }
         elseif ($type == "Activites Totales")
         {
-
+            //TODO still needs to add taxi
+            return array_merge($this->customQuery("Activites Covoiturage",$start,$end), $this->customQuery("Activites Colis",$start,$end));
         }
         elseif ($type == "Revenues Colis")
         {
@@ -33,29 +32,31 @@ class ObjectifRepository extends EntityRepository
         }
         elseif ($type == "Activites Colis")
         {
-
+            $query = "SELECT COUNT(RC.idReservationColis) FROM FiThnitekBundle:ReservationColis RC, FiThnitekBundle:OffreColis OC
+             WHERE RC.idOffre = OC.idOffreCol AND OC.dateCol Between '$start' AND '$end'";
         }
         elseif ($type == "Revenues Covoiturage")
         {
-            $query = "Select SUM(R.prixt) from FiThnitekBundle:ReservationCovoiturage R, FiThnitekBundle:offreCovoiturage O
+            $query = "SELECT SUM(R.prixt) FROM FiThnitekBundle:ReservationCovoiturage R, FiThnitekBundle:offreCovoiturage O
             WHERE R.idoffrer = O.idoffrecovoiturage AND O.date Between '$start' AND '$end'";
         }
-        elseif ($type == "Activite Covoiturage")
+        elseif ($type == "Activites Covoiturage")
         {
-
+            $query = "SELECT COUNT(R.idreservationcov) FROM FiThnitekBundle:ReservationCovoiturage R, FiThnitekBundle:offreCovoiturage O
+            WHERE R.idoffrer = O.idoffrecovoiturage AND O.date Between '$start' AND '$end'";
         }
         elseif ($type == "Revenues Taxi")
         {
-
+            // TODO
+            $query = "SELECT SUM(R.prixt) from FiThnitekBundle:ReservationCovoiturage R, FiThnitekBundle:offreCovoiturage O
+            WHERE R.idoffrer = O.idoffrecovoiturage AND O.date Between '$start' AND '$end'";
         }
-        elseif ($type == "Activite Taxi")
+        elseif ($type == "Activites Taxi")
         {
-
+            //TODO
         }
 
-        $q = $this->getEntityManager()
-            ->createQuery($query);
-        return $query = $q->getResult();
+        return $query = $this->getEntityManager()->createQuery($query)->getResult();
     }
 
 

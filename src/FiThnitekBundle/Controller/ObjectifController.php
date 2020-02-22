@@ -98,8 +98,10 @@ class ObjectifController extends Controller
             $repo = $this->getDoctrine()->getManager()->getRepository(Objectif:: class);
             $res = $repo->customQuery($objectif->getType(),$objectif->getStartDate()->format('Y-m-d'),$objectif->getEndDate()->format('Y-m-d'));
             var_dump($res);
-            $percent = ($res[0][1] / $objectif->getBut())*100;
-            $total = $res[0][1];
+            $total = 0;
+            for($i=0;$i<sizeof($res);$i++)
+                $total += $res[$i][1];
+            $percent = ($total / $objectif->getBut())*100;
             return $this->render('@FiThnitek/Objectif/DetailsObjectif.html.twig', array('table'=>$objectif, 'percent'=>$percent,'total'=>$total));
         }
         return $this->render('@FiThnitek/Objectif/DetailsObjectif.html.twig', array('table'=>$objectif));
