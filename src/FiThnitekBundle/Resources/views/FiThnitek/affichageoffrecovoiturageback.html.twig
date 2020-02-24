@@ -7,12 +7,14 @@
                     <h3 class="card-title">All carsharing offers </h3>
 
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
+                        <div  style="width: 1050px;">
+                           <form method="post">
+                            <input type="text" name="destinationrechercheback"  placeholder="Destination">
+                            <input type="text" name="departrechercheback"  placeholder="Departure">
+                            <input type="number" name="nbrplacerechercheback"  placeholder="Number">
+                               <input type="date" name="daterechercheback"  >
+                            <button type="submit" formaction="{{ path('fi_thnitek_recherchecovback') }}" class="btn btn-default"><i class="fas fa-search"></i></button>
+                           </form>
                         </div>
                     </div>
                 </div>
@@ -38,7 +40,7 @@
                         <tbody>
                         {% for i in cov %}
                         <tr>
-                            <td>{{ i.idutilisateur.username }} {{ i.idutilisateur.prenom }}</td>
+                            <td><a href="{{ path('fi_thnitek_finduserback',{'id': i.idutilisateur.id}) }}">{{ i.idutilisateur.username }} {{ i.idutilisateur.prenom }}</a></td>
                             <td>{{ i.idutilisateur.tel }}</td>
                             <td>{{ i.destination  }}</td>
                             <td>{{ i.depart }}</td>

@@ -251,15 +251,19 @@ else {
         {
             $datesys = new \DateTime();
             $datea= $datesys->format('Y-m-d');
-            $user = $this->container->get('security.token_storage')->getToken()->getUser();
-            $idu = $user->getId();
+            if($datea < $request->get('daterecherche'))
+                {
+                    $user = $this->container->get('security.token_storage')->getToken()->getUser();
+                    $idu = $user->getId();
+                    $dater = $request->get('daterecherche');
+                    $dest = $request->get('destinationrecherche') ;
+                    $dept = $request->get('departrecherche');
+                    $nbrplace = $request->get('nbrplacerecherche');
+                    $em = $this ->getDoctrine()->getManager()->getRepository(offreCovoiturage::class);
+                    $cov = $em->myrechercheoffre($nbrplace,$idu,$dater,$dest,$dept);
+                    return $this->render('@FiThnitek/FiThnitek/affichageallcovoiturage.html.twig', array('cov' => $cov));
+                }
 
-          $dest = $request->get('destinationrecherche') ;
-          $dept = $request->get('departrecherche');
-            $nbrplace = $request->get('nbrplacerecherche');
-            $em = $this ->getDoctrine()->getManager()->getRepository(offreCovoiturage::class);
-           $cov = $em->myrechercheoffre($nbrplace,$idu,$datea,$dest,$dept);
-            return $this->render('@FiThnitek/FiThnitek/affichageallcovoiturage.html.twig', array('cov' => $cov));
         }
 
 
@@ -333,15 +337,16 @@ else {
 
 /////////Afficher all offers back ///////
     public function afficheallcovbackAction()
-    {$em = $this->getDoctrine()->getManager();
-        $cov = $em->getRepository(offreCovoiturage::class)->findAll();
+    {$em = $this->getDoctrine()->getManager()->getRepository(offreCovoiturage::class);
+        $cov = $em->mytriedateadmin();
 
         return $this->render('@FiThnitek/FiThnitek/affichageoffrecovoiturageback.html.twig',array('cov'=>$cov));
     }
 ///////////////supprimer une offre back ////////////////////////
     public function supprimercovbackAction($id)
+    { $res = $this->getDoctrine()->getRepository(ReservationCovoiturage::class)->findBy(array("idoffrer"=>$id));
+    if ($res == NULL)
     {
-
         $ids = $this->getDoctrine()->getRepository(offreCovoiturage::class)->find($id);
         $iduo = $ids->getIdutilisateur();
         $userkbir = $this->getDoctrine()->getRepository(User::class)->find($iduo);
@@ -356,10 +361,15 @@ else {
         $em->remove($ids);
         $em->flush();
         //$tab = $this->getDoctrine()->getRepository(Club::class)->findAll() ;
+    }
+
+
 
         return $this->redirectToRoute("fi_thnitek_affichagecovback");
     }
     public function modifiercovbackAction(Request $request, $id)
+    { $res = $this->getDoctrine()->getRepository(ReservationCovoiturage::class)->findBy(array("idoffrer"=>$id));
+    if($res == NULL)
     {
         $datesys = new \DateTime();
         $dateesys= $datesys->format('Y-m-d');
@@ -377,7 +387,7 @@ else {
             {
                 $text="The admin has updated your offer : "."  Old Destination ".$cov->getDestination()."New Destination ".$request->get('destinationback');
                 $message = \Swift_Message::newInstance()->setSubject('Your CarSharing Offer')->setFrom('fithnitekcodeslayers@gmail.com')
-                ->setTo($mailuser1)->setBody($text);
+                    ->setTo($mailuser1)->setBody($text);
                 $this->get('mailer')->send($message);
                 $cov->setDestination($request->get('destinationback'));
                 $cov->setDepart($request->get('departureBack'));
@@ -389,10 +399,19 @@ else {
                 $em->flush();
                 return $this->redirectToRoute("fi_thnitek_affichagecovback");
             }
+else {
+    return $this->render('@FiThnitek/FiThnitek/modifiercovoiturageback.html.twig', array('cov' => $cov));
+}
 
 
-            return $this->redirectToRoute("fi_thnitek_affichagecovback");
         }
+    }
+
+    else
+        {
+        return $this->redirectToRoute("fi_thnitek_affichagecovback");
+    }
+
         return $this->render('@FiThnitek/FiThnitek/modifiercovoiturageback.html.twig', array('cov' => $cov));
     }
 //////////////////////////////Reservation Offre Back ///////////////////////////////
@@ -413,8 +432,8 @@ else {
                     $reservation->setIdutilisateurr($user);
                     $reservation->setIdoffrer($offre);
                     $reservation->setNbrplacer($request->get('nbrrback'));
-                    $reservation->setPrixt(5);
-
+                    $reservation->setPrixt($offre->getPrix()*($request->get('nbrrback')));
+                    $offre->setNbrplaceo($nbrpd-($request->get('nbrrback')));
                     $em->persist($reservation);
                     $em->flush();
              return $this->redirectToRoute("fi_thnitek_affichageresevcovback");
@@ -443,4 +462,36 @@ else {
 
         return $this->redirectToRoute("fi_thnitek_affichageresevcovback");
     }
+////////////////////RechercheBack////////////////////////////////
+ public function  recherchecovBackAction(Request $request)
+    {
+        if($request->isMethod("POST"))
+        {
+            //$datesys = new \DateTime();
+            //$datea= $datesys->format('Y-m-d');
+            //$user = $this->container->get('security.token_storage')->getToken()->getUser();
+            //$idu = $user->getId();
+            $datea = $request->get('daterechercheback');
+            $dest = $request->get('destinationrechercheback') ;
+            $dept = $request->get('departrechercheback');
+            $nbrplace = $request->get('nbrplacerechercheback');
+            $em = $this ->getDoctrine()->getManager()->getRepository(offreCovoiturage::class);
+            $cov = $em->myrecherchBackeoffre($nbrplace,$datea,$dest,$dept);
+            return $this->render('@FiThnitek/FiThnitek/affichageoffrecovoiturageback.html.twig', array('cov' => $cov));
+        }
+
+
+
+
+        return $this->redirectToRoute("fi_thnitek_afficheall");
+
+    }
+////////////////////Utilisateurfind /////////////////////////
+public function utilisateurcovbackfindAction(Request $request,$id)
+            {
+                $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+
+                return $this->render('@FiThnitek/FiThnitek/affichageutilisateuroffcovoiturageback.html.twig', array('user' => $user));
+            }
 }

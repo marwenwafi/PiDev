@@ -1,0 +1,47 @@
+{% extends 'FiThnitek/basebackFiThnitek.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">User Details  </h3>
+
+                    <div class="card-tools">
+                        <div  style="width: 1050px;">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>User Number</th>
+                            <th>Email</th>
+                            <th>BirthDay</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td>{{ user.username }} {{ user.prenom }}</td>
+                            <td>{{ user.tel }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.datedenaissance | date('Y/m/d') }}</td>
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+
+{% endblock %}

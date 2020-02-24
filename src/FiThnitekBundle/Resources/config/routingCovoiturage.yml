@@ -57,3 +57,9 @@ fi_thnitek_affichageresevcovback:
 fi_thnitek_suppresevcovback:
     path:     /supprimerrescovback/{id}
     defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescovback }
+fi_thnitek_recherchecovback:
+  path:     /recherchecovback
+  defaults: { _controller: FiThnitekBundle:Covoiturage:recherchecovBack }
+fi_thnitek_finduserback:
+  path:     /userfind{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:utilisateurcovbackfind }

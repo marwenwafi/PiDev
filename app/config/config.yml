@@ -64,11 +64,15 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
+    transport: smtp
+    host: smtp.gmail.com
+    auth_mode: login
+    encryption: ssl
+    username: fithnitekcodeslayers@gmail.com
+    password: FiThnitek1
     spool: { type: memory }
+    port: 465
+    disable_delivery: false
 
 sensio_framework_extra:
    router:
