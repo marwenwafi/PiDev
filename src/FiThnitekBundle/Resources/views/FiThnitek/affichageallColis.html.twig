@@ -3,6 +3,7 @@
 
 {% endblock %}
 {% block container %}
+
     <section class="page-search">
         <div class="container">
             <div class="row">
@@ -30,24 +31,29 @@
             </div>
         </div>
     </section>
+
     <section class="section-sm">
+
         <div class="container">
 
             <div class="row">
 
                 <div class="col-md-9">
-                    {% for i in r %}
+
+                    <!-- houni-->
                     <div class="product-grid-list">
 
                         <div class="row mt-30">
+                            {% for i in r %}
 
                             <div class="col-sm-12 col-lg-4 col-md-6">
                                 <!-- product card -->
+
                                 <div class="product-item bg-light">
                                     <div class="card">
                                         <div class="thumb-content">
                                             <!-- <div class="price">$200</div> -->
-                                            <img src="{{ i.idU.image }}" >
+                                            <!--  <img src="{{ i.idU.image }}" > -->
                                         </div>
                                         <div >
                                             <h3 class="card-title">{{ i.idU.username }} {{ i.idU.prenom }}</h3>
@@ -93,7 +99,7 @@
                                                 <h6 class="font-weight-bold pt-4 pb-1">Longueur
                                                     :</h6>
                                                 <input type="number" min="1" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="Longueur">
-                                                <input type="submit" formaction="{{  path('fi_thnitek_ajouterReservation',{'id':i.idOffreCol }) }}">
+                                                <input type="submit" class="btn btn-primary" formaction="{{  path('fi_thnitek_ajouterReservation',{'id':i.idOffreCol }) }}">
                                             </div>
                                         </form>
 
@@ -102,10 +108,12 @@
 
 
                                 </div>
-
                             </div>
+                            {% endfor %}
+
                         </div>
-                        {% endfor %}
+
+
                         <div class="pagination justify-content-center">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">

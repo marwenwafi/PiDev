@@ -29,10 +29,12 @@ class OffreColisController extends Controller
 
     public function ajouteroffrecolisAction(Request $request)
     {
+        $date=new \DateTime();
+        $d=$date->format('Y-m-d');
         $upd=$this->getDoctrine()->getManager();
         $Offre=new OffreColis();
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        if ($request->isMethod('POST'))
+        if ($request->isMethod('POST') && ( $d <= $request->get('Date')))
         {
 
             $Offre->setIdU($user);
@@ -119,9 +121,11 @@ class OffreColisController extends Controller
     {
         $upd = $this->getDoctrine()->getManager();
         $Reservation = new ReservationColis();
+      //  $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $id2=$user->getId();
         $Offre = $this->getDoctrine()->getRepository(OffreColis::class)->find($id);
-      $em = $this->getDoctrine()->getRepository(OffreColis::class)->MyOffre($id);
+      $em = $this->getDoctrine()->getRepository(OffreColis::class)->MyOffre($id2);
 
         if (($request->isMethod('POST')) && ($Offre->getHauteur() >= $request->get('Hauteur')) && ($Offre->getLargeur() >= $request->get('Largeur')) && ($Offre->getLongueur() >= $request->get('Longueur'))) {
          //   if (($Offre->getHauteur() <= $request->get('Hauteur')) && ($Offre->getLargeur() <= $request->get('Largeur'))) {
@@ -193,10 +197,13 @@ class OffreColisController extends Controller
     }
     public function ajouteroffrecolisbackAction(Request $request)
     {
+        $date=new \DateTime();
+        $d=$date->format('Y-m-d');
         $upd=$this->getDoctrine()->getManager();
         $Offre=new OffreColis();
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        if ($request->isMethod('POST'))
+        if ($request->isMethod('POST') && ( $d <= $request->get('Date'))
+        )
         {
             $Offre->setIdU($user);
             $Offre->setLieuDepart($request->get('Depart'));
@@ -337,6 +344,27 @@ return $this->render('@FiThnitek/FiThnitek/ajouterOffreBack.html.twig');
         {
             $em=$this->getDoctrine()->getRepository(OffreColis::class)->MyOffre();
             return $this->render('@FiThnitek/FiThnitek/affichageallColis.html.twig',array('r'=>$em));
+        }
+
+
+    }
+    public function rechercheDatebackAction(Request $request)
+    {
+
+        if($request->isMethod('POST')) #test aa buton
+        {
+
+            $Date=$request->get('Date');
+            $Prix=$request->get('prix');
+            $em=$this->getDoctrine()->getManager()->getRepository(OffreColis::class)->findDateback($Date,$Prix);
+
+            return $this->render('@FiThnitek/FiThnitek/affichageoffrecolisback.html.twig',array('r'=>$em));
+
+        }
+        else
+        {
+            $em=$this->getDoctrine()->getRepository(OffreColis::class)->MyOffre();
+            return $this->render('@FiThnitek/FiThnitek/affichageoffrecolisback.html.twig',array('r'=>$em));
         }
 
 

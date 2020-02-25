@@ -11,8 +11,6 @@ class OffreRepository extends EntityRepository
     public function MyOffre($id)
     {
 
-$hauteur=0;
-$largeur=0;
         $date=new \DateTime();
         $d=$date->format('Y-m-d');
         $qb=$this->getEntityManager()->createQuery("select c from FiThnitekBundle:OffreColis c where c.dateCol >='$d'
@@ -28,6 +26,11 @@ $largeur=0;
     public function trier()
     {
         $qb=$this->getEntityManager()->createQuery("select c from FiThnitekBundle:OffreColis c ORDER BY c.dateCol DESC");
+        return $query=$qb->getResult();
+    }
+    public function findDateback($Date,$Prix)
+    {
+        $qb=$this->getEntityManager()->createQuery("select c from FiThnitekBundle:OffreColis c where c.dateCol  >= '$Date' and c.prix <= '$Prix'    ");
         return $query=$qb->getResult();
     }
 
