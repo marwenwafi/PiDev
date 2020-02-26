@@ -2,28 +2,8 @@
 {% block event %}
 
 {% endblock %}
-
 {% block notification %}
-    <li class="nav-item dropdown dropdown-slide">
 
-        <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Notifications    <span class="badge badge-warning navbar-badge"> {{ b|length }}</span> <span><i class="fa fa-angle-down"></i></span>
-        </a>
-        <!-- Dropdown list -->
-        <div class="dropdown-menu">
-            {% for i in b %}
-            <ul class="list-inline justify-content-center">
-                <li class="list-inline-item">
-
-
-                        <button type="button" class="btn btn-block btn-outline-info">{{ i.title }} </button>
-
-
-                </li>
-            </ul>
-                    {% endfor %}
-        </div>
-    </li>
 {% endblock %}
 {% block container %}
 
@@ -36,9 +16,9 @@
                         <form method="post">
                             <div class="form-row">
 
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-3">
 
-                                    <select  class="form-control my-2 my-lg-0" id="inputLocation4" name="region">
+                                    <select  name="region" class="form-control my-2 my-lg-0" id="inputLocation4">
 
 
                                         <option valeur="Ariana">Ariana</option>
@@ -72,29 +52,16 @@
                                 </div>
 
                                 <div class="form-group col-md-2">
-
-                                 <input type="date" class="form-control my-2 my-lg-0" id="inputLocation4" name="date">
+                                    <a href="http://localhost/FiThnitek-master/web/app_dev.php/FiThnitek/Taxi/recherche">
+                                    <button type="submit" class="btn btn-primary"> Search Now</button>
+                                    </a>
                                 </div>
-
-                                <div class="form-group col-md-2">
-
-                                    <button type="submit" class="btn btn-primary">Search </button>
-
-                                </div>
-
-
-
-
-
-                    </div>
-
+                            </div>
                         </form>
-
                     </div>
-                </div>
                 </div>
             </div>
-
+        </div>
 
 
 
@@ -122,22 +89,27 @@
         <div class="col-md-9" align="center">
             <div class="category-search-filter" align="center">
                 <div class="row">
-
+                    <div class="col-md-6">
+                        <strong>Short</strong>
+                        <select>
+                            <option>Most Recent</option>
+                            <option value="1">Most Popular</option>
+                            <option value="2">Lowest Price</option>
+                            <option value="4">Highest Price</option>
+                        </select>
+                    </div>
                     <div class="col-md-6">
                         <div class="view">
-
-                                <a  href="{{ path('fi_thnitek_trieprix') }}">
-
-                             <button type="submit" class="btn btn-outline-info"> Sort By Price   </button>
-                                </a>
-
-                            <a  href="{{ path('fi_thnitek_trieheure') }}">
-
-                                <button type="submit" class="btn btn-outline-info"> Sort By Hour   </button>
-                            </a>
-
+                            <strong>Views</strong>
+                            <ul class="list-inline view-switcher">
+                                <li class="list-inline-item">
+                                    <a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
+                                </li>
+                            </ul>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -148,7 +120,7 @@
                     {% for i in a  %}
                     <div class="col-sm-12 col-lg-4 col-md-10" >
                         <!-- product card -->
- <br> <br>
+
                         <a class="product-item bg-light">
 
                             <div class="card">
@@ -171,9 +143,8 @@
                                             {{ i.iduser.nom }} {{ i.iduser.username }}
                                         </li>
                                     </ul>
-                                    <p class="card-text">Heure de depart  {{ i.periode }}</p>
-                                    <p class="card-text">Prix est  {{ i.prix}}</p>
-                                    <p class="card-text">Date est  {{ i.dateD}}</p>
+                                    <p class="card-text">Periode d attente est {{ i.periode }}</p>
+
                                     <form method="post">
                                         <input type="submit" value="Accepter" formaction="{{ path('fi_thnitek_reservertaxi',{'id': i.id }) }} ">
                                     </form>
@@ -182,7 +153,7 @@
 
                     </div>
 
-                    {% endfor %}
+
 
                 </div>
 
@@ -192,8 +163,28 @@
         </div>
 
         </div>
-
-
+        {% endfor %}
+        <div class="pagination justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         </div>
         </div>
         </div>

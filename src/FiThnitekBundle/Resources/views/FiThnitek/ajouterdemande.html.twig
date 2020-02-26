@@ -1,10 +1,33 @@
-{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% extends 'FiThnitek/baseFiThnitek.html.twig' %}
 {% block event %}
 
 {% endblock %}
+
+{% block notification %}
+    <li class="nav-item dropdown dropdown-slide">
+
+        <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Notifications    <span class="badge badge-warning navbar-badge"> {{ b|length }}</span> <span><i class="fa fa-angle-down"></i></span>
+        </a>
+        <!-- Dropdown list -->
+        <div class="dropdown-menu">
+            {% for i in b %}
+                <ul class="list-inline justify-content-center">
+                    <li class="list-inline-item">
+
+
+                        <button type="button" class="btn btn-block btn-outline-info">{{ i.title }} </button>
+
+
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+    </li>
+{% endblock %}
 {% block container %}
 
-        <section >
+        <section class="ad-post bg-gray py-5">
             <div class="container">
                 <form method="post">
                     <!-- Post Your ad start -->
@@ -14,13 +37,50 @@
                                 <h3>Post Your ad</h3>
                             </div>
                             <div class="col-lg-6">
+                                <h6 class="font-weight-bold pt-4 pb-1"> Region</h6>
+                                <select  id="inputGroupSelect" class="w-100" name="region">
+
+
+                                <option valeur="Ariana">Ariana</option>
+                                <option valeur="Beja">Baja</option>
+                                <option valeur="Ben Arous ">Ben Arous</option>
+                                <option valeur="Bizerte ">Bizerte </option>
+                                <option valeur="Gabes ">Gabes </option>
+                                <option valeur=" Gafsa">Gafsa </option>
+                                <option valeur=" Jendouba">Jendouba </option>
+                                <option valeur=" kairouan">kairouan </option>
+                                <option valeur=" kaserine"> kaserine</option>
+                                <option valeur=" keblili">kebili </option>
+                                <option valeur=" Kef">Kef </option>
+                                <option valeur=" kef"> Mahdia</option>
+                                <option valeur=" Manouba">Manouba </option>
+                                <option valeur=" Medenine"> Medenine</option>
+                                <option valeur="Monastir ">Monastir </option>
+                                <option valeur="Nabeul "> Nabeul</option>
+                                <option valeur=" Sidi Bouzid">Sidi Bouzid </option>
+                                <option valeur=" Siliana"> Siliana</option>
+                                <option valeur=" Sfax">Sfax </option>
+                                <option valeur="Sousse ">Sousse </option>
+                                <option valeur="Tataouine">Tataouine </option>
+                                <option valeur=" Touzer">Touzer </option>
+                                <option valeur=" Tunis"> Tunis</option>
+                                <option valeur=" Zaghouan"> Zaghouan</option>
+
+
+
+                                </select>
+
+
+
                                 <h6 class="font-weight-bold pt-4 pb-1">Lieu de depart
                                     :</h6>
-                                <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="lieud">
+                                <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" required pattern="[0-9a-zA-Z- \-]{3,12}" name="lieud">
                                 <h6 class="font-weight-bold pt-4 pb-1">Destination:</h6>
-                                <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="lieua">
+                                <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" required pattern="[0-9a-zA-Z- \-']{3,12}" name="lieua">
                                 <h6 class="font-weight-bold pt-4 pb-1"> Periode</h6>
-                                <input type="time" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="periode">
+                                <input type="time" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There"  required pattern="[0-9 \:]{5}"  name="periode">
+                                <h6 class="font-weight-bold pt-4 pb-1"> Date  </h6>
+                                <input type="date" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There"    name="date">
 
                             </div>
 

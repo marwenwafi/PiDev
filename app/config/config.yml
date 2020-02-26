@@ -9,8 +9,6 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    events_directory: '%kernel.project_dir%/web/uploads/eventsImages'
-
 
 framework:
     #esi: ~
@@ -83,3 +81,10 @@ fos_user:
     from_email:
         address: "badiaa.bouhdid@esprit.tn"
         sender_name: "badi3a"
+
+# NotificationsBundle configuration
+notifications:
+    app_id:     949394
+    app_key:    c050b20df6518d43c941
+    app_secret: 7ec987856b7d6fa43529
+    cluster:    ap2

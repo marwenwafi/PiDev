@@ -3,8 +3,11 @@
 
 namespace FiThnitekBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use SBC\NotificationsBundle\Builder\NotificationBuilder;
+use SBC\NotificationsBundle\Model\NotifiableInterface;
+
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FiThnitekBundle\Repository\TaxiRepository")
  */
 
 class DemandeTaxi
@@ -24,9 +27,21 @@ class DemandeTaxi
      */
     private $lieudarrive;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",length=255)
+     */
+    private $region;
+    /**
+     *
+     * @ORM\Column(type="string",length=255)
+     *
      */
     private $periode;
+    /**
+     *
+     * @ORM\Column(type="string",length=255)
+     *
+     */
+    private $dateD;
 
     /**
      * @ORM\Column(type="integer")
@@ -37,40 +52,7 @@ class DemandeTaxi
      */
     private $prix;
 
-    /**
-     * @return mixed
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
 
-    /**
-     * @param mixed $prix
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-    }
-
-
-
-
-    /**
-     * @return mixed
-     */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * @param mixed $etat
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
-    }
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(name="iduser",
@@ -78,21 +60,6 @@ class DemandeTaxi
      */
     private $iduser;
 
-    /**
-     * @return mixed
-     */
-    public function getIduser()
-    {
-        return $this->iduser;
-    }
-
-    /**
-     * @param mixed $iduser
-     */
-    public function setIduser($iduser)
-    {
-        $this->iduser = $iduser;
-    }
 
     /**
      * @return mixed
@@ -159,6 +126,131 @@ class DemandeTaxi
     }
 
 
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param mixed $prix
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIduser()
+    {
+        return $this->iduser;
+    }
+
+    /**
+     * @param mixed $iduser
+     */
+    public function setIduser($iduser)
+    {
+        $this->iduser = $iduser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param mixed $region
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateD()
+    {
+        return $this->dateD;
+    }
+
+    /**
+     * @param mixed $dateD
+     */
+    public function setDateD($dateD)
+    {
+        $this->dateD = $dateD;
+    }
+
+
+    /*
+    public function notificationsOnCreate(NotificationBuilder $builder)
+    {
+        $notification= new Notification();
+        //$user = $this->container->get('security.token_storage')->getToken()->getUser();
+
+        $notification
+            ->setTitle('ajout demande')
+            ->setDescription('vous avez fait une demande de taxi ')
+            ->setRoute('fi_thnitek_affichedemandeuser')
+            ->setParameters(array('id'=> $this->id));
+            //->setIduser(array('iduser'=>$this->iduser));
+          $builder->addNotification($notification);
+        return $builder;
+    }
+
+    public function notificationsOnUpdate(NotificationBuilder $builder)
+    {
+        $notification= new Notification();
+
+        $notification
+            ->setTitle('mise a jour demande')
+            ->setDescription('vous avez fait une demande de taxi ')
+            ->setRoute('fi_thnitek_affichedemandeuser')
+            ->setParameters(array('id'=> $this->id));
+
+        $builder->addNotification($notification);
+        return $builder;    }
+
+    public function notificationsOnDelete(NotificationBuilder $builder)
+    {   //$user = $this->container->get('security.token_storage')->getToken()->getUser();
+
+        $notification= new Notification();
+        $notification
+            ->setTitle('supprimer demande')
+            ->setDescription('vous avez fait une demande de taxi ')
+            ->setRoute('fi_thnitek_affichedemandeuser')
+            ->setParameters(array('id'=> $this->id));
+
+        $builder->addNotification($notification);
+        return $builder;
+    }
+*/
 
 
 }

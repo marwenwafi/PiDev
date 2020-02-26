@@ -1,7 +1,5 @@
 ############        FRONT                   ##################
-fi_thnitek_affiche:
-    path:     /affiche
-    defaults: { _controller: FiThnitekBundle:Default:affiche }
+
 fi_thnitek_affichedemande:
   path:     /affichedemande
   defaults: { _controller: FiThnitekBundle:Taxi:affichedemande }
@@ -26,6 +24,27 @@ fi_thnitek_affichereservation:
 fi_thnitek_supprimerreservation:
   path:     /supprimerres/{id}
   defaults: { _controller: FiThnitekBundle:Taxi:supprimerres }
+fi_thnitek_sendNotification:
+  path:     /sendNotification
+  defaults: { _controller: FiThnitekBundle:Taxi:sendNotification }
+fi_thnitek_affichenotif:
+  path:     /notif
+  defaults: { _controller: FiThnitekBundle:Taxi:NotificationUser }
+
+fi_thnitek_trieprix:
+  path:     /trieP
+  defaults: { _controller: FiThnitekBundle:Taxi:Trier }
+fi_thnitek_trieheure:
+  path:     /trieH
+  defaults: { _controller: FiThnitekBundle:Taxi:TrierH }
+fi_thnitek_notifdemande:
+  path:     /notifdemande/{title}
+  defaults: { _controller: FiThnitekBundle:Taxi:notifdemande }
+
+fi_thnitek_showdemande:
+  path:     /show/{article}
+  defaults: { _controller: FiThnitekBundle:Taxi:showdemande }
+
 
 ############          BACK                    ##################
 fi_thnitek_affichedemandeB:
@@ -49,3 +68,28 @@ fi_thnitek_reservertaxiB:
 fi_thnitek_modifierdemandeB:
   path:     /modifierB/{id}
   defaults: { _controller: FiThnitekBundle:Taxi:modifierB }
+fi_thnitek_supprimernotif:
+  path:     /notifs/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:supprimernotif }
+fi_thnitek_demanderetat1:
+  path:     /etat=1
+  defaults: { _controller: FiThnitekBundle:Taxi:etat1 }
+fi_thnitek_demanderetat0:
+  path:     /etat=0
+  defaults: { _controller: FiThnitekBundle:Taxi:etat0 }
+fi_thnitek_user:
+  path:     /user/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:user }
+fi_thnitek_demande:
+  path:     /demande/{id}
+  defaults: { _controller: FiThnitekBundle:Taxi:demande }
+fi_thnitek_affichenotifchauffeur:
+  path:     /notifchauffeur
+  defaults: { _controller: FiThnitekBundle:Taxi:notifch }
+fi_thnitek_affichenotifclient:
+  path:     /notifclient
+  defaults: { _controller: FiThnitekBundle:Taxi:notifcl }
+fi_thnitek_affichenotifall:
+  path:     /notifallb
+  defaults: { _controller: FiThnitekBundle:Taxi:notifallb }
+

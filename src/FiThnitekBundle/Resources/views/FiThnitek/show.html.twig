@@ -11,17 +11,34 @@
         </a>
         <!-- Dropdown list -->
         <div class="dropdown-menu">
-            {% for i in b %}
-                <ul class="list-inline justify-content-center">
-                    <li class="list-inline-item">
+
+            <ul class="list-inline justify-content-center">
+                <li class="list-inline-item">
+
+                    <a href="{{ path('fi_thnitek_notifdemande',{'title': 'Demande Taxi'}) }}">
+                        <button type="button" class="btn btn-block btn-outline-info"> Demande Taxi <span class="badge badge-warning navbar-badge"> {{ s|length }}</span> <span><i class="fa fa-angle-down"></i></span> </button>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="list-inline justify-content-center">
+                <li class="list-inline-item">
 
 
-                        <button type="button" class="btn btn-block btn-outline-info">{{ i.title }} </button>
+                    <button type="button" class="btn btn-block btn-outline-info"> Modifier une Demande Taxi <span class="badge badge-warning navbar-badge"> {{ mod|length }}</span> <span><i class="fa fa-angle-down"></i></span> </button>
 
 
-                    </li>
-                </ul>
-            {% endfor %}
+                </li>
+            </ul>
+            <ul class="list-inline justify-content-center">
+                <li class="list-inline-item">
+
+
+                    <button type="button" class="btn btn-block btn-outline-info"> Supprimer une  Demande Taxi <span class="badge badge-warning navbar-badge"> {{ sup|length }}</span> <span><i class="fa fa-angle-down"></i></span> </button>
+
+
+                </li>
+            </ul>
         </div>
     </li>
 {% endblock %}
@@ -69,45 +86,38 @@
 
                     </div>
                 </div>
-                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-1">
                     <!-- Recently Favorited -->
                     <div class="widget dashboard-container my-adslist">
-                        <h3 class="widget-header">My Reservations</h3>
+                        <h3 class="widget-header">My offers</h3>
                         <table class="table table-responsive product-dashboard-table">
                             <thead>
                             <tr>
-                                <th> Depart</th>
-                                <th>Destination</th>
-                                <th class="text-center">Periode</th>
-                                <th class="text-center">Action</th>
+                                <th> lieu de depart </th>
+                                <th> lieu d arrive  </th>
+                                <th class="text-center">heure  </th>
+
+                                <th class="text-center">date  </th>
+
                             </tr>
                             </thead>
                             <tbody>
-                            {% for i in a %}
+
+
+
                             <tr>
-                                <td class="product-thumb">
-                                    {{ i.iddemande.lieudarrive}}</td>
-                                <td class="product-details">
-                                    {{ i.iddemande.lieudedepart }}
+                                <td class="product-category"><span class="categories">
+                                    {{ a.lieudedepart }}</td>
+                                <td class="product-category"><span class="categories">
+                                    {{ a.lieudarrive }}
                                 </td>
-                                <td class="product-category"><span class="categories">{{ i.iddemande.periode }}</span></td>
-                                <td class="action" data-title="Action">
-                                    <div class="">
-                                        <ul class="list-inline justify-content-center">
+                                <td class="product-category"><span class="categories">{{ a.periode }}</span></td>
+                                <td class="product-category"><span class="categories">{{ a.dateD }}</span></td>
 
 
-                                            <li class="list-inline-item">
-                                                <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="{{ path('fi_thnitek_supprimerreservation',{'id': i.id }) }}">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
                             </tr>
 
 
-                            {% endfor %}
 
                             </tbody>
                         </table>

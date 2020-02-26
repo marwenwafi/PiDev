@@ -1,7 +1,9 @@
-{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% extends 'FiThnitek/baseFiThnitek.html.twig' %}
 {% block event %}
 
 {% endblock %}
+
+
 {% block container %}
 
     <section class="dashboard section">
@@ -55,8 +57,10 @@
                             <tr>
                                 <th> Depart</th>
                                 <th>Destination</th>
-                                <th class="text-center">Periode</th>
+                                <th class="text-center">Heure </th>
+
                                 <th class="text-center">Action</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -68,6 +72,7 @@
                                     {{ i.iddemande.lieudarrive }}
                                 </td>
                                 <td class="product-category"><span class="categories">{{ i.iddemande.periode }}</span></td>
+
                                 <td class="action" data-title="Action">
                                     <div class="">
                                         <ul class="list-inline justify-content-center">
@@ -76,17 +81,21 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </li>
+
                                             <li class="list-inline-item">
 
                                                     <a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="{{ path('fi_thnitek_modifierreservation',{'id': i.id }) }}">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
                                             </li>
+
                                             <li class="list-inline-item">
                                                 <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="{{ path('fi_thnitek_supprimerreservation',{'id': i.id }) }}">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </li>
+
+
                                         </ul>
                                     </div>
                                 </td>

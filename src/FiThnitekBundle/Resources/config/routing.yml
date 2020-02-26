@@ -1,32 +1,17 @@
 fi_thnitek_homepage:
     path:     /
     defaults: { _controller: FiThnitekBundle:Default:index }
+fi_thnitek_Back:
+  path:     /back
+  defaults: { _controller: FiThnitekBundle:Default:back }
+fi_thnitek_login:
+    path:     /login
+    defaults: { _controller: FiThnitekBundle:Default:login }
+fi_thnitek_register:
+    path:     /Register
+    defaults: { _controller: FiThnitekBundle:Default:Register }
+Taxi:
+  resource: "@FiThnitekBundle/Resources/config/routingTaxi.yml"
+  prefix: /Taxi
 
-fi_thnitek_admin:
-    path:     /admin
-    defaults: { _controller: FiThnitekBundle:Default:admin }
-
-fi_thnitek_marwen_routes:
-    resource: "@FiThnitekBundle/Resources/config/marwen.yml"
-    prefix: /admin
-
-fi_thnitek_maha_routes:
-    resource: "@FiThnitekBundle/Resources/config/routingCovoiturage.yml"
-    prefix: /covoiturage
-
-fi_thnitek_siwar_routes:
-    resource: "@FiThnitekBundle/Resources/config/routingTaxi.yml"
-    prefix: /taxi
-
-fi_thnitek_jassem_routes:
-    resource: "@FiThnitekBundle/Resources/config/routingColis.yml"
-    prefix: /colis
-
-fi_thnitek_sourour_routes:
-    resource: "@FiThnitekBundle/Resources/config/sourour.yml"
-    prefix: /
-
-fi_thnitek_yassin_routes:
-    resource: "@FiThnitekBundle/Resources/config/yassin.yml"
-    prefix: /reclamation
 

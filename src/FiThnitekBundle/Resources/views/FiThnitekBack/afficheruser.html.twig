@@ -1,0 +1,164 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block notification %}
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge"> {{ b|length }}</span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-header">  Notifications</span>
+            <div class="dropdown-divider"></div>
+
+            {% for i in b %}
+
+            {% if i.Title == 'Demande Taxi' %}
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                {{ i.Title }} {{ i.id }}
+
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a  class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> {{ i.Description }}</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{ i.iduser.nom }} </p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        <a  class="nav-link" href="{{ path('fi_thnitek_supprimernotif',{'id': i.id }) }}"  > <button type="button" class="btn btn-block btn-outline-danger btn-sm">Supprimer</button> </a>
+                                    </p>
+
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+                {% elseif i.Title == 'Reservation Taxi' %}
+
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                             {{ i.Title }}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="http://localhost/FiThnitek-master/web/app_dev.php/FiThnitek/Taxi/affichedemandeB" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> {{ i.Description }}</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="http://localhost/FiThnitek-master/web/app_dev.php/FiThnitek/Taxi/ajouterdemandeB" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{ i.Title }} </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="http://localhost/FiThnitek-master/web/app_dev.php/FiThnitek/Taxi/affichereservationB" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> {{ i.Title }}</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+
+     {% endif %}
+
+
+            {% endfor %}
+        </div>
+
+
+
+    </li>
+
+{% endblock %}
+  {% block content %}
+
+
+
+      <section class="content">
+          <div class="container-fluid">
+              <div class="row">
+
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <h3 class="card-title"> Les  demandes Taxi</h3>
+
+
+
+
+
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body p-0">
+                              <table class="table table-sm">
+                                  <thead>
+                                  <tr>
+                                      <th >user name  </th>
+                                      <th>email </th>
+                                      <th>phone number</th>
+                                      <th >Birthday  </th>
+
+                                  </tr>
+                                  </thead>
+
+                                  <tbody>
+                                  <tr>
+                                      <td>{{ a.username }}</td>
+                                      <td>{{ a.email }}</td>
+                                      <td>{{ a.tel}}</td>
+                                      <td>{{ a.datedenaissance |date('Y-m-d') }}</td>
+
+
+
+                                  </tr>
+
+                                  </tbody>
+
+                              </table>
+                          </div>
+                          <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                  </div>
+              </div>
+              <!-- /.row -->
+          </div><!-- /.container-fluid -->
+
+      </section>
+
+  {% endblock %}
+
+{#
+{{ block("javascripts", "fithnitek/baseFiThnitek.html.twig") }}
+{{ block("navbar", "fithnitek/baseFiThnitek.html.twig") }}
+#}
