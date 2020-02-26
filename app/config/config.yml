@@ -87,3 +87,9 @@ fos_user:
     from_email:
         address: "badiaa.bouhdid@esprit.tn"
         sender_name: "badi3a"
+# NotificationsBundle configuration
+notifications:
+    app_id:     949394
+    app_key:    c050b20df6518d43c941
+    app_secret: 7ec987856b7d6fa43529
+    cluster:    ap2
