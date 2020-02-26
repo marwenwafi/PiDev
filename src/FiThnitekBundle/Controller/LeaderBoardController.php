@@ -19,10 +19,6 @@ class LeaderBoardController extends Controller
         $form = $form->handleRequest($request);
         if ($form->isValid())
         {
-            $file = $form->get('banner')->getData();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('banners_directory'), $fileName);
-            $leaderb->setBanner($fileName);
             $em = $this->getDoctrine()->getManager();
             $em->persist($leaderb);
             $em->flush();

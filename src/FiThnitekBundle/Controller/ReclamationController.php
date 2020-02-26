@@ -9,13 +9,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FiThnitekBundle\Repository\ReclamationRepository;
 
+
+
 class ReclamationController extends Controller
 {
     function ajouterreclamationAction(Request $request)
     {
     $reclamation = new Reclamation();
-        //$dateuse =  new \DateTime();
-        //$date= $dateuse->format('Y-m-d');
+        $dateuse =  new \DateTime();
+        $date= $dateuse->format('Y-m-d');
 
         $upd=$this->getDoctrine()->getManager();
 
@@ -26,7 +28,7 @@ class ReclamationController extends Controller
             $reclamation->setType($request->get('type'));
             $reclamation->setSujet($request->get('sujet'));
             $reclamation->setDescription($request->get('description'));
-            $reclamation->setDate("12/03/2020");
+            $reclamation->setDate($date);
             $reclamation->setEtat(false);
             $upd->persist($reclamation);
             $upd->flush();
@@ -56,7 +58,7 @@ class ReclamationController extends Controller
     function afficherbackreclamationAction()
     {
         $em=$this->getDoctrine()->getManager();
-        $reclamation=$em->getRepository('FiThnitekBundle:Reclamation')->backreclamation();
+        $reclamation=$em->getRepository('FiThnitekBundle:Reclamation')->findall();
         return $this->render('@FiThnitek/FiThnitek/listereclamation.html.twig',array('reclamation'=>$reclamation));
 
     }
@@ -70,12 +72,16 @@ class ReclamationController extends Controller
         if ($request->isMethod('POST'))
         {
             $reponse->setReponseRec($request->get('reponse'));
-
+$rep = $request->get('reponse');
             $reponse->setIdRec($rec1);
             $upd->persist($reponse);
             //$upd->persist($rec);
             //$upd->flush();
+            $message = new \DocDocDoc\NexmoBundle\Message\Simple("FiThnitek", "21629288025", $request->get('reponse'));
+            $nexmoResponse = $this->container->get('doc_doc_doc_nexmo')->send($message);
             $upd->flush();
+
+
             return $this->redirectToRoute('fi_thnitek_afficherbackreclamation');
         }
         return $this->render('@FiThnitek/FiThnitek/repondrereclamation.html.twig');

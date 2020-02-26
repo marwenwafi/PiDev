@@ -1,0 +1,265 @@
+{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% block navbar %}
+<section>
+    <div class="container">
+        <nav class="row">
+            <nav class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light navigation">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{{ asset ('images/logo.png')}}" alt="" style="height: 80px;width: 100px;">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto main-nav ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
+                                </a>
+
+                                <!-- Dropdown list -->
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                                    <a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
+                                    <a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
+                                    <a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
+                                    <a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Pages <span><i class="fa fa-angle-down"></i></span>
+                                </a>
+                                <!-- Dropdown list -->
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="about-us.html">About Us</a>
+                                    <a class="dropdown-item" href="contact-us.html">Contact Us</a>
+                                    <a class="dropdown-item" href="user-profile.html">User Profile</a>
+                                    <a class="dropdown-item" href="404.html">404 Page</a>
+                                    <a class="dropdown-item" href="package.html">Package</a>
+                                    <a class="dropdown-item" href="single.html">Single Page</a>
+                                    <a class="dropdown-item" href="store.html">Store Single</a>
+                                    <a class="dropdown-item" href="single-blog.html">Single Post</a>
+                                    <a class="dropdown-item" href="blog.html">Blog</a>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide">
+                                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Listing <span><i class="fa fa-angle-down"></i></span>
+                                </a>
+                                <!-- Dropdown list -->
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="category.html">Ad-Gird View</a>
+                                    <a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+            </nav>
+            </nav>
+        </nav>
+        </div>
+
+</section>
+
+
+{% endblock %}
+{% block event %}
+
+{% endblock %}
+{% block call %}
+
+{% endblock %}
+{% block container %}
+    <section class="call-to-action overly bg-3 section-sm">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row justify-content-md-center text-center">
+
+                <div class="col-md-8">
+                    <div class="content-holder">
+
+
+
+                        <form  class="formsourour" >
+                                    <div class="card-body">
+                                        <h1 style="color: white; font-family:Blackadder ITC ; font-size:50px">  Mes évènements  </h1>
+                                        <div class="form-group">
+
+                                            {% for i in event %}
+                                                <a href="{{ path(i.route,i.parameters) }}"> <h2 style=" color: #518cad ; font-weight: bold;; font-size:20px">
+                                                        {{i.Title}}  </h2> </a>
+
+
+                                                <h3 style="color:#d5c8ed">  Participer à <b> {{i.Title}} </b> et gagner {{i.Description}} points </h3>
+                                            {% else %}
+                                                <h3 style="color:#d5c8ed">  Aucun évenement n'est disponible.  </h3>
+
+
+                                            {% endfor %}
+
+
+
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+                                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+    </section>
+{% endblock %}
+{% block footer %}
+    <footer class="footer-bottom">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                    <!-- Copyright -->
+                    <div class="copyright">
+                        <p>Copyright © <script>
+                                var CurrentYear = new Date().getFullYear()
+                                document.write(CurrentYear)
+                            </script>. All Rights Reserved, theme by <a class="text-primary" href="https://themefisher.com" target="_blank">themefisher.com</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                    <!-- Social Icons -->
+                    <ul class="social-media-icons text-right">
+                        <li><a class="fa fa-facebook" href="https://www.facebook.com/themefisher" target="_blank"></a></li>
+                        <li><a class="fa fa-twitter" href="https://www.twitter.com/themefisher" target="_blank"></a></li>
+                        <li><a class="fa fa-pinterest-p" href="https://www.pinterest.com/themefisher" target="_blank"></a></li>
+                        <li><a class="fa fa-vimeo" href=""></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+        <!-- To Top -->
+        <div class="top-to">
+            <a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+        </div>
+    </footer>
+{% endblock %}
+ {% block css %}
+     <!-- FAVICON -->
+     <link href="img/favicon.png" rel="shortcut icon">
+     <!-- PLUGINS CSS STYLE -->
+     <link href="{{ asset ('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}" rel ="stylesheet">
+
+
+     <!-- Bootstrap -->
+
+     <link rel="stylesheet" href="{{ asset ('plugins/bootstrap/css/bootstrap.min.css') }}">
+     <link rel="stylesheet" href="{{ asset ('plugins/bootstrap/css/bootstrap-slider.css') }}">
+     <!-- Font Awesome -->
+     <link href="{{ asset ('plugins/font-awesome/css/font-awesome.min.css') }}" rel ="stylesheet">
+     <!-- Owl Carousel -->
+     <link href="{{ asset ('plugins/slick-carousel/slick/slick.css') }}" rel="stylesheet">
+     <link href="{{ asset ('plugins/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet">
+     <!-- Fancy Box -->
+     <link href="{{ asset ('plugins/fancybox/jquery.fancybox.pack.css') }}" rel="stylesheet">
+     <link href="{{ asset ('plugins/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
+     <!-- CUSTOM CSS -->
+     <link href="{{ asset ('css/style.css') }}" rel="stylesheet">
+
+
+
+
+
+
+     <style >
+
+         .formsourour{
+             background-color: #404040;
+         }
+
+
+     </style>
+
+      <script>
+          function rechercheOption(element,value,action){
+              var i=0,li=element.childNodes.length;
+              if(!action && element.value==value){//on vérifie si la valeur à cacher est celle qui est actuellement choisie
+                  (element.firstElementChild||element.firstChild).selected=true; //la tournure est complexe mais elle permet de selectionner la première option tout en évitant un comportement de Firefox (qui considère que le premier enfant est le saut de ligne (à juste titre selon mon avis)) et permettre aux navigateurs ne connaissant pas firstElementChild de gérer le premier enfant
+              }
+              while(i<li){ //on parcours la liste des enfants de l'élément
+                  if(element.childNodes[i].value==value){ //on vérifie la valeur du value
+                      //on a trouvé la bonne option
+                      element.childNodes[i].style.display=action?"block":"none"; //on affiche ou cache cet option en fonction de la valeur de action
+                      return; //on quitte la fonction, ça ne sert à rien de rester ici puisqu'on a trouvé le bon select
+                  }
+                  i++;
+              }
+          }
+
+          var oldValue1="1"; //valeur par défaut du premier select
+          function changeSelect1(){
+              var select1=document.getElementById("select1");
+              var select2=document.getElementById("select2");
+              rechercheOption(select2,oldValue1,true); //rétablie la valeur précédente
+              oldValue1=select1.value; //permet de se souvenir de la précédente valeur
+              rechercheOption(select2,oldValue1,false); //cache la valeur actuelle
+          }
+
+      </script>
+
+
+
+
+
+
+ {% endblock %}
+{% block javascripts %}
+    <!-- JAVASCRIPTS -->
+    <script src="{{ asset ('plugins/jQuery/jquery.min.js') }}"></script>
+    <script src="{{ asset ('plugins/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset ('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset ('plugins/bootstrap/js/bootstrap-slider.js') }}"></script>
+    <!-- tether js -->
+    <script src="{{ asset ('plugins/tether/js/tether.min.js') }}"></script>
+    <script src="{{ asset ('plugins/raty/jquery.raty-fa.js') }}"></script>
+    <script src="{{ asset ('plugins/slick-carousel/slick/slick.min.js') }}"></script>
+    <script src="{{ asset ('plugins/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset ('plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
+    <script src="{{ asset ('plugins/smoothscroll/SmoothScroll.min.js') }}"></script>
+    <!-- google map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
+    <script src="{{ asset ('plugins/google-map/gmap.js') }}"></script>
+    <script src="{{ asset ('js/script.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+    <script src="{{ asset ('backend/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/jquery/jquery.min.js') }}"></script>
+
+{% endblock %}

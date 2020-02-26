@@ -1,6 +1,6 @@
 ################Front####################################
 fi_thnitek_ajoutcovoiturageutilisateur:
-    path:     /ajoutcovoiturage
+    path:     /ajoutcovoiturage1
     defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovoiturage }
 fi_thnitek_affichcovoiturageutilisateur:
     path:     /affichagebase
@@ -23,6 +23,18 @@ fi_thnitek_readreservation:
 fi_thnitek_supprimerReservCov:
     path:     /supprimerrescov{id}
     defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescov }
+fi_thnitek_ordonneroffreCov:
+    path:     /ordonnercov
+    defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecov }
+fi_thnitek_ordonneroffreCov1:
+    path:     /ordonnercov1
+    defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecov1 }
+fi_thnitek_maha:
+  path:     /maha
+  defaults: { _controller: FiThnitekBundle:Covoiturage:readoffre }
+fi_thnitek_rechercheReservCov:
+  path:     /recherchecov
+  defaults: { _controller: FiThnitekBundle:Covoiturage:recherchecov }
 #######################Back################################
 fi_thnitek_ajoutcovback:
     path:     /ajoutcovback
@@ -45,3 +57,9 @@ fi_thnitek_affichageresevcovback:
 fi_thnitek_suppresevcovback:
     path:     /supprimerrescovback/{id}
     defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescovback }
+fi_thnitek_recherchecovback:
+  path:     /recherchecovback
+  defaults: { _controller: FiThnitekBundle:Covoiturage:recherchecovBack }
+fi_thnitek_finduserback:
+  path:     /userfind{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:utilisateurcovbackfind }

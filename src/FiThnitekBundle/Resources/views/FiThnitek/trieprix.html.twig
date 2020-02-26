@@ -1,0 +1,189 @@
+{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% block event %}
+
+{% endblock %}
+{% block notification %}
+    <li class="nav-item dropdown dropdown-slide">
+        <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Notifications <span><i class="fa fa-angle-down"></i></span>
+        </a>
+        <!-- Dropdown list -->
+        <div class="dropdown-menu">
+            {% for i in b %}
+            <ul class="list-inline justify-content-center">
+                <li class="list-inline-item">
+
+
+                        <button type="button" class="btn btn-block btn-outline-info">{{ i.title }} </button>
+
+
+                </li>
+            </ul>
+                    {% endfor %}
+        </div>
+    </li>
+{% endblock %}
+{% block container %}
+
+    <section class="page-search">
+        <div class="container" align="center">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advance Search -->
+                    <div class="advance-search">
+                        <form method="post">
+                            <div class="form-row">
+
+                                <div class="form-group col-md-2">
+
+                                    <select  class="form-control my-2 my-lg-0" id="inputLocation4" name="region">
+
+
+                                        <option valeur="Ariana">Ariana</option>
+                                        <option valeur="Beja">Baja</option>
+                                        <option valeur="Ben Arous ">Ben Arous</option>
+                                        <option valeur="Bizerte ">Bizerte </option>
+                                        <option valeur="Gabes ">Gabes </option>
+                                        <option valeur=" Gafsa">Gafsa </option>
+                                        <option valeur=" Jendouba">Jendouba </option>
+                                        <option valeur=" kairouan">kairouan </option>
+                                        <option valeur=" kaserine"> kaserine</option>
+                                        <option valeur=" keblili">kebili </option>
+                                        <option valeur=" Kef">Kef </option>
+                                        <option valeur=" kef"> Mahdia</option>
+                                        <option valeur=" Manouba">Manouba </option>
+                                        <option valeur=" Medenine"> Medenine</option>
+                                        <option valeur="Monastir ">Monastir </option>
+                                        <option valeur="Nabeul "> Nabeul</option>
+                                        <option valeur=" Sidi Bouzid">Sidi Bouzid </option>
+                                        <option valeur=" Siliana"> Siliana</option>
+                                        <option valeur=" Sfax">Sfax </option>
+                                        <option valeur="Sousse ">Sousse </option>
+                                        <option valeur="Tataouine">Tataouine </option>
+                                        <option valeur=" Touzer">Touzer </option>
+                                        <option valeur=" Tunis"> Tunis</option>
+                                        <option valeur=" Zaghouan"> Zaghouan</option>
+
+
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-2">
+
+                                    <button type="submit" class="btn btn-primary">Search Now</button>
+                                </div>
+
+
+
+
+                    </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+    </section>
+    <!-- affichage-->
+
+
+
+
+
+
+    <section class="section-sm">
+        <div class="container">
+
+
+
+        </div>
+        </div>
+        <div class="col-md-9" align="center">
+            <div class="category-search-filter" align="center">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="view">
+                            <form method="post">
+
+
+                                <select name="trier">
+                                    <option value="Heure"> Heure</option>
+                                    <option value="Prix"> Prix </option>
+
+                                </select>
+                                <button type="submit" class="btn btn-outline-info">Sort By </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-grid-list">
+
+                <div class="row mt-10">
+                    {% for i in a  %}
+                    <div class="col-sm-12 col-lg-4 col-md-10" >
+                        <!-- product card -->
+ <br> <br>
+                        <a class="product-item bg-light">
+
+                            <div class="card">
+                                <div class="thumb-content">
+
+
+                                    <!-- <div class="price">$200</div> -->
+                                    <a href="single.html">
+                                        <img class="card-img-top img-fluid" src="" >
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <h4 class="card-title">Du {{ i.lieudedepart }} Jusqu'a {{ i.lieudarrive }} </h4>
+                                    <ul class="list-inline product-meta">
+
+                                        <li class="list-inline-item">
+                                            {{ i.iduser.nom }} {{ i.iduser.username }}
+                                        </li>
+                                    </ul>
+                                    <p class="card-text">Periode d attente est {{ i.periode }}</p>
+
+                                    <form method="post">
+                                        <input type="submit" value="Accepter" formaction="{{ path('fi_thnitek_reservertaxi',{'id': i.id }) }} ">
+                                    </form>
+                                </div>
+                            </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        </div>
+
+
+        </div>
+        </div>
+        </div>
+
+    </section>
+
+{% endblock %}

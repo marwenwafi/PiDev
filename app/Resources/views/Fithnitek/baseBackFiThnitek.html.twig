@@ -50,8 +50,14 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ path('fi_thnitek_homepage') }}" class="nav-link">Home</a>
       </li>
+      {% block notification %}
+
+      {% endblock %}
     </ul>
   </nav>
+
+
+
   {% endblock %}
   <!-- /.navbar -->
 
@@ -145,7 +151,133 @@
               </li>
             </ul>
           </li>
-
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Colis
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_ajouterOffreback') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Offre</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_afficherOffreback') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Show Offre</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_affichageReservationback') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Show Reservation</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Covoiturage
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_ajoutcovback') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Offre</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_affichagecovback') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Show Offre</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_affichageresevcovback') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Show Reservation</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Taxi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_affichedemandeB') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View requests</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_ajouterdemandeB') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add a request </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_affichereservationB') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> View reservations </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Evénement
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_ajouterEvent') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ajouter Evènement </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_readEvent') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lister les évenements</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Questionnaire
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ path('fi_thnitek_readques') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lister Questionnaire </p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

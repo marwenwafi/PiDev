@@ -21,7 +21,8 @@
                     <table class="table table-hover text-nowrap">
                         <thead>
                         <tr>
-                            <th>User Name</th>
+                            <th>Driver Name</th>
+                            <th>User name</th>
                             <th>User Number</th>
                             <th>Destination</th>
                             <th>Departure</th>
@@ -35,7 +36,8 @@
                         <tbody>
                         {% for i in cov %}
                         <tr>
-                            <td>{{ i.idoffrer.idutilisateur.username }}</td>
+                            <td><a href="{{ path('fi_thnitek_finduserback',{'id': i.idoffrer.idutilisateur.id}) }}">{{ i.idoffrer.idutilisateur.username }}</a></td>
+                           <td><a href="{{ path('fi_thnitek_finduserback',{'id': i.idutilisateurr.id}) }}">{{ i.idutilisateurr.username }}</a></td>
                             <td>{{ i.idoffrer.idutilisateur.tel }}</td>
                             <td>{{ i.idoffrer.destination  }}</td>
                             <td>{{ i.idoffrer.depart }}</td>

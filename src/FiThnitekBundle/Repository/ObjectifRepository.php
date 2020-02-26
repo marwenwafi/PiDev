@@ -17,13 +17,11 @@ class ObjectifRepository extends EntityRepository
         }
         elseif ($type == "Revenues Totales")
         {
-            //TODO still needs to add taxi
-            return array_merge($this->customQuery("Revenues Covoiturage",$start,$end), $this->customQuery("Revenues Colis",$start,$end));
+            return array_merge($this->customQuery("Revenues Covoiturage",$start,$end), $this->customQuery("Revenues Colis",$start,$end), $this->customQuery("Revenues Taxi",$start,$end));
         }
         elseif ($type == "Activites Totales")
         {
-            //TODO still needs to add taxi
-            return array_merge($this->customQuery("Activites Covoiturage",$start,$end), $this->customQuery("Activites Colis",$start,$end));
+            return array_merge($this->customQuery("Activites Covoiturage",$start,$end), $this->customQuery("Activites Colis",$start,$end), $this->customQuery("Activites Taxi",$start,$end));
         }
         elseif ($type == "Revenues Colis")
         {
@@ -47,13 +45,11 @@ class ObjectifRepository extends EntityRepository
         }
         elseif ($type == "Revenues Taxi")
         {
-            // TODO
-            $query = "SELECT SUM(R.prixt) from FiThnitekBundle:ReservationCovoiturage R, FiThnitekBundle:offreCovoiturage O
-            WHERE R.idoffrer = O.idoffrecovoiturage AND O.date Between '$start' AND '$end'";
+            $query = "SELECT SUM(T.prix) from FiThnitekBundle:DemandeTaxi T WHERE T.etat=1 AND T.dateD Between '$start' AND '$end'";
         }
         elseif ($type == "Activites Taxi")
         {
-            //TODO
+            $query = "SELECT COUNT(T.id) FROM FiThnitekBundle:DemandeTaxi T WHERE T.etat=1 AND T.dateD Between '$start' AND '$end'";
         }
 
         return $query = $this->getEntityManager()->createQuery($query)->getResult();

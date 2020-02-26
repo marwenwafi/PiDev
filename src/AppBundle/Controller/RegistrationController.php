@@ -36,10 +36,6 @@ class RegistrationController extends BaseController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $file = $form->get('image')->getData();
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->getParameter('profile_pictures_directory'), $fileName);
-                $user->setImage($fileName);
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 

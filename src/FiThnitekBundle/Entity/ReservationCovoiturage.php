@@ -4,7 +4,7 @@
 namespace FiThnitekBundle\Entity;
 use Doctrine\ORM\Mapping as ORM ;
 /**
- * @ORM\Entity
+ * @ORM\Entity (repositoryClass="FiThnitekBundle\Repository\CovoiturageRepository")
  */
 
 class ReservationCovoiturage
@@ -19,7 +19,7 @@ class ReservationCovoiturage
 private $idutilisateurr;
     /**
 
-     * @ORM\ManyToOne(targetEntity="offreCovoiturage")
+     * @ORM\ManyToOne(targetEntity="OffreCovoiturage")
      * @ORM\JoinColumn(name="idoffrer",
      *  referencedColumnName="idoffrecovoiturage")
      */

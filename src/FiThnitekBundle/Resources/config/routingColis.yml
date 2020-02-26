@@ -51,3 +51,9 @@ fi_thnitek_affichageReservationback:
 fi_thnitek_supprimerReservationback:
     path:     /supprimerReservationback/{id}
     defaults: { _controller: FiThnitekBundle:OffreColis:supprimerReserverback }
+fi_thnitek_AffichageDateColi:
+    path:     /rechercheDateColi
+    defaults: { _controller: FiThnitekBundle:OffreColis:rechercheDate }
+fi_thnitek_Rechecheback:
+    path:     /rechercheDateback
+    defaults: { _controller: FiThnitekBundle:OffreColis:rechercheDateback }

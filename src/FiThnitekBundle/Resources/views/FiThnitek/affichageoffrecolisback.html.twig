@@ -3,19 +3,20 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <form method="post">
+
                 <div class="card-header">
-                    <h3 class="card-title">All carsharing offers </h3>
+                    <h3 class="card-title">All colis offers </h3>
 
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
+                        <div class="input-group input-group-sm" >
+                            <input type="date" name="Date" class="form-control float-right" placeholder="Date">
+                            <input type="text" name="prix" class="form-control float-right" placeholder="prix">
+                                <input type="submit" class="btn btn-default" formaction="{{path('fi_thnitek_Rechecheback' ) }}">
                         </div>
                     </div>
                 </div>
+                </form>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
@@ -28,10 +29,13 @@
                             <th>Date</th>
                             <th>largeur</th>
                             <th>hauteur</th>
+                            <th>Longueur</th>
+
                             <th>price</th>
 
                             <th>largeur</th>
                             <th>hauteur</th>
+                            <th>Longueur</th>
 
                             <th>Delete</th>
                             <th>Update</th>
@@ -47,11 +51,14 @@
                             <td>{{ i.dateCol }}</td>
                             <td>{{i.largeur  }}</td>
                             <td>{{i.hauteur  }}</td>
+                            <td>{{i.Longueur  }}</td>
                             <td>{{ i.prix }}</td>
 <form method="post">
-                            <td><input type="number"  name="Hauteur"></td>
-                            <td> <input type="number"  name="Largeur"></td>
-                            <td>
+                            <td><input type="number" min="1" name="Largeur"></td>
+                            <td> <input type="number" min="1" name="Hauteur"></td>
+                           <td> <input type="number" min="1" name="Longueur"></td>
+
+    <td>
                                 <a class="btn btn-block btn-outline-danger" href="{{  path('fi_thnitek_supprimerOffreback',{'id':i.idOffreCol }) }}">Delete</a>
 
                             </td>

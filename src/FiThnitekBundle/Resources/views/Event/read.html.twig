@@ -6,9 +6,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Editer les évènements</h1>
+                        <h1></h1>
 
                 </div>
+            </div>
             </div><!-- /.container-fluid -->
         </section>
 
@@ -35,6 +36,9 @@
                                 <th>Promotion</th>
                                 <th>Etat</th>
                                 <th>Image</th>
+                                <th>Opération</th>
+                                <th>URL</th>
+
                                 <th></th>
                             </tr>
                             </thead>
@@ -48,7 +52,12 @@
                                 <td>{{tab.description}}</td>
                                 <td>{{tab.promotion}}</td>
                                 <td>{{tab.etat}}</td>
-                                <td>{{tab.image}}</td>
+                                <td><img src="{{asset('uploads/eventsImages/'~ tab.image ) }}" style="width:50px;max-width:50px"></td>
+                                <td>{{tab.operation}}</td>
+                                <td>{{tab.url}}</td>
+
+
+
 
 
 
@@ -59,8 +68,14 @@
 
                                 <td class="text-right py-0 align-middle">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="{{ path('fi_thnitek_updateEvent' , { 'id':tab.id} ) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                        <a  href="{{ path('fi_thnitek_updateEvent' , { 'id':tab.id} ) }}" class="btn btn-danger"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ path('fi_thnitek_readoneevent' , { 'id':tab.id} ) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+
                                         <a  href="{{ path('fi_thnitek_deleteEvent' , { 'id':tab.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                        <a  href="{{ path('fi_thnitek_activerEvent' , { 'id':tab.id} ) }}" class="btn btn-dark"><i class="fas fa-play"></i></a>
+                                        <a  href="{{ path('fi_thnitek_desactiverEvent' , { 'id':tab.id} ) }}" class="btn btn-warning"><i class="fas fa-power-off"></i></a>
+
+
                                     </div>
                                 </td>
                             </tr>
@@ -69,6 +84,10 @@
 
                             </tbody>
                         </table>
+
+                    <div class="navigation">
+                        {{ knp_pagination_render(event) }}
+                    </div>
 
                     <!-- /.card-body -->
                 </div>

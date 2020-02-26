@@ -4,6 +4,12 @@
 namespace FiThnitekBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use nexmo\Client;
+use nexmo\Client\Credentials\Basic;
+use Nexmo\Client\Exception\Exception;
+use Nexmo\Client\Exception\Request;
+use Nexmo\Client\Exception\Server;
+
 
 /**
  * @ORM\Entity (repositoryClass="FiThnitekBundle\Repository\ReponseRepository")
@@ -81,5 +87,26 @@ class Reponse
         $this->reponseRec = $reponseRec;
     }
 
+    public function sendmessage()
+    {
+        $adapter_client = new \Http\Adapter\Guzzle6\Client(new \GuzzleHttp\Client(['timeout' => 5]));
+        $client = new \Nexmo\Client(
+            new \Nexmo\Client\Credentials\Basic('5762260d', 'DrwU2x8JUxbkVKPh'),
+            [
+                'base_api_url' => 'https://rest.nexmo.com/sms/json'
+            ], $adapter_client
+        );
 
+        try {
+            $client->message()->send([
+                'to' => '21629288025',
+                'from' => 'FiThnitek',
+                'text' => 'tessd'
+            ]);
+        } catch (Request $e) {
+        } catch (Server $e) {
+        } catch (Exception $e) {
+        }
+
+    }
 }

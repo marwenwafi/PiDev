@@ -2,6 +2,29 @@
 {% block event %}
 
 {% endblock %}
+
+{% block notification %}
+    <li class="nav-item dropdown dropdown-slide">
+
+        <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Notifications    <span class="badge badge-warning navbar-badge"> {{ b|length }}</span> <span><i class="fa fa-angle-down"></i></span>
+        </a>
+        <!-- Dropdown list -->
+        <div class="dropdown-menu">
+            {% for i in b %}
+                <ul class="list-inline justify-content-center">
+                    <li class="list-inline-item">
+
+
+                        <button type="button" class="btn btn-block btn-outline-info">{{ i.title }} </button>
+
+
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+    </li>
+{% endblock %}
 {% block container %}
 
     <section class="dashboard section">

@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class LeaderBoardType extends AbstractType
 {
@@ -23,7 +24,11 @@ class LeaderBoardType extends AbstractType
                 ->add('end_date')
                 ->add('category',EntityType::class, array('class'=>'FiThnitekBundle:Category','choice_label' => 'title'))
                 ->add('color')
-                ->add('banner','Symfony\Component\Form\Extension\Core\Type\FileType')
+                ->add('imageFile', VichFileType::class, array(
+                    'required'      => false,
+                    'allow_delete'  => true, // not mandatory, default is true
+                    'download_link' => true, // not mandatory, default is true
+                ))
                 ->add($options["label"],SubmitType::class);
     }/**
      * {@inheritdoc}

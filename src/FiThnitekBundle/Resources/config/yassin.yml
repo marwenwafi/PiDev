@@ -1,7 +1,3 @@
-fi_thnitek_login:
-    path:     /login
-    defaults: { _controller: FiThnitekBundle:Default:login }
-
 fi_thnitek_ajouterreclamation:
     path:     /ajout
     defaults: { _controller: FiThnitekBundle:Reclamation:ajouterreclamation }
@@ -25,3 +21,27 @@ fi_thnitek_repondrereclamation:
 fi_thnitek_afficherreponse:
     path:     /afficherreponse/{id}
     defaults: { _controller: FiThnitekBundle:Reclamation:afficherreponse }
+
+fi_thnitek_addrating:
+    path:     /profil/{id}
+    defaults: { _controller: FiThnitekBundle:Evaluation:addRating }
+
+fi_thnitek_showrating:
+    path:     /show
+    defaults: { _controller: FiThnitekBundle:Evaluation:showRating }
+
+fi_thnitek_deleterating:
+    path:     /supprimerratting/{id}
+    defaults: { _controller: FiThnitekBundle:Evaluation:deleteRating }
+
+fi_thnitek_editcomment:
+    path:     /modifiercomment/{id}
+    defaults: { _controller: FiThnitekBundle:Evaluation:editrating }
+
+fi_thnitek_stat:
+    path:     /stat
+    defaults: { _controller: FiThnitekBundle:Evaluation:afficherstat }
+
+fi_thnitek_user:
+    path:     /liste
+    defaults: { _controller: FiThnitekBundle:Evaluation:afficherusers }

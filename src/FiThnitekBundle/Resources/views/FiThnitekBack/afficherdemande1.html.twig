@@ -1,0 +1,187 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block notification %}
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge">{{ b|length }} </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">{{ b|length }} Notifications</span>
+            <div class="dropdown-divider"></div>
+            <a href="{{ path('fi_thnitek_affichenotifchauffeur') }}" class="dropdown-item">
+                <i class="fas fa-envelope mr-2"></i> {{ chauffeur|length }} Notification chauffeur
+                <span class="float-right text-muted text-sm"></span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+                <i class="fas fa-users mr-2"></i> {{ client|length }} Notification client
+                <span class="float-right text-muted text-sm">12 hours</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="{{ path('fi_thnitek_affichenotifclient') }}" class="dropdown-item">
+                <i class="fas fa-users mr-2"></i> {{ client|length }} Notification client
+                <span class="float-right text-muted text-sm"></span>
+            </a>
+        </div>
+    </li>
+
+
+{% endblock %}
+  {% block content %}
+
+
+
+      <section class="content">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="advance-search">
+                      <form method="post">
+                          <div class="form-row">
+
+                              <div class="form-group col-md-6">
+
+                                  <select  class="form-control my-2 my-lg-0" id="inputLocation4" name="region">
+
+
+                                      <option valeur="Ariana">Ariana</option>
+                                      <option valeur="Beja">Baja</option>
+                                      <option valeur="Ben Arous ">Ben Arous</option>
+                                      <option valeur="Bizerte ">Bizerte </option>
+                                      <option valeur="Gabes ">Gabes </option>
+                                      <option valeur=" Gafsa">Gafsa </option>
+                                      <option valeur=" Jendouba">Jendouba </option>
+                                      <option valeur=" kairouan">kairouan </option>
+                                      <option valeur=" kaserine"> kaserine</option>
+                                      <option valeur=" keblili">kebili </option>
+                                      <option valeur=" Kef">Kef </option>
+                                      <option valeur=" kef"> Mahdia</option>
+                                      <option valeur=" Manouba">Manouba </option>
+                                      <option valeur=" Medenine"> Medenine</option>
+                                      <option valeur="Monastir ">Monastir </option>
+                                      <option valeur="Nabeul "> Nabeul</option>
+                                      <option valeur=" Sidi Bouzid">Sidi Bouzid </option>
+                                      <option valeur=" Siliana"> Siliana</option>
+                                      <option valeur=" Sfax">Sfax </option>
+                                      <option valeur="Sousse ">Sousse </option>
+                                      <option valeur="Tataouine">Tataouine </option>
+                                      <option valeur=" Touzer">Touzer </option>
+                                      <option valeur=" Tunis"> Tunis</option>
+                                      <option valeur=" Zaghouan"> Zaghouan</option>
+
+
+
+                                  </select>
+                              </div>
+
+
+
+                              <div class="form-group col-md-2">
+
+                                  <button type="submit" class="btn btn-primary">Search </button>
+
+                              </div>
+
+
+
+
+
+                          </div>
+
+                      </form>
+
+
+                  </div>
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <h3 class="card-title"> Les  demandes Taxi</h3>
+                             <div align="right">
+                                 <a  href="{{ path('fi_thnitek_demanderetat1') }}">
+
+                                     <button type="submit" class="btn btn-outline-info">request reserved  </button>
+                                 </a>
+                                 <a  href="{{ path('fi_thnitek_demanderetat0') }}">
+
+                                     <button type="submit" class="btn btn-outline-info">unreserved request </button>
+                                 </a>
+                             </div>
+
+
+
+
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body p-0">
+                              <table class="table table-sm">
+                                  <thead>
+                                  <tr>
+                                      <th >ID demande </th>
+                                      <th>Lieu de depart </th>
+                                      <th>Lieu d arrive </th>
+                                      <th>Region </th>
+                                      <th >Periode </th>
+                                      <th > ID utilisateur </th>
+                                      <th >Etat </th>
+                                      <th >Prix</th>
+                                      <th>Modifier </th>
+                                      <th>Supprimer</th>
+                                      <th>Reserver</th>
+                                  </tr>
+                                  </thead>
+
+                                  <tbody>
+                                  <tr>
+                                      <td>{{ a.id }}</td>
+                                      <td>{{ a.lieudedepart }}</td>
+                                      <td>{{ a.lieudarrive }}</td>
+                                      <td>{{ a.region }}</td>
+                                      <td>{{ a.periode }}</td>
+                                      <td> <a href="{{ path('fi_thnitek_user',{'id': a.iduser.id }) }}" >{{ a.iduser.username }}</a></td>
+                                      <td>
+
+
+                                          {{ a.etat }}</td>
+                                      <td> {{ a.prix }}</td>
+
+                                      <td> <a href="{{ path("fi_thnitek_modifierdemandeB",{'id': a.id}) }}" > <button type="button" class="btn btn-block btn-outline-success">Modifier</button>
+                                          </a>
+                                      </td>
+                                     <td>
+                                         <a href="{{ path('fi_thnitek_supprimerdemandeB',{'id': a.id }) }}" > <button type="button" class="btn btn-block btn-outline-danger">Supprimer</button> </a>
+                                     </td>
+
+                                      <td>   {%  if a.etat == 0 %}
+                                              <form method="post">
+
+                                                  <form method="post">
+                                                      <input type="submit" class="btn btn-block btn-outline-info" value="reserver" formaction="{{ path('fi_thnitek_reservertaxiB',{'id': a.id }) }} ">
+                                                  </form>
+
+
+                                              </form>
+                                          {%  elseif a.etat == 1 %}
+                                              <button type="button" class="btn btn-block btn-outline-secondary">Demande Reservee </button>
+                                          {% endif %}
+                                      </td>
+                                  </tr>
+
+                                  </tbody>
+
+                              </table>
+                          </div>
+                          <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                  </div>
+              </div>
+              <!-- /.row -->
+          </div><!-- /.container-fluid -->
+
+      </section>
+
+  {% endblock %}
+
+{#
+{{ block("javascripts", "fithnitek/baseFiThnitek.html.twig") }}
+{{ block("navbar", "fithnitek/baseFiThnitek.html.twig") }}
+#}

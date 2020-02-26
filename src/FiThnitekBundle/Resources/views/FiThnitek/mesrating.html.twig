@@ -1,0 +1,57 @@
+{% extends 'FiThnitek/baseFrontFiThnitek.html.twig' %}
+{% block event %}
+{% endblock %}
+{% block container %}
+    <div class="widget dashboard-container my-adslist">
+    <h3 class="widget-header">Mes Ratings</h3>
+    <table class="table table-responsive product-dashboard-table">
+        <thead>
+        <tr>
+            <th>Identifiant</th>
+            <th>Comment</th>
+            <th class="text-center">Rate</th>
+            <th class="text-center">Identifiant de l'utlisateur</th>
+            <th class="text-center">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+    {% for c in Rating %}
+        <tr>
+
+            <td class="product-thumb"> <h2>{{ c.id }}</h2></td>
+            <td class="product-details">
+                <h2>{{ c.commentaire }}</h2>
+            </td>
+            <td class="product-category"><center>{{ c.note }}</center></td>
+            <td class="product-category">{{ c.utilisateur }}</td>
+            <td class="action" data-title="Action">
+                <div class="">
+                    <ul class="list-inline justify-content-center">
+                        <li class="list-inline-item">
+                            <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="{{ path('fi_thnitek_afficherreponse' , { 'id':c.id} ) }}">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="{{ path('fi_thnitek_editcomment' , { 'id':c.id} ) }}">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="{{ path('fi_thnitek_deleterating' , { 'id':c.id} ) }}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+{% endblock %}

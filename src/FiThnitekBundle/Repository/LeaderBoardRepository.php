@@ -13,29 +13,22 @@ class LeaderBoardRepository extends EntityRepository
 
         if ($cat->getType() == "Taxi" && $cat->getNature() == "Avis")
         {
-
             //TODO According to what siwar and yassine do
-
-
             $query = "";
         }
         elseif ($cat->getType() == "Taxi" && $cat->getNature() == "Revenu")
         {
 
-            //TODO According to what siwar does
+            $query = "select U.username, SUM(D.prix) AS value from FiThnitekBundle:DemandeTaxi D, FiThnitekBundle:reservationTaxis R, AppBundle:User U WHERE D.etat=1 AND R.iddemande = D.id AND U.id = R.iduser AND D.dateD BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
 
-            $query = "";
         }
         elseif ($cat->getType() == "Taxi" && $cat->getNature() == "Activite")
         {
-            //TODO According to what siwar does
-
-            $query = "select T.username, COUNT(O.id_offre_col) AS value from FiThnitekBundle:OffreColis O, AppBundle:User U WHERE O.idU = U.id AND O.date BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
+            $query = "select U.username, COUNT(D.id) AS value from FiThnitekBundle:DemandeTaxi D, FiThnitekBundle:reservationTaxis R, AppBundle:User U WHERE D.etat=1 AND R.iddemande = D.id AND U.id = R.iduser AND D.dateD BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
         }
         elseif ($cat->getType() == "Covoiturage" && $cat->getNature() == "Avis")
         {
             //TODO According to what yassine does
-
             $query = "";
         }
         elseif ($cat->getType() == "Covoiturage" && $cat->getNature() == "Revenu")

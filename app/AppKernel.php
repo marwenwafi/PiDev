@@ -21,6 +21,11 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new SBC\NotificationsBundle\NotificationsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new DocDocDoc\NexmoBundle\DocDocDocNexmoBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
         ];
 

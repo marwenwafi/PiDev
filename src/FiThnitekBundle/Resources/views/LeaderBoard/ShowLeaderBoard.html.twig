@@ -32,10 +32,12 @@
                                         {% endfor %}
                                     </ul>
                                 </div><!-- /.card-header -->
-                                <div class="card-body">
+                                <div class="card-body" >
                                     <div class="tab-content">
                                         {% for r in results %}
-                                            <div class="tab-pane" id="tab_{{ loop.index }}">
+                                            
+                                            <div class="tab-pane" id="tab_{{ loop.index }}" style="background-color: {{ boards[loop.index-1].color }}">
+                                                <img src="{{ vich_uploader_asset(boards[loop.index-1], 'imageFile') }}" alt="{{ boards[loop.index-1].image }}" />
                                                 <h3 class="card-title p-3">Description: {{ boards[loop.index-1].description }}</h3>
                                                 <h3 class="card-title p-3">Period: {{ boards[loop.index-1].StartDate|date('d-m-y')}} -> {{ boards[loop.index-1].EndDate|date('d-m-y')}}</h3>
                                                 <table class="table">

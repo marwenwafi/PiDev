@@ -1,0 +1,204 @@
+{% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+
+
+{% block container %}
+    <!-- Content Wrapper. Contains page content -->
+    <section class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+
+
+        <!-- Ajouter -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-6">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Modifier un évènement</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+
+
+
+                            {{ form_start(f, {'attr': {'class': 'form-horizontal'}}) }}
+
+
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{ form_label(f.titre, "Titre :", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+                                        {{ form_widget(f.titre, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(f.titre) }}
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        {{ form_label(f.promotion, "Les points à gagner :", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
+                                        {{ form_widget(f.promotion, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(f.promotion) }}
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        {{ form_label(f.description, "Description :", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
+                                        {{ form_widget(f.description, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(f.description) }}
+                                    </div>
+
+
+
+
+
+
+
+
+                                    <div class="row mb-lg-1">
+
+                                        <div class="form-group">
+                                            {{ form_label(f.dateDebut, "Date de Début :") }}
+                                            {{ form_widget(f.dateDebut, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(f.dateDebut) }}
+                                        </div>
+
+                                        <div class="col-sm-auto">
+
+                                        <div class="form-group">
+                                            {{ form_label(f.dateFin, "Date de Fin :") }}
+                                            {{ form_widget(f.dateFin, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(f.dateFin) }}
+                                        </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        {{ form_label(f.operation, "Opération :") }}
+                                        {{ form_widget(f.operation, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(f.operation) }}
+
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(f.url, "URL :") }}
+                                        {{ form_widget(f.url, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(f.url) }}
+
+                                    </div>
+
+                                  {#  <div class="form-group">
+                                        <div class="form-group">
+                                            {{ form_label(f.destinataires, "Destinataires :") }}
+                                            {{ form_widget(f.destinataires, {'attr': {'class': 'form-control'}}) }}
+
+
+                                        </div>
+                                    </div>#}
+
+
+
+
+                                    <div class="card-footer">
+                                        <table>
+                                            <tr>
+
+
+                                            <td> {{ form_widget(f.Modifier, {'attr': {'class': 'btn btn-primary'}}) }}</td>
+
+                                            </tr>
+                                            </table>
+
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+
+
+                            {{ form_end(f) }}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </section>
+    </div>
+    </section>
+
+    <!--script type="text/javascript">
+
+            $(document).ready(function () {
+                bsCustomFileInput.init();
+            });
+
+        </script-->
+
+
+
+
+{% endblock %}
+{% block Javascript %}
+    <!-- jQuery -->
+    <script src="{{ asset ('plugins/jquery/jquery.min.js') }}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset ('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset ('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <!-- ChartJS -->
+    <script src="{{ asset ('backend/plugins/chart.js/Chart.min.js') }}"></script>
+    <!-- Sparkline -->
+    <script src="{{ asset ('backend/plugins/sparklines/sparkline.js') }}"></script>
+    <!-- JQVMap -->
+    <script src="{{ asset ('backend/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="{{ asset ('backend/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+    <!-- daterangepicker -->
+    <script src="{{ asset ('backend/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="{{ asset ('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <!-- Summernote -->
+    <script src="{{ asset ('backend/plugins/summernote/summernote-bs4.min.js') }}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{{ asset ('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset ('backend/dist/js/adminlte.js') }}"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="{{ asset ('backend/dist/js/pages/dashboard.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset ('backend/dist/js/demo.js') }}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
+</script>
+{% endblock %}
+
+

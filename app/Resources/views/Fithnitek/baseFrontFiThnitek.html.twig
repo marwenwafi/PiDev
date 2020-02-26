@@ -81,20 +81,40 @@
                                 </a>
                                 <!-- Dropdown list -->
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ path('fi_thnitek_afficheall') }}">Delivery Offers</a>
-                                    <a class="dropdown-item" href="{{ path('fi_thnitek_affichcovoiturageutilisateur') }}">My offers</a>
-                                    <a class="dropdown-item" href="{{ path('fi_thnitek_readreservation') }}">Delivery reservations</a>
-                                    <a class="dropdown-item" href="{{ path('fi_thnitek_ajoutcovoiturageutilisateur') }}">Add Delivery Offer</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_afficherall') }}">Delivery Offers</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_afficherOffre') }}">My offers</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_affichageReservation') }}">Delivery reservations</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_CreateOffre') }}">Add Delivery Offer</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown dropdown-slide">
                                 <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Taxi <span><i class="fa fa-angle-down"></i></span>
+                                    Taxi User <span><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <!-- Dropdown list -->
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ path('fi_thnitek_afficheall') }}">Request a Taxi</a>
-                                    <a class="dropdown-item" href="{{ path('fi_thnitek_affichcovoiturageutilisateur') }}">My requests</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_ajouterdemande') }}">Request a Taxi</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_affichedemandeuser') }}">My requests</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide">
+                                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Taxi driver <span><i class="fa fa-angle-down"></i></span>
+                                </a>
+                                <!-- Dropdown list -->
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_affichedemande') }}">View requests</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_affichereservation') }}">View my reservations</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Evénements<span><i class="fa fa-angle-down"></i></span>
+                                </a>
+                                <!-- Dropdown list -->
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_readNoPart') }}">Mes evénements</a>
+                                    <a class="dropdown-item" href="{{ path('fi_thnitek_converssion') }}">Convertir mes points</a>
+
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -102,6 +122,9 @@
                                     LeaderBoards
                                 </a>
                             </li>
+                            {% block notification %}
+
+                            {% endblock %}
                         </ul>
                         <ul class="navbar-nav ml-auto mt-10">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -466,6 +489,26 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
 <script src="{{ asset ('plugins/google-map/gmap.js') }}"></script>
 <script src="{{ asset ('js/script.js') }}"></script>
+    <script src="{{ asset ('js/script.js') }}"></script>
+    {# Call NotificationsBundles's assets #}
+    {{ notifications_assets() }}
+    <script>
+        /**
+         * After calling notifications_assets() "pusher" is now available
+         * and you can use it this way
+         */
+
+            // select the channel you want to listen to
+        var channel = pusher.subscribe("notifications");// notifications channel
+        channel.bind("my-event", function(data) {
+            console.log('from notifications channel', data);
+        });
+
+        var channel = pusher.subscribe("messages");// messages channel
+        channel.bind("my-event", function(data) {
+            console.log('from messages channel', data);
+        });
+    </script>
 {% endblock %}
 </body>
 

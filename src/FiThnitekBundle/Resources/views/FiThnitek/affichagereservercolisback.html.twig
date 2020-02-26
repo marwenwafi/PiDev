@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">All carsharing offers </h3>
+                    <h3 class="card-title">All Colis offers </h3>
 
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -25,10 +25,10 @@
                             <th>lieu depart</th>
                             <th>Arrive</th>
                             <th>Prix Tottal</th>
-                            <th>hauteur</th>
-                            <th>largeur</th>
+                            <th>hauteur Reserve</th>
+                            <th>largeur Reserve</th>
+                            <th>longueur Reserve</th>
                             <th>ID utilisateur</th>
-
                             <th>delete</th>
 
 
@@ -41,9 +41,11 @@
                             <td>  {{ i.idOffre.dateCol}}</td>
                             <td>  {{ i.idOffre.lieuDepart}}</td>
                             <td> {{ i.idOffre.lieuArrive}}</td>
-                            <td>{{ i.idOffre.prix }}</td>
+                            <td>{{ i.prix }}</td>
                             <td>{{ i.HauteurResv}}</td>
                             <td>{{ i.LargeurResv}}</td>
+                            <td>{{ i.LongueurResv}}</td>
+
                             <td>{{ i.idUR}}</td>
 
 

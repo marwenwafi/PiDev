@@ -33,6 +33,3 @@ fi_thnitek_sourour_routes:
 fi_thnitek_yassin_routes:
     resource: "@FiThnitekBundle/Resources/config/yassin.yml"
     prefix: /reclamation
-
-
-
