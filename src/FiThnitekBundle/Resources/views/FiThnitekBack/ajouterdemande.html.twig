@@ -1,5 +1,28 @@
 {% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block notification %}
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge">{{ b|length }} </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">{{ b|length }} Notifications</span>
+            <div class="dropdown-divider"></div>
+            <a href="{{ path('fi_thnitek_affichenotifchauffeur') }}" class="dropdown-item">
+                <i class="fas fa-envelope mr-2"></i> {{ chauffeur|length }} Notification chauffeur
+                <span class="float-right text-muted text-sm"></span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="{{ path('fi_thnitek_affichenotifclient') }}" class="dropdown-item">
+                <i class="fas fa-users mr-2"></i> {{ client|length }} Notification client
+                <span class="float-right text-muted text-sm"></span>
+            </a>
+        </div>
 
+    </li>
+
+
+{% endblock %}
   {% block content %}
 <section class="content">
     <div class="container-fluid">
@@ -16,12 +39,64 @@
                     <form role="form" method="post">
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Region </label>
+
+                                <select  class="form-control" id="exampleInputEmail1"  name="region">
+
+
+                                    <option valeur="Ariana">Ariana</option>
+                                    <option valeur="Beja">Baja</option>
+                                    <option valeur="Ben Arous ">Ben Arous</option>
+                                    <option valeur="Bizerte ">Bizerte </option>
+                                    <option valeur="Gabes ">Gabes </option>
+                                    <option valeur=" Gafsa">Gafsa </option>
+                                    <option valeur=" Jendouba">Jendouba </option>
+                                    <option valeur=" kairouan">kairouan </option>
+                                    <option valeur=" kaserine"> kaserine</option>
+                                    <option valeur=" keblili">kebili </option>
+                                    <option valeur=" Kef">Kef </option>
+                                    <option valeur=" kef"> Mahdia</option>
+                                    <option valeur=" Manouba">Manouba </option>
+                                    <option valeur=" Medenine"> Medenine</option>
+                                    <option valeur="Monastir ">Monastir </option>
+                                    <option valeur="Nabeul "> Nabeul</option>
+                                    <option valeur=" Sidi Bouzid">Sidi Bouzid </option>
+                                    <option valeur=" Siliana"> Siliana</option>
+                                    <option valeur=" Sfax">Sfax </option>
+                                    <option valeur="Sousse ">Sousse </option>
+                                    <option valeur="Tataouine">Tataouine </option>
+                                    <option valeur=" Touzer">Touzer </option>
+                                    <option valeur=" Tunis"> Tunis</option>
+                                    <option valeur=" Zaghouan"> Zaghouan</option>
+
+
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"> Personne qui souhaite Faire une offre  </label>
+
+                                <select   name="idu">
+
+                                     {% for i in id  %}
+                                    <option valeur={{i.id}}>{{ i.id }}</option>
+{                                      {% endfor %}
+
+
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Lieu de depart </label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" placeholder="lieu de depart " name="lieud">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Lieu d arrive </label>
                                 <input type="text" class="form-control" id="exampleInputPassword1" placeholder="lieu d arrive " name="lieua">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"> Date </label>
+                                <input type="date" class="form-control" id="exampleInputPassword1" placeholder="periode d attente  " name="dated">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Periode </label>
@@ -40,6 +115,6 @@
 
 
 {#
-{{ block("javascripts", "fithnitek/baseFrontFiThnitek.html.twig") }}
-{{ block("navbar", "fithnitek/baseFrontFiThnitek.html.twig") }}
+{{ block("javascripts", "fithnitek/baseFiThnitek.html.twig") }}
+{{ block("navbar", "fithnitek/baseFiThnitek.html.twig") }}
 #}

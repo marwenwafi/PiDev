@@ -2,12 +2,10 @@
 {% block event %}
 
 {% endblock %}
-
 {% block notification %}
     <li class="nav-item dropdown dropdown-slide">
-
         <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Notifications    <span class="badge badge-warning navbar-badge"> {{ b|length }}</span> <span><i class="fa fa-angle-down"></i></span>
+            Notifications <span><i class="fa fa-angle-down"></i></span>
         </a>
         <!-- Dropdown list -->
         <div class="dropdown-menu">
@@ -73,23 +71,14 @@
 
                                 <div class="form-group col-md-2">
 
-                                 <input type="date" class="form-control my-2 my-lg-0" id="inputLocation4" name="date">
+                                    <button type="submit" class="btn btn-primary">Search Now</button>
                                 </div>
-
-                                <div class="form-group col-md-2">
-
-                                    <button type="submit" class="btn btn-primary">Search </button>
-
-                                </div>
-
 
 
 
 
                     </div>
-
                         </form>
-
                     </div>
                 </div>
                 </div>
@@ -125,19 +114,17 @@
 
                     <div class="col-md-6">
                         <div class="view">
+                            <form method="get">
 
-                                <a  href="{{ path('fi_thnitek_trieprix') }}">
 
-                             <button type="submit" class="btn btn-outline-info"> Sort By Price   </button>
-                                </a>
+                                <select name="trier">
+                                    <option value="Heure"> Heure </option>
+                                    <option value="Prix"> Prix </option>
 
-                            <a  href="{{ path('fi_thnitek_trieheure') }}">
-
-                                <button type="submit" class="btn btn-outline-info"> Sort By Hour   </button>
-                            </a>
-
+                                </select>
+                                <button type="submit" class="btn btn-outline-info">Sort By </button>
+                            </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -171,9 +158,8 @@
                                             {{ i.iduser.nom }} {{ i.iduser.username }}
                                         </li>
                                     </ul>
-                                    <p class="card-text">Heure de depart  {{ i.periode }}</p>
-                                    <p class="card-text">Prix est  {{ i.prix}}</p>
-                                    <p class="card-text">Date est  {{ i.dateD}}</p>
+                                    <p class="card-text">Periode d attente est {{ i.periode }}</p>
+
                                     <form method="post">
                                         <input type="submit" value="Accepter" formaction="{{ path('fi_thnitek_reservertaxi',{'id': i.id }) }} ">
                                     </form>
