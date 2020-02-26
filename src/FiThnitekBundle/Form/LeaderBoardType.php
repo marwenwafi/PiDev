@@ -22,6 +22,8 @@ class LeaderBoardType extends AbstractType
                 ->add('start_date')
                 ->add('end_date')
                 ->add('category',EntityType::class, array('class'=>'FiThnitekBundle:Category','choice_label' => 'title'))
+                ->add('color')
+                ->add('banner','Symfony\Component\Form\Extension\Core\Type\FileType')
                 ->add($options["label"],SubmitType::class);
     }/**
      * {@inheritdoc}

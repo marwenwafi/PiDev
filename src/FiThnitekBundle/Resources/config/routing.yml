@@ -10,6 +10,10 @@ fi_thnitek_marwen_routes:
     resource: "@FiThnitekBundle/Resources/config/marwen.yml"
     prefix: /admin
 
+fi_thnitek_showLeaderBoard:
+    path:     /showLeaderBoard
+    defaults: { _controller: FiThnitekBundle:LeaderBoard:showLeaderBoard }
+
 fi_thnitek_maha_routes:
     resource: "@FiThnitekBundle/Resources/config/routingCovoiturage.yml"
     prefix: /covoiturage
@@ -29,4 +33,6 @@ fi_thnitek_sourour_routes:
 fi_thnitek_yassin_routes:
     resource: "@FiThnitekBundle/Resources/config/yassin.yml"
     prefix: /reclamation
+
+
 

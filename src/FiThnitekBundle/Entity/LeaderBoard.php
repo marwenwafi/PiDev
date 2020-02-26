@@ -54,6 +54,18 @@ class LeaderBoard
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string",length=255)
+     */
+    private $color;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="banner", type="string", length=255,nullable=true)
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
+     */
+    private $banner;
 
     /**
      * LeaderBoard constructor.
@@ -176,5 +188,36 @@ class LeaderBoard
         $this->category = $category;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param mixed $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBanner()
+    {
+        return $this->banner;
+    }
+
+    /**
+     * @param mixed $banner
+     */
+    public function setBanner($banner)
+    {
+        $this->banner = $banner;
+    }
 
 }

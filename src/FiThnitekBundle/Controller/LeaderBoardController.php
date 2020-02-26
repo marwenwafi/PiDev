@@ -19,6 +19,10 @@ class LeaderBoardController extends Controller
         $form = $form->handleRequest($request);
         if ($form->isValid())
         {
+            $file = $form->get('banner')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('banners_directory'), $fileName);
+            $leaderb->setBanner($fileName);
             $em = $this->getDoctrine()->getManager();
             $em->persist($leaderb);
             $em->flush();
@@ -70,8 +74,6 @@ class LeaderBoardController extends Controller
             $l = $this->getDoctrine()->getRepository(LeaderBoard:: class)->find($leaderBoardS[$i]->getIdleaderboard());
             $results[] = $repo->customQuery($l->getCategory(),$l->getSize(),$l->getStartDate()->format('Y-m-d'),$l->getEndDate()->format('Y-m-d'));
         }
-
-        //TODO If there are no leaderboards or results, work on a displayable result instead of error messages
 
         return $this->render('@FiThnitek/LeaderBoard/ShowLeaderBoard.html.twig', array('results'=>$results,'boards'=>$leaderBoardS));
     }

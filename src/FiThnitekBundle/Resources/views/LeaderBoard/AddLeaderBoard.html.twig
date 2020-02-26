@@ -1,5 +1,28 @@
 {% form_theme f 'bootstrap_4_horizontal_layout.html.twig' %}
 {% extends 'FiThnitek/baseBackFiThnitek.html.twig' %}
+{% block stylesheets %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="{{ asset ('backend/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset ('backend/dist/css/adminlte.min.css') }}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+{% endblock %}
 {% block event %}
 
 {% endblock %}
@@ -19,5 +42,35 @@
                 {{ form(f) }}
             </div>
         </div>
-    </section>
+{% endblock %}
+
+{% block Javascript %}
+<script src="{{ asset ('backend/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset ('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset ('backend/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="{{ asset ('backend/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+    <!-- InputMask -->
+    <script src="{{ asset ('backend/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset ('backend/plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
+    <!-- date-range-picker -->
+    <script src="{{ asset ('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <!-- bootstrap color picker -->
+    <script src="{{ asset ('backend/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="{{ asset ('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <!-- Bootstrap Switch -->
+    <script src="{{ asset ('backend/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset ('backend/dist/js/adminlte.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset ('backend/dist/js/demo.js') }}"></script>
+    <script>
+        $(function () {
+            //Colorpicker
+            $('#fithnitekbundle_leaderboard_color').colorpicker()
+        })
+    </script>
 {% endblock %}

@@ -10,6 +10,8 @@ imports:
 parameters:
     locale: fr
     events_directory: '%kernel.project_dir%/web/uploads/eventsImages'
+    profile_pictures_directory: '%kernel.project_dir%/web/uploads/profiles'
+    banners_directory: '%kernel.project_dir%/web/uploads/banners'
 
 
 framework:

@@ -12,4 +12,9 @@ class AppBundle extends Bundle
         return new Response("Hello World");
     }
 
+    public function getParent()
+    {
+        return 'FOSUserBundle';
+    }
+
 }

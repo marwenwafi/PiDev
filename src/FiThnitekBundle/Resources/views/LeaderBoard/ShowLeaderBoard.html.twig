@@ -9,44 +9,59 @@
                 <div class="row">
                     <div class="col-12">
                         <!-- Custom Tabs -->
+                        {% if boards is empty %}
                         <div class="card">
                             <div class="card-header d-flex p-0">
                                 <h3 class="card-title p-3">Current LeaderBoards</h3>
-                                <ul class="nav nav-pills ml-auto p-2">
-                                    {% for b in boards %}
-                                    <li class="nav-item"><a class="nav-link" href="#tab_{{ loop.index }}" data-toggle="tab">{{ b.title }}</a></li>
-                                    {% endfor %}
-                                </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
                                 <div class="tab-content">
-                                    {% for r in results %}
-                                    <div class="tab-pane" id="tab_{{ loop.index }}">
-                                        <h3 class="card-title p-3">Description: {{ boards[loop.index-1].description }}</h3>
-                                        <h3 class="card-title p-3">Period: {{ boards[loop.index-1].StartDate|date('d-m-y')}} -> {{ boards[loop.index-1].EndDate|date('d-m-y')}}</h3>
-                                        <table class="table">
-                                            <thead class="thead-dark">
-                                            <tr>
-                                                <th scope="col">Rank</th>
-                                                <th scope="col">Username</th>
-                                                <th scope="col">{{boards[loop.index-1].category.nature}}</th>
-                                            </tr>
-                                            </thead>
-                                            {% for l in r %}
-                                                <tr>
-                                                    <td>{{ loop.index }} </td>
-                                                    <td>{{ l.username }} </td>
-                                                    <td>{{ l.value }} </td>
-                                                </tr>
-                                            {% endfor %}
-                                        </table>
-                                    </div>
-                                    {% endfor %}
+                                    Pas de LeaderBoard Actuellement.
                                     <!-- /.tab-pane -->
                                 </div>
                                 <!-- /.tab-content -->
                             </div><!-- /.card-body -->
                         </div>
+                        {% else %}
+                            <div class="card">
+                                <div class="card-header d-flex p-0">
+                                    <h3 class="card-title p-3">Current LeaderBoards</h3>
+                                    <ul class="nav nav-pills ml-auto p-2">
+                                        {% for b in boards %}
+                                            <li class="nav-item"><a class="nav-link" href="#tab_{{ loop.index }}" data-toggle="tab">{{ b.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        {% for r in results %}
+                                            <div class="tab-pane" id="tab_{{ loop.index }}">
+                                                <h3 class="card-title p-3">Description: {{ boards[loop.index-1].description }}</h3>
+                                                <h3 class="card-title p-3">Period: {{ boards[loop.index-1].StartDate|date('d-m-y')}} -> {{ boards[loop.index-1].EndDate|date('d-m-y')}}</h3>
+                                                <table class="table">
+                                                    <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">Rank</th>
+                                                        <th scope="col">Username</th>
+                                                        <th scope="col">{{boards[loop.index-1].category.nature}}</th>
+                                                    </tr>
+                                                    </thead>
+                                                    {% for l in r %}
+                                                        <tr>
+                                                            <td>{{ loop.index }} </td>
+                                                            <td>{{ l.username }} </td>
+                                                            <td>{{ l.value }} </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        {% endfor %}
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                        {% endif %}
                         <!-- ./card -->
                     </div>
                     <!-- /.col -->
