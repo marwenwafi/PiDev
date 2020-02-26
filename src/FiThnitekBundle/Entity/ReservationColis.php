@@ -37,6 +37,10 @@ class ReservationColis
     /**
      * @ORM\Column(type="float")
      */
+    private $LongueurResv;
+    /**
+     * @ORM\Column(type="float")
+     */
     private $Prix;
 
     /**
@@ -133,6 +137,22 @@ class ReservationColis
     public function setPrix($Prix)
     {
         $this->Prix = $Prix;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongueurResv()
+    {
+        return $this->LongueurResv;
+    }
+
+    /**
+     * @param mixed $LongueurResv
+     */
+    public function setLongueurResv($LongueurResv)
+    {
+        $this->LongueurResv = $LongueurResv;
     }
 
 

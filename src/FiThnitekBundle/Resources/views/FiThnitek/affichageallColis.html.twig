@@ -3,26 +3,26 @@
 
 {% endblock %}
 {% block container %}
+
     <section class="page-search">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advance Search -->
                     <div class="advance-search">
-                        <form>
+                        <form method="post">
+
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
+                                    <input type="date" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="Date" name="Date">
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
+                                    <input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Prix" name="prix">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
-                                </div>
-                                <div class="form-group col-md-2">
 
-                                    <button type="submit" class="btn btn-primary">Search Now</button>
+                                <div class="form-group col-md-2">
+                                    <input type="submit" class="btn btn-primary" formaction="{{  path('fi_thnitek_AffichageDateColi' ) }}">
+
                                 </div>
                             </div>
                         </form>
@@ -31,24 +31,29 @@
             </div>
         </div>
     </section>
+
     <section class="section-sm">
+
         <div class="container">
 
             <div class="row">
 
                 <div class="col-md-9">
-                    {% for i in r %}
+
+                    <!-- houni-->
                     <div class="product-grid-list">
 
                         <div class="row mt-30">
+                            {% for i in r %}
 
                             <div class="col-sm-12 col-lg-4 col-md-6">
                                 <!-- product card -->
+
                                 <div class="product-item bg-light">
                                     <div class="card">
                                         <div class="thumb-content">
                                             <!-- <div class="price">$200</div> -->
-                                           <img src="{{ i.idU.image }}" >
+                                            <!--  <img src="{{ i.idU.image }}" > -->
                                         </div>
                                         <div >
                                             <h3 class="card-title">{{ i.idU.username }} {{ i.idU.prenom }}</h3>
@@ -68,63 +73,72 @@
 
                                         </div>
                                         <div>
-                                            <h6 class="card-title">Prix : {{ i.Prix }}</h6>
+                                            <h6 class="card-title">Prix Disponible: {{ i.Prix }}</h6>
 
                                         </div>
                                         <div>
-                                            <h6 class="card-title">Hauteur : {{ i.Hauteur }}</h6>
+                                            <h6 class="card-title">Hauteur Disponible: {{ i.Hauteur }}</h6>
 
                                         </div>
                                         <div>
-                                            <h6 class="card-title">Hauteur : {{ i.Largeur }}</h6>
+                                            <h6 class="card-title">Largeur Disponible : {{ i.Largeur }}</h6>
+
+                                        </div>
+                                        <div>
+                                            <h6 class="card-title">Longueur Disponible : {{ i.Longueur }}</h6>
 
                                         </div>
                                         <form method="post">
-                                        <div>
-                                            <h6 class="font-weight-bold pt-4 pb-1">Hauteur
-                                                :</h6>
-                                            <input type="number"  class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="Largeur">
-                                            <h6 class="font-weight-bold pt-4 pb-1">Largeur
-                                                :</h6>
-                                            <input type="number"  class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="Hauteur">
-                                            <input type="submit" formaction="{{  path('fi_thnitek_ajouterReservation',{'id':i.idOffreCol }) }}">
-                                        </div>
+                                            <div>
+                                                <h6 class="font-weight-bold pt-4 pb-1">Largeur
+                                                    :</h6>
+                                                <input type="number" min="1"  class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="Largeur">
+                                                <h6 class="font-weight-bold pt-4 pb-1">hauteur
+                                                    :</h6>
+                                                <input type="number" min="1" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="Hauteur">
+                                                <h6 class="font-weight-bold pt-4 pb-1">Longueur
+                                                    :</h6>
+                                                <input type="number" min="1" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="Longueur">
+                                                <input type="submit" class="btn btn-primary" formaction="{{  path('fi_thnitek_ajouterReservation',{'id':i.idOffreCol }) }}">
+                                            </div>
                                         </form>
 
+                                    </div>
+
+
+
                                 </div>
-
-
-
                             </div>
+                            {% endfor %}
 
                         </div>
-                    </div>
-                    {% endfor %}
-                    <div class="pagination justify-content-center">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+
+
+                        <div class="pagination justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
     </section>
 
 {% endblock %}
