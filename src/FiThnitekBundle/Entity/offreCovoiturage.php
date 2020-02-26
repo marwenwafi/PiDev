@@ -4,7 +4,7 @@
 namespace FiThnitekBundle\Entity;
 use Doctrine\ORM\Mapping as ORM ;
 /**
- * @ORM\Entity
+ * @ORM\Entity (repositoryClass="FiThnitekBundle\Repository\CovoiturageRepository")
  */
 
 class offreCovoiturage
@@ -16,41 +16,46 @@ class offreCovoiturage
      * @ORM\JoinColumn(name="idutilisateur",
      *  referencedColumnName="id")
      */
-private $idutilisateur;
+    private $idutilisateur;
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-private $idoffrecovoiturage;
+    private $idoffrecovoiturage;
     /**
      * @ORM\Column(type="string",length=255)
      */
-private $destination;
-
-    /**
-     * @ORM\Column(type="string",length=255)
-     */
-
-private $depart;
+    private $destination;
 
     /**
      * @ORM\Column(type="string",length=255)
      */
 
-private $date;
+    private $depart;
+
+    /**
+     * @ORM\Column(type="string",length=255)
+     */
+
+    private $date;
+    /**
+     * @ORM\Column(type="string",length=255)
+     */
+
+    private $voiture;
 
     /**
      * @ORM\Column(type="integer")
      */
 
-private $nbrplaceo;
+    private $nbrplaceo;
 
-/**
+    /**
      * @ORM\Column(type="float")
      */
 
-private $prix ;
+    private $prix ;
 
     /**
      * @return mixed
@@ -138,6 +143,22 @@ private $prix ;
     public function getNbrplaceo()
     {
         return $this->nbrplaceo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVoiture()
+    {
+        return $this->voiture;
+    }
+
+    /**
+     * @param mixed $voiture
+     */
+    public function setVoiture($voiture)
+    {
+        $this->voiture = $voiture;
     }
 
     /**

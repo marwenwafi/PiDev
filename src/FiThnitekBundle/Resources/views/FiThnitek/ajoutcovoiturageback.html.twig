@@ -1,5 +1,7 @@
 {% extends 'FiThnitek/basebackFiThnitek.html.twig' %}
+
 {% block content %}
+
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Add Carsharing offer</h3>
@@ -10,31 +12,40 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Departure</label>
-                   <input type="text" class="form-control" id="exampleInputPassword1" name="departureBack">
+                    <input required type="text" class="form-control" id="exampleInputPassword1" name="departureBack" placeholder="Ad Departure">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Destination</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" name="destinationback">
+                    <input required type="text" class="form-control" id="exampleInputPassword1" name="destinationback" placeholder="Ad Destination">
 
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Date</label>
-                    <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password" name="dateeback">
+                    <input type="date" required class="form-control" id="exampleInputPassword1" placeholder="Password" name="dateeback">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Car</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input type="text" required class="form-control" id="exampleInputPassword1" placeholder="Ad Car" name="carback">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Number of places</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Password" name="nbrback">
+                    <input type="number" min="1" required class="form-control" id="exampleInputPassword1" placeholder="Ad Number of places" name="nbrback">
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Price</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Password" name="prixback">
+                    <input type="number" required min="1" class="form-control" id="exampleInputPassword1" placeholder="Ad Price" name="prixback">
                 </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">User</label>
+                    <select name="iduser">
+
+                        {% for i in cov %}
+                            <option value="{{ i.id }}">{{ i.username }} {{ i.prenom }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
+            </div>
 
 
             <!-- /.card-body -->

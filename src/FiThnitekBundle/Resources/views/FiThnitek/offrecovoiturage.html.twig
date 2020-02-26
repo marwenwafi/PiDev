@@ -4,7 +4,7 @@
 {% block container %}
 
 
-    <section >
+    <section  >
         <div class="container">
             <form method="post">
 
@@ -13,27 +13,27 @@
                 <fieldset class="border border-gary p-4 mb-5">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3>Post Your ad</h3>
+                            <h3>Post Your Offer</h3>
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Departure
                                 :</h6>
-                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="departure">
+                            <input required type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad Departure" name="departure">
                             <h6 class="font-weight-bold pt-4 pb-1">Destination:</h6>
-                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="destination">
+                            <input  required type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad Destination" name="destination">
                             <h6 class="font-weight-bold pt-4 pb-1">Date</h6>
-                            <input type="date" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="datee">
+                            <input required type="date" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad Date" name="datee">
                             <h6 class="font-weight-bold pt-4 pb-1">Car:</h6>
-                            <input type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There">
+                            <input required type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad Car " name="car">
                             </div>
 
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">number of places
                                 :</h6>
-                            <input type="number" min="1" max="5" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="nbr">
+                            <input type="number" min="1" max="10" required class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad number of places" name="nbr">
                             <div class="price">
                                 <h6 class="font-weight-bold pt-4 pb-1">Price :</h6>
-                                <input type="number" min="1"  class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There" name="prix">
+                                <input  required type="number" min="1"  class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad Price" name="prix">
 
                             </div>
 
