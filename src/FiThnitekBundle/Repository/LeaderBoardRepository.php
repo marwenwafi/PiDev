@@ -11,26 +11,16 @@ class LeaderBoardRepository extends EntityRepository
     {
         $query = "";
 
-        if ($cat->getType() == "Taxi" && $cat->getNature() == "Avis")
-        {
-            //TODO According to what siwar and yassine do
-            $query = "";
-        }
-        elseif ($cat->getType() == "Taxi" && $cat->getNature() == "Revenu")
-        {
 
+        if ($cat->getType() == "Taxi" && $cat->getNature() == "Revenu")
+        {
             $query = "select U.username, SUM(D.prix) AS value from FiThnitekBundle:DemandeTaxi D, FiThnitekBundle:reservationTaxis R, AppBundle:User U WHERE D.etat=1 AND R.iddemande = D.id AND U.id = R.iduser AND D.dateD BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
-
         }
         elseif ($cat->getType() == "Taxi" && $cat->getNature() == "Activite")
         {
             $query = "select U.username, COUNT(D.id) AS value from FiThnitekBundle:DemandeTaxi D, FiThnitekBundle:reservationTaxis R, AppBundle:User U WHERE D.etat=1 AND R.iddemande = D.id AND U.id = R.iduser AND D.dateD BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
         }
-        elseif ($cat->getType() == "Covoiturage" && $cat->getNature() == "Avis")
-        {
-            //TODO According to what yassine does
-            $query = "";
-        }
+
         elseif ($cat->getType() == "Covoiturage" && $cat->getNature() == "Revenu")
         {
             $query = "select U.username, SUM(R.prixt) AS value from FiThnitekBundle:offreCovoiturage O, FiThnitekBundle:ReservationCovoiturage R, AppBundle:User U WHERE R.idoffrer = O.idoffrecovoiturage AND U.id = O.idutilisateur AND O.date BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
@@ -38,13 +28,6 @@ class LeaderBoardRepository extends EntityRepository
         elseif ($cat->getType() == "Covoiturage" && $cat->getNature() == "Activite")
         {
             $query = "select U.username, COUNT(O.idoffrecovoiturage) AS value from FiThnitekBundle:offreCovoiturage O, AppBundle:User U WHERE O.idutilisateur = U.id AND O.date BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
-        }
-        elseif ($cat->getType() == "Colis" && $cat->getNature() == "Avis")
-        {
-
-            //TODO According to what yassine does
-
-            $query = "";
         }
         elseif ($cat->getType() == "Colis" && $cat->getNature() == "Revenu")
         {
@@ -54,12 +37,7 @@ class LeaderBoardRepository extends EntityRepository
         {
             $query = "select U.username, COUNT(O.idOffreCol) AS value from FiThnitekBundle:OffreColis O, AppBundle:User U WHERE O.idU = U.id AND O.dateCol BETWEEN '$start' AND '$end' GROUP BY U.id ORDER BY value DESC";
         }
-        else
-        {
 
-        }
-
-        //select o from FiThnitekBundle:offreCovoiturage o Where o.date BETWEEN '$start' AND '$end'
         $q = $this->getEntityManager()
             ->createQuery($query);
         $q->setMaxResults($size);

@@ -475,10 +475,13 @@ class TaxiController extends Controller
     {
         if($request->isMethod('POST'))
         {  $region=$request->get('region');
-
+            $t='Chauffeur';
+            $t2='Client';
+            $mod=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t);
+            $sup=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t2);
                 $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->regiononly($region);
             $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
-                return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm));
+                return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm ,'chauffeur'=>$mod,'client'=>$sup));
 
         }
 
@@ -663,20 +666,25 @@ class TaxiController extends Controller
 
     public function etat1Action( )
     {
-
+        $t1='Chauffeur';
+        $t2='Client';
+        $mod=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t1);
+        $sup=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t2);
         $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->etat1();
         $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
-        return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm));
+        return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm, 'chauffeur'=>$mod,'client'=>$sup));
 
 
     }
 
     public function etat0Action( )
-    {
-
+    {$t1='Chauffeur';
+        $t2='Client';
+        $mod=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t1);
+        $sup=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t2);
         $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->etat0();
         $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
-        return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm));
+        return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm, 'chauffeur'=>$mod,'client'=>$sup));
 
 
     }

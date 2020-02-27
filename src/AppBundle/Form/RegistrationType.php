@@ -3,6 +3,7 @@
 
 namespace AppBundle\Form;
 
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -29,7 +30,8 @@ class RegistrationType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',))
             ->add('tel')->add('datedenaissance')
-            ->add('image','Symfony\Component\Form\Extension\Core\Type\FileType');
+            ->add('image','Symfony\Component\Form\Extension\Core\Type\FileType')
+            ->add('captcha', CaptchaType::class);
     }
 
     public function getParent()

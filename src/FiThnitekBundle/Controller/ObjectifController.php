@@ -50,18 +50,19 @@ class ObjectifController extends Controller
         return $this->redirectToRoute("fi_thnitek_listObjectif");
     }
 
-    public function listObjectifAction()
+    public function listObjectifAction(Request $request)
     {
+
         $mod = $this->getDoctrine()->getRepository(Objectif:: class)->findAll();
         $repo = $this->getDoctrine()->getManager()->getRepository(Objectif:: class);
-        $rescov = $repo->customQuery("Revenues Covoiturage",date("yy-m-d", mktime(0,0,0,2,1,2020)),date("yy-m-d", mktime(0,0,0,2,28,2020)));
-        $rescol = $repo->customQuery("Revenues Colis",date("yy-m-d", mktime(0,0,0,2,1,2020)),date("yy-m-d", mktime(0,0,0,2,28,2020)));
+        $rescov = $repo->customQuery("Revenues Covoiturage", date("yy-m-d", mktime(0, 0, 0, 2, 1, 2020)), date("yy-m-d", mktime(0, 0, 0, 2, 28, 2020)));
+        $rescol = $repo->customQuery("Revenues Colis", date("yy-m-d", mktime(0, 0, 0, 2, 1, 2020)), date("yy-m-d", mktime(0, 0, 0, 2, 28, 2020)));
+
         $pieChart = new PieChart();
-        var_dump($rescov[0][1]);
         $pieChart->getData()->setArrayToDataTable(
             [['Source', 'Revenues'],
-                ['Covoiturage',  (int)$rescov[0][1]],
-                ['Colis',   (int) $rescol[0][1]],
+                ['Covoiturage', (int)$rescov[0][1]],
+                ['Colis', (int)$rescol[0][1]],
             ]
         );
         $pieChart->getOptions()->setTitle('Distribution Revenues');
@@ -72,6 +73,12 @@ class ObjectifController extends Controller
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
         $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
         $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+        if($request->isMethod('POST'))
+        {
+            $type=$request->get('type');
+            $mod = $this->getDoctrine()->getRepository(Objectif:: class)->findBy(array('type'=>$type));
+        }
 
         return $this->render('@FiThnitek/Objectif/ListObjectif.html.twig', array('table'=>$mod,'piechart'=>$pieChart));
     }
@@ -106,5 +113,6 @@ class ObjectifController extends Controller
         }
         return $this->render('@FiThnitek/Objectif/DetailsObjectif.html.twig', array('table'=>$objectif));
     }
+
 
 }

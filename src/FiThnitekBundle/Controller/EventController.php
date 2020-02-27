@@ -132,8 +132,8 @@ class EventController extends Controller
         $event= $em->getRepository(Event::class)->find($id);
         $image=$event->getImage();
        // $event->setImage("sourour.png");
-        $x=$request->files->get('fiThnitekbundle_event')['image'];
-        dump($x);
+        //$x=$request->files->get('fiThnitekbundle_event')['image'];
+        //dump($x);
 
         dump($request);
         $form= $this->createForm(Event2Type::class, $event);
@@ -141,7 +141,7 @@ class EventController extends Controller
 
         if($form->isSubmitted() ){
 
-            /****************************/
+            /****************************
             if ($event->getImage()=="sourour" && $request->files->get('fiThnitekbundle_event')['image']==null  ) {
 
                 $event->setImage($image);
@@ -261,11 +261,14 @@ class EventController extends Controller
     {
         $mn = $this->getDoctrine()->getManager();
         $event= $mn->getRepository(Event::class)->find($id);
+        $notif=$mn->getRepository(NotificationEvent::class)->findOneBy(array('idevent'=>$id));
 
         $event->setEtat("Visible");
         $mn->persist($event);
         $mn->flush();
-        $type="sourour";
+        if($notif == null){
+
+
         //////  DEBUT NOTIFICATION //////
 
         $notification= new NotificationEvent();
@@ -276,7 +279,7 @@ class EventController extends Controller
             ->setParameters(array('id'=>$event->getId()
             ))
             ->setIdEvent($id)
-            //->setType("ss")
+
 
 
 
@@ -290,6 +293,8 @@ class EventController extends Controller
         //dump($pusher);
         ///// FIN NOTIFICATION //////
         return $this->redirectToRoute("fi_thnitek_readEvent");
+        }
+        return new Response("l'évenement est déja activé");
 
     }
 /******************Afficher les evenements non repondus ********************/
@@ -317,6 +322,8 @@ class EventController extends Controller
         $mn = $this->getDoctrine()->getManager();
         $event= $mn->getRepository(Event::class)->find($id);
         $notif= $mn->getRepository(NotificationEvent::class)->findOneBy(array('idevent'=>$id));
+        $notif=$mn->getRepository(NotificationEvent::class)->findOneBy(array('idevent'=>$id));
+        if($notif != null){
 
         $event->setEtat("Invisible");
         $mn->persist($event);
@@ -332,6 +339,9 @@ class EventController extends Controller
         return $this->redirectToRoute("fi_thnitek_readEvent");
 
     }
+        return new Response("l'évenement est déja désactivé");
+    }
+
 
 
 
