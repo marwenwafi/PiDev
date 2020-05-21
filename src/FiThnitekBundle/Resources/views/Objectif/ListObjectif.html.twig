@@ -61,16 +61,16 @@
             </thead>
             {% for o in table %}
                 <tr>
-                    <th scope="col">{{ o.IdOjectif }}  </th>
+                    <th scope="col">{{ o.IdObjectif }}  </th>
                     <td>{{ o.titre }} </td>
                     <td>{{ o.description }} </td>
                     <td>{{ o.type }} </td>
                     <td>{{ o.but }} </td>
                     <td>{{ o.StartDate|date("d/m/Y") }} </td>
                     <td>{{ o.EndDate|date("d/m/Y") }} </td>
-                    <td><a href="{{ path('fi_thnitek_detailsObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Details" class="btn btn-block btn-outline-primary btn-sm"></a></td>
-                    <td><a href="{{ path('fi_thnitek_modifyObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Modifier" class="btn btn-block btn-outline-primary btn-sm"></a></td>
-                    <td><a href="{{ path('fi_thnitek_deleteObjectif', {'id': o.IdOjectif}) }}"> <input type="button" value="Supprimer" class="btn btn-block btn-outline-primary btn-sm"></a></td>
+                    <td><a href="{{ path('fi_thnitek_detailsObjectif', {'id': o.IdObjectif}) }}"> <input type="button" value="Details" class="btn btn-block btn-outline-primary btn-sm"></a></td>
+                    <td><a href="{{ path('fi_thnitek_modifyObjectif', {'id': o.IdObjectif}) }}"> <input type="button" value="Modifier" class="btn btn-block btn-outline-primary btn-sm"></a></td>
+                    <td><a href="{{ path('fi_thnitek_deleteObjectif', {'id': o.IdObjectif}) }}"> <input type="button" value="Supprimer" class="btn btn-block btn-outline-primary btn-sm"></a></td>
                 </tr>
             {% endfor %}
         </table>

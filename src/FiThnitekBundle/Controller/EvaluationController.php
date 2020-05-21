@@ -33,7 +33,7 @@ function addRatingAction(Request $request, $id)
         {
             $o+=1;
         }}
-        if ($o!=0){$upd->persist($rating);}
+        if ($o==0){$upd->persist($rating);}
         else {$rating = $upd->getRepository('FiThnitekBundle:Evaluation')->updatecomment($id, $c,$r);}
 
         $upd->flush();

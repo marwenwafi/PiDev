@@ -9,12 +9,279 @@ use FiThnitekBundle\Entity\DemandeTaxi;
 use FiThnitekBundle\Entity\Notification;
 use FiThnitekBundle\Entity\reservationTaxis;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class TaxiController extends Controller
 {
 //////////////         FRONT                //////////////////////////////////////////////////
+
+
+////////////**************** MOBILE ///////////////////////////////////////
+
+//recherchedrld
+    public function recherchedrldMobileAction(Request $request)
+    { $id= $request->get('iduser');
+        $region =$request->get('region');
+        $lieud=$request->get('lieudepart');
+        $date=$request->get('date');
+        $demande = $this->getDoctrine()->getManager()
+            ->getRepository(DemandeTaxi::class)
+            ->recherchedrld($id, $region, $lieud , $date);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($demande);
+        return new JsonResponse($formatted);
+    }
+
+    public function reserverdemandemobileAction(Request $request)
+    {
+
+        $id =  $request->get('iddemande');
+        $iduser =  $request->get('iduser');
+        $demande=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->find($id);
+        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->find($iduser);
+        $reservation = new reservationTaxis();
+        $em=$this->getDoctrine()->getManager();
+        $emm=$this->getDoctrine()->getManager();
+        $reservation->setIduser($user);
+        $demande->setEtat(1);
+        $reservation->setIddemande($demande);
+        $emm->persist($demande);
+        $em->persist($reservation);
+        $em->flush();
+        $emm->flush();
+
+
+        //////  DEBUT NOTIFICATION //////
+
+        $notification= new Notification();
+        $notification
+            ->setTitle(' Taxi Reservation  ')
+            ->setDescription('You have made a taxi reservation  ')
+            ->setRoute('fi_thnitek_affichedemandeuser')
+            ->setParameters(array('id'=>$reservation->getId()))
+            ->setType('Chauffeur');
+        $notification->setIduser($user);
+        $notification->setIdarticle($demande);
+
+
+
+
+
+
+
+        $em->persist($notification);
+
+        $em->flush();
+        $pusher = $this->get('mrad.pusher.notificaitons');
+        $pusher->trigger($notification);
+        ///// FIN NOTIFICATION //////
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+    }
+
+
+
+    public function afficherdemandeuserMobileAction(Request $request)
+    { $id= $request->get('iduser');
+        $demande = $this->getDoctrine()->getManager()
+            ->getRepository(DemandeTaxi::class)
+            ->findBy(array('iduser'=> $id));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($demande);
+        return new JsonResponse($formatted);
+    }
+
+    public function supprimerdemandeuserMobileAction(Request $request)
+    {  $id= $request->get('id');
+        $type= "Client";
+        $demande01=$this->getDoctrine()->getManager();
+        $notif =$this->getDoctrine()->getManager()
+            ->getRepository(Notification::class)->supprimerselon($id , $type );
+        for ($i=0 ; $i< sizeof($notif) ;$i++)
+        {
+            $notif2 =$this->getDoctrine()->getManager()
+                ->getRepository(Notification::class)->find($notif[$i]->getId());
+            $demande01->remove($notif2);
+            $demande01->flush();
+            //dump($notif2);
+
+
+        }
+
+
+        $demande = $this->getDoctrine()->getManager()
+            ->getRepository(DemandeTaxi::class)
+            ->find($id);
+        // $demande01=$this->getDoctrine()->getManager();
+        $demande01->remove($demande);
+        $demande01->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($demande);
+        return new JsonResponse($formatted);
+    }
+
+
+
+    public function afficherReservationuserMobileAction(Request $request)
+    { $id= $request->get('iduser');
+        $demande = $this->getDoctrine()->getManager()
+            ->getRepository(reservationTaxis::class)
+            ->findBy(array('iduser'=> $id));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($demande);
+        return new JsonResponse($formatted);
+    }
+
+    public function afficherAllDemandeMobileAction(Request $request)
+    { $id =  $request->get('iduser');
+        $demande = $this->getDoctrine()->getManager()
+            ->getRepository(DemandeTaxi::class)
+            ->affichagedemande($id);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($demande);
+        return new JsonResponse($formatted);
+    }
+
+    public function trierselonprixMobileAction(Request $request)
+    { $id =  $request->get('iduser');
+        $demande = $this->getDoctrine()->getManager()
+            ->getRepository(DemandeTaxi::class)
+            ->trierselonprice($id);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($demande);
+        return new JsonResponse($formatted);
+    }
+
+
+    public function ajoutermobileAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $demande = new DemandeTaxi();
+        // $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $finduser = $this->getDoctrine()->getRepository(User::class)->find($request->get('idu'));
+        $demande->setIduser( $finduser);
+        $demande->setLieudarrive($request->get('lieua'));
+        $demande->setLieudedepart($request->get('lieud'));
+
+        $demande->setPeriode($request->get('periode'));
+        $demande->setDateD($request->get('dated'));
+        $demande->setRegion($request->get('region'));
+        $demande->setEtat(0);
+        $demande->setPrix($request->get('prix'));
+        $em->persist($demande);
+        $em->flush();
+
+        //////  DEBUT NOTIFICATION //////
+
+        $notification= new Notification();
+        $notification
+            ->setTitle('Request a  Taxi')
+            ->setDescription('You have made a taxi Request ')
+            ->setRoute('fi_thnitek_affichedemandeuser')
+            ->setParameters(array('id'=>$demande->getId()))
+            ->setType('Client')
+            // ->setIduser($user)
+
+
+
+
+        ;
+        $notification->setIduser($finduser);
+        $notification->setIdarticle($demande);
+        //var_dump($demande->getId());
+
+        $em->persist($notification);
+
+        $em->flush();
+        $pusher = $this->get('mrad.pusher.notificaitons');
+        $pusher->trigger($notification);
+        ///// FIN NOTIFICATION //////
+
+
+
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($demande);
+        return new JsonResponse($formatted);
+    }
+
+
+
+
+
+    public function supprimerresrvationMobileAction(Request $request)
+    {
+        $id =  $request->get('id');
+        $type= "Chauffeur";
+        $demande01=$this->getDoctrine()->getManager();
+        $notif =$this->getDoctrine()->getManager()
+            ->getRepository(Notification::class)->supprimerselon( $id,$type);
+        for ($i=0 ; $i< sizeof($notif) ;$i++)
+        {
+            $notif2 =$this->getDoctrine()->getManager()
+                ->getRepository(Notification::class)->find($notif[$i]->getId());
+            $demande01->remove($notif2);
+            $demande01->flush();
+            //dump($notif2);
+
+
+        }
+
+
+
+        $em=$this->getDoctrine()->getRepository(reservationTaxis::class)->find($id);
+        $demande=$this->getDoctrine()->getManager();
+        $demande->remove($em);
+        $demande->flush();
+        $iddemande=$em->getIddemande();
+        $de=$this->getDoctrine()->getRepository(DemandeTaxi::class)->find($iddemande);
+        $de->setEtat(0);
+        $demande->persist($de);
+        $demande->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($em);
+        return new JsonResponse($formatted);
+    }
+
+    public function affichernotifdriverAction(Request $request)
+    { $id= $request->get('iduser');
+        $type="Chauffeur";
+        $notif = $this->getDoctrine()->getManager()
+            ->getRepository(Notification::class)
+            ->trief($type , $id);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($notif);
+        return new JsonResponse($formatted);
+    }
+
+    public function affichernotifclientAction(Request $request)
+    { $id= $request->get('iduser');
+        $type="Client";
+        $notif = $this->getDoctrine()->getManager()
+            ->getRepository(Notification::class)
+            ->trief($type , $id);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($notif);
+        return new JsonResponse($formatted);
+    }
+
+
+
+
+
+    ////////////////////////////////////***********************MOBILE ///////////////////////////////////////
+
+
+
+
+
 
     public function affichedemandeAction(Request $request)
     {/*
@@ -31,7 +298,7 @@ class TaxiController extends Controller
         $now=$datek->format(' Y-m-d');
         if($request->isMethod('POST'))
         {  $region=$request->get('region');
-           $date=$request->get('date');
+            $date=$request->get('date');
             if ($date==$now)
             {
                 $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->region($region,$date);
@@ -52,10 +319,10 @@ class TaxiController extends Controller
             }
         }
         else
-        {
-            $em = $this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->affichagedemande();
-            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        {$user = $this->container->get('security.token_storage')->getToken()->getUser();
             $id=$user->getId();
+            $em = $this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->affichagedemande($id);
+
 
 
             $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->count($id);
@@ -93,9 +360,9 @@ class TaxiController extends Controller
     public function TrierAction( )
     {
 
-            $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->triprix();
-            $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
-            return $this->render('@FiThnitek/FiThnitek/affichedemande.html.twig', array('a' => $em , 'b'=>$emm));
+        $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->triprix();
+        $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
+        return $this->render('@FiThnitek/FiThnitek/affichedemande.html.twig', array('a' => $em , 'b'=>$emm));
 
 
     }
@@ -129,8 +396,8 @@ class TaxiController extends Controller
         $id=$user->getId();
         //var_dump($idd);
         $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->count($id);
-      $a=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->find($article);
-       $t='Demande Taxi';
+        $a=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->find($article);
+        $t='Demande Taxi';
 
         $t1='Modifier Demande Taxi';
         $t2='Supprimer Demande Taxi';
@@ -145,7 +412,7 @@ class TaxiController extends Controller
 
     public function affichedemandeuserAction()
     {    $user = $this->container->get('security.token_storage')->getToken()->getUser();
-          $id=$user->getId();
+        $id=$user->getId();
         $em = $this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->findBy(array('iduser'=>$id));
         $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->count($id);
         $t='Demande Taxi';
@@ -162,7 +429,7 @@ class TaxiController extends Controller
         $id=$user->getId();
 
         $em = $this->getDoctrine()->getManager()->getRepository(reservationTaxis::class)->findBy(array('iduser'=>$id));
-       $t='Chauffeur';
+        $t='Chauffeur';
 
         $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->trief($t,$id);
 
@@ -212,7 +479,7 @@ class TaxiController extends Controller
                     ->setRoute('fi_thnitek_affichedemandeuser')
                     ->setParameters(array('id'=>$demande->getId()))
                     ->setType('Client')
-                   ->setIduser($user)
+                    ->setIduser($user)
 
 
 
@@ -251,7 +518,7 @@ class TaxiController extends Controller
                     ->setRoute('fi_thnitek_affichedemandeuser')
                     ->setParameters(array('id'=>$demande->getId()))
                     ->setType('Client')
-                   // ->setIduser($user)
+                    // ->setIduser($user)
 
 
 
@@ -277,44 +544,23 @@ class TaxiController extends Controller
         return $this->render('@FiThnitek/FiThnitek/ajouterdemande.html.twig' , array('demande'=> $demande, 'user'=>$user,'b'=>$emm));
     }
 
-   public function supprimerAction($id)
-   {$em=$this->getDoctrine()->getRepository(DemandeTaxi::class)->find($id);
-   $sou=$em->getId();
-       $user = $this->container->get('security.token_storage')->getToken()->getUser();
-       $idu=$user->getId();
-   $notid=$this->getDoctrine()->getRepository(Notification::class)->supp($idu,$id);
+    public function supprimerAction($id)
+    {$em=$this->getDoctrine()->getRepository(DemandeTaxi::class)->find($id);
+        // $sou=$em->getId();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $idu=$user->getId();
+        // $notid=$this->getDoctrine()->getRepository(Notification::class)->supp($idu,$id);
 
-   $demande=$this->getDoctrine()->getManager();
-       $demande01=$this->getDoctrine()->getManager();
-   /*////////////// notif ///////////////////////////
-       $user = $this->container->get('security.token_storage')->getToken()->getUser();
-       $notification= new Notification();
-       $notification
-           ->setTitle('Supprimer Demande Taxi')
-           ->setDescription('a supprime sa demande de taxi ')
-           ->setRoute('fi_thnitek_affichedemandeuser')
-           ->setParameters(array('id'=>$em->getId()))
-           ->setIduser($user)
+        //  $demande=$this->getDoctrine()->getManager();
+        $demande01=$this->getDoctrine()->getManager();
+
+        $demande01->remove($em);
+        $demande01->flush();
 
 
-       ;
-       $notification->setIdarticle($demande);
 
-       $s=$this->getDoctrine()->getManager();
-       $s->persist($notification);
-
-       $s->flush();
-       $pusher = $this->get('mrad.pusher.notificaitons');
-       $pusher->trigger($notification);
-   ////////Notif     //*/
-   $demande01->remove($em);
-   $demande01->flush();
-
-
-       //$emm=$this->getDoctrine()->getRepo
-       //sitory(DemandeTaxi::class)->findAll();
-       return $this->redirectToRoute("fi_thnitek_affichedemandeuser") ;
-   }
+        return $this->redirectToRoute("fi_thnitek_affichedemandeuser") ;
+    }
 
     public function supprimerresAction($id)
     {$em=$this->getDoctrine()->getRepository(reservationTaxis::class)->find($id);
@@ -328,7 +574,7 @@ class TaxiController extends Controller
         $demande->flush();
 
 
-       // $emm=$this->getDoctrine()->getRepository(reservationTaxis::class)->findAll();
+        // $emm=$this->getDoctrine()->getRepository(reservationTaxis::class)->findAll();
         return $this->redirectToRoute("fi_thnitek_affichereservation") ;
     }
 
@@ -336,79 +582,79 @@ class TaxiController extends Controller
     public function modifierAction($id ,Request $request)
     { $em=$this->getDoctrine()->getManager();
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
-    $demande=$em->getRepository(DemandeTaxi::class)->find($id);
+        $demande=$em->getRepository(DemandeTaxi::class)->find($id);
         $date=new \DateTime();
 
         $daten=$date->format('Y-m-d');
         $dateh=$date->format('H:m');
-    if($request->isMethod('POST'))
-    {  if($request->get('date') == $daten  and $request->get('periode') > $dateh )
-    {
-        $demande->setIduser( $user);
-        $demande->setregion($request->get('region'));
-        $demande->setLieudarrive($request->get('lieua'));
-        $demande->setLieudedepart($request->get('lieud'));
-        $demande->setPeriode($request->get('periode'));
-        $demande->setdateD($request->get('date'));
+        if($request->isMethod('POST'))
+        {  if($request->get('date') == $daten  and $request->get('periode') > $dateh )
+        {
+            $demande->setIduser( $user);
+            $demande->setregion($request->get('region'));
+            $demande->setLieudarrive($request->get('lieua'));
+            $demande->setLieudedepart($request->get('lieud'));
+            $demande->setPeriode($request->get('periode'));
+            $demande->setdateD($request->get('date'));
 
-        $em->flush();
-        //////  DEBUT NOTIFICATION //////
+            $em->flush();
+            //////  DEBUT NOTIFICATION //////
 
-        $notification= new Notification();
-        $notification
-            ->setTitle('Modifier Demande Taxi')
-            ->setDescription('vous avez modifier une demande de taxi ')
-            ->setRoute('fi_thnitek_affichedemandeuser')
-            ->setParameters(array('id'=>$demande->getId()))
-            ->setIduser($user)
-            ->setType('Client')
-
-
-        ;
-        $notification->setIdarticle($demande);
-
-        $em->persist($notification);
-
-        $em->flush();
-        $pusher = $this->get('mrad.pusher.notificaitons');
-        $pusher->trigger($notification);
-        ///// FIN NOTIFICATION //////
-        return $this->redirectToRoute("fi_thnitek_affichedemandeuser");
-    }
-    else if($request->get('date') > $daten )
-    {
-        $demande->setIduser( $user);
-        $demande->setregion($request->get('region'));
-        $demande->setLieudarrive($request->get('lieua'));
-        $demande->setLieudedepart($request->get('lieud'));
-        $demande->setPeriode($request->get('periode'));
-        $demande->setdateD($request->get('date'));
-
-        $em->flush();
-        //////  DEBUT NOTIFICATION //////
-
-        $notification= new Notification();
-        $notification
-            ->setTitle('Modifier Demande Taxi')
-            ->setDescription('vous avez modifier une demande de taxi ')
-            ->setRoute('fi_thnitek_affichedemandeuser')
-            ->setParameters(array('id'=>$demande->getId()))
-            ->setIduser($user)
+            $notification= new Notification();
+            $notification
+                ->setTitle('Modifier Demande Taxi')
+                ->setDescription('vous avez modifier une demande de taxi ')
+                ->setRoute('fi_thnitek_affichedemandeuser')
+                ->setParameters(array('id'=>$demande->getId()))
+                ->setIduser($user)
+                ->setType('Client')
 
 
+            ;
+            $notification->setIdarticle($demande);
 
-        ;
-        $notification->setIdarticle($demande);
-        $notification->setType('Client');
-        $em->persist($notification);
+            $em->persist($notification);
 
-        $em->flush();
-        $pusher = $this->get('mrad.pusher.notificaitons');
-        $pusher->trigger($notification);
-        ///// FIN NOTIFICATION //////
-        return $this->redirectToRoute("fi_thnitek_affichedemandeuser");
-    }
-    }
+            $em->flush();
+            $pusher = $this->get('mrad.pusher.notificaitons');
+            $pusher->trigger($notification);
+            ///// FIN NOTIFICATION //////
+            return $this->redirectToRoute("fi_thnitek_affichedemandeuser");
+        }
+        else if($request->get('date') > $daten )
+        {
+            $demande->setIduser( $user);
+            $demande->setregion($request->get('region'));
+            $demande->setLieudarrive($request->get('lieua'));
+            $demande->setLieudedepart($request->get('lieud'));
+            $demande->setPeriode($request->get('periode'));
+            $demande->setdateD($request->get('date'));
+
+            $em->flush();
+            //////  DEBUT NOTIFICATION //////
+
+            $notification= new Notification();
+            $notification
+                ->setTitle('Modifier Demande Taxi')
+                ->setDescription('vous avez modifier une demande de taxi ')
+                ->setRoute('fi_thnitek_affichedemandeuser')
+                ->setParameters(array('id'=>$demande->getId()))
+                ->setIduser($user)
+
+
+
+            ;
+            $notification->setIdarticle($demande);
+            $notification->setType('Client');
+            $em->persist($notification);
+
+            $em->flush();
+            $pusher = $this->get('mrad.pusher.notificaitons');
+            $pusher->trigger($notification);
+            ///// FIN NOTIFICATION //////
+            return $this->redirectToRoute("fi_thnitek_affichedemandeuser");
+        }
+        }
         return $this->render('@FiThnitek/FiThnitek/modifierdemande.html.twig' , array('demande'=> $demande,'user'=>$user));
     }
 
@@ -467,7 +713,7 @@ class TaxiController extends Controller
 
 
     }
- //////////////////// BACK        /////////////////////////////////////////
+    //////////////////// BACK        /////////////////////////////////////////
 
 
     public function affichedemandeBAction(Request $request)
@@ -479,9 +725,9 @@ class TaxiController extends Controller
             $t2='Client';
             $mod=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t);
             $sup=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t2);
-                $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->regiononly($region);
+            $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->regiononly($region);
             $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
-                return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm ,'chauffeur'=>$mod,'client'=>$sup));
+            return $this->render('@FiThnitek/FiThnitekBack/afficherdemande.html.twig', array('a' => $em , 'b'=>$emm ,'chauffeur'=>$mod,'client'=>$sup));
 
         }
 
@@ -526,7 +772,7 @@ class TaxiController extends Controller
             $em->persist($demande);
 
             $em->flush();
-           // return $this->redirectToRoute("fi_thnitek_affichedemandeB") ;
+            // return $this->redirectToRoute("fi_thnitek_affichedemandeB") ;
         }
         $t='Chauffeur';
         $t2='Client';
@@ -559,7 +805,7 @@ class TaxiController extends Controller
 
 
         else {$user = $this->container->get('security.token_storage')->getToken()->getUser();
-        $id=$user->getId();
+            $id=$user->getId();
             $t1='Chauffeur';
             $t2='Client';
 
@@ -568,9 +814,9 @@ class TaxiController extends Controller
             $mod=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t1);
             $sup=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t2);
             $emm= $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
-        $use= $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
-        return $this->render('@FiThnitek/FiThnitekBack/affichereservation.html.twig',array('a'=>$em,'u'=>$use,'b'=>$emm, 'chauffeur'=>$mod,'client'=>$sup));
-    }}
+            $use= $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
+            return $this->render('@FiThnitek/FiThnitekBack/affichereservation.html.twig',array('a'=>$em,'u'=>$use,'b'=>$emm, 'chauffeur'=>$mod,'client'=>$sup));
+        }}
 
     public function supprimerresBAction($id)
     {$em=$this->getDoctrine()->getRepository(reservationTaxis::class)->find($id);
@@ -637,7 +883,7 @@ class TaxiController extends Controller
 
 
             $em->flush();
-             return $this->redirectToRoute("fi_thnitek_affichedemandeB");
+            return $this->redirectToRoute("fi_thnitek_affichedemandeB");
         }
         return $this->render('@FiThnitek/FiThnitekBack/modifierdemande.html.twig', array('demande' => $demande));
 
@@ -645,13 +891,13 @@ class TaxiController extends Controller
 /////////////////////////////////////////NoTIFICATION                 ////////////////////////
 
 
-     public function NotificationUserAction()
-     {$em = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
+    public function NotificationUserAction()
+    {$em = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
 
-         return $this->render('@FiThnitek/FiThnitek/affichenotif.html.twig', array('a' => $em));
+        return $this->render('@FiThnitek/FiThnitek/affichenotif.html.twig', array('a' => $em));
 
 
-     }
+    }
 
     public function supprimernotifAction($id)
     {$em=$this->getDoctrine()->getRepository(Notification::class)->find($id);
@@ -711,7 +957,7 @@ class TaxiController extends Controller
         $mod=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t1);
         $sup=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t2);
         //$emm= $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
-       // $use= $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
+        // $use= $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
 
         $em=$this->getDoctrine()->getManager()->getRepository(DemandeTaxi::class)->find($id);
         $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
@@ -721,12 +967,12 @@ class TaxiController extends Controller
     }
     public function notifchAction()
     {$t='Chauffeur';
-    $t2='Client';
+        $t2='Client';
 
         $mod=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t);
         $emm = $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
         $sup=$this->getDoctrine()->getManager()->getRepository(Notification::class)->trieb($t2);
-       // $emm= $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
+        // $emm= $this->getDoctrine()->getManager()->getRepository(Notification::class)->findAll();
         $use= $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
         return $this->render('@FiThnitek/FiThnitekBack/affichenotifc.html.twig', array( 'b'=>$emm,'u'=>$use,'b'=>$emm, 'chauffeur'=>$mod,'client'=>$sup));
 
@@ -759,5 +1005,22 @@ class TaxiController extends Controller
         // you can add a notification to a list of entities
         // the third parameter `$flush` allows you to directly flush the entities
         $manager->addNotification(array($this->getUser()), $notif, true);
-    }*/
     }
+
+       public function supprimerdemandeMobileAction(Request $request)
+    {   $id =  $request->get('iddemande');
+    $em =$this->getDoctrine()->getManager(DemandeTaxi::class)->find($id);
+
+        //$demande01=$this->getDoctrine()->getManager();
+        //$demande01->remove($em);
+       // $demande01->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($em);
+        return new JsonResponse($formatted);
+    }
+
+
+
+
+    */
+}

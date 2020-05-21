@@ -248,20 +248,5 @@ class LeaderBoard
         $this->color = $color;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBanner()
-    {
-        return $this->banner;
-    }
-
-    /**
-     * @param mixed $banner
-     */
-    public function setBanner($banner)
-    {
-        $this->banner = $banner;
-    }
 
 }

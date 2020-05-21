@@ -122,62 +122,6 @@ class Event
     private $operation;
 
 
-    /***************************************************/
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="iduser"),
-     * ReferencedColumnName="id")
-     */
-    private $user;
-
-
-    /********************************************************
-
-
-
-
-    /**
-
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinTable(name="participer",
-     *     joinColumns={@ORM\JoinColumn(name="eventId" ,
-     *     referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="userId" ,
-     *     referencedColumnName="id")}
-     *     )
-     *
-     */
-    private $participants;
-    /***************************************************/
-    /*******************************************************/
-    /**
-
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinTable(name="destinataires",
-     *     joinColumns={@ORM\JoinColumn(name="eventId" ,
-     *     referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="userId" ,
-     *     referencedColumnName="id")}
-     *     )
-     *
-     */
-    private $destinataires;
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getDestinataires()
-    {
-        return $this->destinataires;
-    }
-
-    /**
-     * @param ArrayCollection $destinataires
-     */
-    public function setDestinataires($destinataires)
-    {
-        $this->destinataires = $destinataires;
-    }
 
 
 
@@ -192,22 +136,6 @@ class Event
     }
 
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getParticipants()
-    {
-        return $this->participants;
-    }
-
-    /**
-     * @param ArrayCollection $participants
-     */
-    public function setParticipants($participants)
-    {
-        $this->participants = $participants;
-
-    }
     /**
      * Get id
      *
@@ -268,21 +196,7 @@ class Event
         return $this->dateFin;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAdmins()
-    {
-        return $this->admins;
-    }
 
-    /**
-     * @param mixed $admins
-     */
-    public function setAdmins($admins)
-    {
-        $this->admins = $admins;
-    }
 
     /**
      * Set description

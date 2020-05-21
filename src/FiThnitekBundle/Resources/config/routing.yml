@@ -14,6 +14,14 @@ fi_thnitek_showLeaderBoard:
     path:     /showLeaderBoard
     defaults: { _controller: FiThnitekBundle:LeaderBoard:showLeaderBoard }
 
+fi_thnitek_lbDetails:
+    path:     /lbDetails/{idl}
+    defaults: { _controller: FiThnitekBundle:LeaderBoard:lbDetails }
+
+fi_thnitek_allLBList:
+    path:     /allLBList
+    defaults: { _controller: FiThnitekBundle:LeaderBoard:allLBList }
+
 fi_thnitek_maha_routes:
     resource: "@FiThnitekBundle/Resources/config/routingCovoiturage.yml"
     prefix: /covoiturage
@@ -29,6 +37,10 @@ fi_thnitek_jassem_routes:
 fi_thnitek_sourour_routes:
     resource: "@FiThnitekBundle/Resources/config/sourour.yml"
     prefix: /
+
+fi_thnitek_sourour_MOBILE_routes:
+    resource: "@FiThnitekBundle/Resources/config/sourourMobile.yml"
+    prefix: /mobile
 
 fi_thnitek_yassin_routes:
     resource: "@FiThnitekBundle/Resources/config/yassin.yml"

@@ -17,7 +17,7 @@ class Objectif
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idOjectif;
+    private $idObjectif;
 
     /**
      * @ORM\Column(type="string",length=255)
@@ -71,17 +71,17 @@ class Objectif
     /**
      * @return mixed
      */
-    public function getIdOjectif()
+    public function getIdObjectif()
     {
-        return $this->idOjectif;
+        return $this->idObjectif;
     }
 
     /**
-     * @param mixed $idOjectif
+     * @param mixed $idObjectif
      */
-    public function setIdOjectif($idOjectif)
+    public function setIdObjectif($idObjectif)
     {
-        $this->idOjectif = $idOjectif;
+        $this->idObjectif = $idObjectif;
     }
 
 

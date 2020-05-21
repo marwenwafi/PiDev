@@ -8,15 +8,32 @@ use Doctrine\ORM\EntityRepository;
 
 class TaxiRepository extends EntityRepository
 {
-    public function affichagedemande()
-{
-    $date=new \DateTime();
+    public function affichagedemande($id)
+    {
+        $date=new \DateTime();
 
-    $daten=$date->format(' Y-m-d');
-    $periode=$date->format('H:i');
-    $qb = $this->getEntityManager()->createQuery("select c from FiThnitekBundle:DemandeTaxi c   where  c.etat=0 and ((c.periode >= '$periode'  and c.dateD ='$daten') or (c.dateD >'$daten')) ORDER BY  c.id DESC  ");
-    return $query = $qb->getResult() ;
-}
+        $daten=$date->format(' Y-m-d');
+        $periode=$date->format('H:i');
+        $qb = $this->getEntityManager()->createQuery("select c from FiThnitekBundle:DemandeTaxi c   where c.iduser != '$id' and c.etat=0 and ((c.periode >= '$periode'  and c.dateD ='$daten') or (c.dateD >'$daten')) ORDER BY  c.id DESC  ");
+        return $query = $qb->getResult() ;
+    }
+    public function recherchedrld($id , $region , $lieud , $date)
+    {
+
+        $qb = $this->getEntityManager()->createQuery("select c from FiThnitekBundle:DemandeTaxi c   where c.iduser != '$id' and c.region= '$region' and c.lieudedepart = '$lieud' and c.etat=0 and c.dateD ='$date' ORDER BY  c.id DESC  ");
+        return $query = $qb->getResult() ;
+    }
+
+
+    public function trierselonprice($id)
+    {
+        $date=new \DateTime();
+
+        $daten=$date->format(' Y-m-d');
+        $periode=$date->format('H:i');
+        $qb = $this->getEntityManager()->createQuery("select c from FiThnitekBundle:DemandeTaxi c   where c.iduser != '$id' and c.etat=0 and ((c.periode >= '$periode'  and c.dateD ='$daten') or (c.dateD >'$daten')) ORDER BY  c.prix DESC  ");
+        return $query = $qb->getResult() ;
+    }
     public function etat1()
     {
 

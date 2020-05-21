@@ -1,0 +1,55 @@
+fi_thnitek_homepage:
+    path:     /
+    defaults: { _controller: FiThnitekBundle:Default:index }
+
+fi_thnitek_readEventjson:
+    path:     /event/read
+    defaults: { _controller: FiThnitekBundle:MobileSourour:read}
+
+fi_thnitek_readNotificationsjson:
+    path:     /Notifications/read
+    defaults: { _controller: FiThnitekBundle:MobileSourour:readNoPart}
+
+fi_thnitek_newEventjson:
+    path:     /event/add
+    defaults: { _controller: FiThnitekBundle:MobileSourour:newEvent}
+
+fi_thnitek_converssionjson:
+    path:     /event/convert
+    defaults: { _controller: FiThnitekBundle:MobileSourour:ConverssionJson}
+
+fi_thnitek_thisUserjson:
+    path:     /event/myuser
+    defaults: { _controller: FiThnitekBundle:MobileSourour:thisUserJson}
+
+fi_thnitek_deleteEventjson:
+    path:     /event/delete/{id}
+    defaults: { _controller: FiThnitekBundle:MobileSourour:deleteJson}
+
+fi_thnitek_editEventjson:
+    path:     /event/edit/{id}
+    defaults: { _controller: FiThnitekBundle:MobileSourour:updateJson}
+
+fi_thnitek_onEventjson:
+    path:     /event/on/{id}
+    defaults: { _controller: FiThnitekBundle:MobileSourour:activerJson}
+
+fi_thnitek_offEventjson:
+  path:     /event/off/{id}
+  defaults: { _controller: FiThnitekBundle:MobileSourour:desactiverJson}
+
+fi_thnitek_thisEventjson:
+    path:     /event/getOne/{id}
+    defaults: { _controller: FiThnitekBundle:MobileSourour:thisEventJson}
+
+fi_thnitek_ParticipeEventjson:
+    path:     /event/participe/{id}
+    defaults: { _controller: FiThnitekBundle:MobileSourour:participerJson}
+
+fi_thnitek_RepondreEventjson:
+    path:     /event/repondre/{id}
+    defaults: { _controller: FiThnitekBundle:MobileSourour:repondreJson}
+
+fi_thnitek_quetionnaireListEventjson:
+  path:     /event/quest/{id}
+  defaults: { _controller: FiThnitekBundle:MobileSourour:quetionnaireList}

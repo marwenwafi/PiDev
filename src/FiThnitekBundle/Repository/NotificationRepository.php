@@ -41,10 +41,23 @@ class NotificationRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->getEntityManager()->createQuery("select e from FiThnitekBundle:Notification e  where  e.seen=0 and e.type='$t' ");
         return $query = $qb->getResult() ;
     }
+
+    public function supprimerselon($id , $type )
+    {
+
+        $qb = $this->getEntityManager()->createQuery("select e from FiThnitekBundle:Notification e  where  e.idarticle='$id' and e.type='$type '");
+        return $query = $qb->getResult() ;
+    }
+
+
+
     public function trief($t,$idu)
     {
 
         $qb = $this->getEntityManager()->createQuery("select e from FiThnitekBundle:Notification e  where  e.seen=0 and e.type='$t' and e.iduser ='$idu' ");
         return $query = $qb->getResult() ;
     }
+
+
+
 }

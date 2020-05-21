@@ -2,3 +2,32 @@ user_homepage:
     path:     /
     defaults: { _controller: UserBundle:Default:index }
 
+
+
+user_loginMobile:
+    path:     /loginMobile/
+    defaults: { _controller: UserBundle:UserMobile:loginMobile}
+
+user_logoutMobile:
+    path:     /logoutMobile/
+    defaults: { _controller: UserBundle:UserMobile:logoutMobile}
+
+user_registerMobile:
+    path:     /registerMobile/
+    defaults: { _controller: UserBundle:UserMobile:registerMobile}
+
+user_updateUserMobile:
+    path:     /updateUserMobile/
+    defaults: { _controller: UserBundle:UserMobile:updateUserMobile}
+
+user_sendVerifCodeMobile:
+    path:     /sendVerifCodeMobile/
+    defaults: { _controller: UserBundle:UserMobile:sendVerifCode}
+
+user_modifyPasswordMobile:
+    path:     /modifyPasswordMobile/
+    defaults: { _controller: UserBundle:UserMobile:modifyPassword}
+
+user_getUserProfilePicture:
+    path:     /getUserProfilePicture/
+    defaults: { _controller: UserBundle:UserMobile:getUserProfilePicture}

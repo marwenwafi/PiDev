@@ -29,6 +29,36 @@ fi_thnitek_affichageReservation:
 fi_thnitek_supprimerReservation:
     path:     /supprimerReservation/{id}
     defaults: { _controller: FiThnitekBundle:OffreColis:supprimerReserver }
+create_Colis:
+    path:     /Colisnew
+    defaults: { _controller: FiThnitekBundle:OffreColis:new}
+affichemobile_Colis:
+    path:     /allMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:myOffre}
+afficheReservationmobile_Colis:
+    path:     /myReservationMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:myReservation}
+afficheAllOffremobile_Colis:
+    path:     /ALLOffreMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:allOffre}
+affichetrie_Colis:
+    path:     /TrierMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:trier}
+affichetrieprix_Colis:
+    path:     /Trierprixmobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:trierprix}
+rechercheMobile_Colis:
+    path:     /rechercheMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:rechercheDateMobile}
+supprimerMobileOffre:
+    path:     /supprimerOffreMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:supprimerOffreMobile }
+supprimerMobileReservation:
+    path:     /supprimerReserverMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:supprimerReserverMobile }
+ajouterReservation:
+    path:     /ajouterReservationMobile
+    defaults: { _controller: FiThnitekBundle:OffreColis:ajouterReservationMobile }
 ###############################Back################################################
 fi_thnitek_afficherOffreback:
     path:     /afficherOffreback

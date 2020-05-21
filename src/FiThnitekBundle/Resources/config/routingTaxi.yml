@@ -93,3 +93,52 @@ fi_thnitek_affichenotifall:
   path:     /notifallb
   defaults: { _controller: FiThnitekBundle:Taxi:notifallb }
 
+
+    ############        Mobile                    ##################
+  ################ Demande ###############
+fi_thnitek_ajouterdemandemobile:
+  path:     /ajouterdemandemobile
+  defaults: { _controller: FiThnitekBundle:Taxi:ajoutermobile }
+
+fi_thnitek_afficherdemandemobile:
+  path:     /afficherdemandemobile
+  defaults: { _controller: FiThnitekBundle:Taxi:afficherAllDemandeMobile }
+
+fi_thnitek_afficheruserdemandemobile:
+  path:     /afficherdemandeusermobile
+  defaults: { _controller: FiThnitekBundle:Taxi:afficherdemandeuserMobile }
+
+fi_thnitek_trierdemandeprixmobilenmobile:
+  path:     /trierselonprixMobile
+  defaults: { _controller: FiThnitekBundle:Taxi:trierselonprixMobile }
+
+fi_thnitek_deleterequestmobile:
+  path:     /deleterequestmobile
+  defaults: { _controller: FiThnitekBundle:Taxi:supprimerdemandeuserMobile }
+
+fi_thnitek_recherchedrld:
+  path:     /recherchedrld
+  defaults: { _controller: FiThnitekBundle:Taxi:recherchedrldMobile }
+
+
+
+fi_thnitek_notificationclientmobile:
+  path:     /notifclientmobile
+  defaults: { _controller: FiThnitekBundle:Taxi:affichernotifclient }
+
+  ########## Reservation ###############"
+
+fi_thnitek_afficheruserReservationmobile:
+  path:     /afficherReservationusermobile
+  defaults: { _controller: FiThnitekBundle:Taxi:afficherReservationuserMobile }
+
+fi_thnitek_deletereservationmobile:
+  path:     /deletereservationmobile
+  defaults: { _controller: FiThnitekBundle:Taxi:supprimerresrvationMobile }
+
+fi_thnitek_reservationdemandemobile:
+  path:     /reservationmobile
+  defaults: { _controller: FiThnitekBundle:Taxi:reserverdemandemobile }
+fi_thnitek_notificationdrivermobile:
+  path:     /notifdrivermobile
+  defaults: { _controller: FiThnitekBundle:Taxi:affichernotifdriver }

@@ -8,7 +8,10 @@ use FiThnitekBundle\Entity\offreCovoiturage;
 use FiThnitekBundle\Entity\ReservationCovoiturage;
 use FiThnitekBundle\Form\LeaderBoardType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class LeaderBoardController extends Controller
 {
@@ -59,8 +62,7 @@ class LeaderBoardController extends Controller
 
     public function showLeaderBoardAction()
     {
-        //ALL Ordered By nbr of all offers
-        $mod1 = $this->getDoctrine()->getRepository(User:: class)->findBy(array(),array('nbroffre'=>'DESC'));
+
         $leaderBoardS = $this->getDoctrine()->getRepository(LeaderBoard::class)->findAll();
         $repo = $this->getDoctrine()->getManager()->getRepository(LeaderBoard:: class);
         $size = sizeof($leaderBoardS);
@@ -72,5 +74,32 @@ class LeaderBoardController extends Controller
         }
 
         return $this->render('@FiThnitek/LeaderBoard/ShowLeaderBoard.html.twig', array('results'=>$results,'boards'=>$leaderBoardS));
+    }
+
+    public function allLBListAction()
+    {
+        $leaderBoardS = $this->getDoctrine()->getRepository(LeaderBoard::class)->findAll();
+        $lb = [];
+        for ($i=0;$i<sizeof($leaderBoardS);$i++)
+        {
+            $l = $this->getDoctrine()->getRepository(LeaderBoard:: class)->find($leaderBoardS[$i]->getIdleaderboard());
+            $l->setStartDate($l->getStartDate()->format('Y-m-d'));
+            $l->setEndDate($l->getEndDate()->format('Y-m-d'));
+            $l->setCategory(null);
+            $lb[] = $l;
+        }
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($lb);
+        return new JsonResponse($formatted);
+    }
+
+    public function lbDetailsAction($idl)
+    {
+        $repo = $this->getDoctrine()->getManager()->getRepository(LeaderBoard:: class);
+        $l = $this->getDoctrine()->getRepository(LeaderBoard:: class)->find($idl);
+        $results = $repo->customQuery($l->getCategory(),$l->getSize(),$l->getStartDate()->format('Y-m-d'),$l->getEndDate()->format('Y-m-d'));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($results);
+        return new JsonResponse($formatted);
     }
 }

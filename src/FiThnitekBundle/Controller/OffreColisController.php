@@ -2,11 +2,17 @@
 
 namespace FiThnitekBundle\Controller;
 
+use AppBundle\Entity\User;
+use Esprit\ApiBundle\Entity\Task;
 use FiThnitekBundle\Entity\OffreColis;
 use FiThnitekBundle\Entity\ReservationColis;
 use QRcode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
 //include "../../../vendor/phpqrcode/qrlib.php";
 //use vendor\phpqrcode\qrlib.php;
 include "../vendor/phpqrcode/qrlib.php";
@@ -47,7 +53,7 @@ class OffreColisController extends Controller
             $Offre->setVoiture($request->get('Modele'));
             $Offre->setLieuArrive($request->get('Arrive'));
             $Offre->setPrix($request->get('Prix'));
-
+            $user->setNbroffre($user->getNbroffre()+1);
             $upd->persist($Offre);
             $upd->flush();
             $Longueur = $Offre->getLongueur();
@@ -68,7 +74,7 @@ class OffreColisController extends Controller
     }
     public function afficherOffreAction()
     {
-     //   QRcode::png("maha bagra", "jas.png", "H", 20, 20);
+        //   QRcode::png("maha bagra", "jas.png", "H", 20, 20);
 
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
@@ -121,47 +127,47 @@ class OffreColisController extends Controller
     {
         $upd = $this->getDoctrine()->getManager();
         $Reservation = new ReservationColis();
-      //  $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        //  $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $id2=$user->getId();
         $Offre = $this->getDoctrine()->getRepository(OffreColis::class)->find($id);
-      $em = $this->getDoctrine()->getRepository(OffreColis::class)->MyOffre($id2);
+        $em = $this->getDoctrine()->getRepository(OffreColis::class)->MyOffre($id2);
 
         if (($request->isMethod('POST')) && ($Offre->getHauteur() >= $request->get('Hauteur')) && ($Offre->getLargeur() >= $request->get('Largeur')) && ($Offre->getLongueur() >= $request->get('Longueur'))) {
-         //   if (($Offre->getHauteur() <= $request->get('Hauteur')) && ($Offre->getLargeur() <= $request->get('Largeur'))) {
-                $Prix = $Offre->getPrix();
-                $idU=$Offre->getIdU()->getUsername();
+            //   if (($Offre->getHauteur() <= $request->get('Hauteur')) && ($Offre->getLargeur() <= $request->get('Largeur'))) {
+            $Prix = $Offre->getPrix();
+            $idU=$Offre->getIdU()->getUsername();
             //    $PrixOffre = $Reservation->getPrix();
-                $hauteur = $Offre->getHauteur();
-                $largeur = $Offre->getLargeur();
-                $longueur = $Offre->getlongueur();
-                $Reservation->setIdOffre($Offre);
-                $Reservation->setIdUR($user);
-                $Reservation->setHauteurResv($request->get('Hauteur'));
-                $Reservation->setLargeurResv($request->get('Largeur'));
-                $Reservation->setLongueurResv($request->get('Longueur'));
+            $hauteur = $Offre->getHauteur();
+            $largeur = $Offre->getLargeur();
+            $longueur = $Offre->getlongueur();
+            $Reservation->setIdOffre($Offre);
+            $Reservation->setIdUR($user);
+            $Reservation->setHauteurResv($request->get('Hauteur'));
+            $Reservation->setLargeurResv($request->get('Largeur'));
+            $Reservation->setLongueurResv($request->get('Longueur'));
 
             $Reservation->setPrix($request->get('Longueur') *$request->get('Hauteur') * $request->get('Largeur') * $Prix);
-                $Offre->setLongueur($longueur - $request->get('Longueur'));
-                $Offre->setLargeur($largeur - $request->get('Largeur'));
-                $m = $request->get('Largeur');
-                $Hauteur = $request->get('Hauteur');
-                $Longeur=$request->get('Longueur');
-                $chaine = "Prix:" . $Prix . "  Largeur: " . $m . "Hauteur:" . $Hauteur ."Longueur: ".$Longeur. $user.$idU;
-                QRcode::png($chaine, "QrReseFront.png", "H", 20, 20);
+            $Offre->setLongueur($longueur - $request->get('Longueur'));
+            $Offre->setLargeur($largeur - $request->get('Largeur'));
+            $m = $request->get('Largeur');
+            $Hauteur = $request->get('Hauteur');
+            $Longeur=$request->get('Longueur');
+            $chaine = "Prix:" . $Prix . "  Largeur: " . $m . "Hauteur:" . $Hauteur ."Longueur: ".$Longeur. $user.$idU;
+            QRcode::png($chaine, "QrReseFront.png", "H", 20, 20);
 
 
-                $upd->persist($Reservation);
-                $upd->persist($Offre);
-                $upd->flush();
-                return $this->redirectToRoute("fi_thnitek_affichageReservation");
-                //  return $this->render('@FiThnitek/FiThnitek/login.html.twig',array('r'=> $Reservation));
-            }
-      //  }
-
-            return $this->render('@FiThnitek/FiThnitek/affichageallColis.html.twig', array('r' => $em));
-
+            $upd->persist($Reservation);
+            $upd->persist($Offre);
+            $upd->flush();
+            return $this->redirectToRoute("fi_thnitek_affichageReservation");
+            //  return $this->render('@FiThnitek/FiThnitek/login.html.twig',array('r'=> $Reservation));
         }
+        //  }
+
+        return $this->render('@FiThnitek/FiThnitek/affichageallColis.html.twig', array('r' => $em));
+
+    }
 
     public function afficherReserverAction()
     {
@@ -214,6 +220,7 @@ class OffreColisController extends Controller
             $Offre->setVoiture($request->get('Modele'));
             $Offre->setLieuArrive($request->get('Arrive'));
             $Offre->setPrix($request->get('Prix'));
+
             $upd->persist($Offre);
             $upd->flush();
             $Longueur = $Offre->getLongueur();
@@ -228,7 +235,7 @@ class OffreColisController extends Controller
             QRcode::png($chaine, "QrAjouterOffreBack.png", "H", 20, 20);
             return $this->redirectToRoute('fi_thnitek_afficherOffreback');
         }
-return $this->render('@FiThnitek/FiThnitek/ajouterOffreBack.html.twig');
+        return $this->render('@FiThnitek/FiThnitek/ajouterOffreBack.html.twig');
     }
     public function supprimerOffrebackAction($id)
     {
@@ -276,7 +283,7 @@ return $this->render('@FiThnitek/FiThnitek/ajouterOffreBack.html.twig');
             $Prix = $Offre->getPrix();
             $idU=$Offre->getIdU()->getUsername();
             $PrixOffre = $Reservation->getPrix();
-        //    $hauteur = $Offre->getHauteur();
+            //    $hauteur = $Offre->getHauteur();
             $largeur = $Offre->getLargeur();
             $Longueur=$Offre->getLongueur();
             $Reservation->setIdOffre($Offre);
@@ -287,7 +294,7 @@ return $this->render('@FiThnitek/FiThnitek/ajouterOffreBack.html.twig');
 
             //    $Reservation->setPrix($request->get('Hauteur')*$request->get('Largeur'));
             $Reservation->setPrix($request->get('Longueur')*$request->get('Hauteur') * $request->get('Largeur') * $Prix);
-          //  $Offre->setPrix($Prix - $PrixOffre);
+            //  $Offre->setPrix($Prix - $PrixOffre);
             $Offre->setLongueur($Longueur - $request->get('Longueur'));
             $Offre->setLargeur($largeur - $request->get('Largeur'));
             $m = $request->get('Largeur');
@@ -369,5 +376,159 @@ return $this->render('@FiThnitek/FiThnitek/ajouterOffreBack.html.twig');
 
 
     }
+    /////////////////////Mobile////////////////////////////////////////////
+
+    public function newAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $Offre = new OffreColis();
+        $user=$this->getDoctrine()->getManager()->getRepository(User::class)->find($request->get('id'));
+        $Offre->setLieuDepart($request->get('Depart'));
+        $Offre->setDateCol($request->get('Date'));
+        $Offre->setHauteur($request->get('Hauteur'));
+        $Offre->setLargeur($request->get('Largeur'));
+        $Offre->setLongueur($request->get('Longueur'));
+        $Offre->setVoiture($request->get('Modele'));
+        $Offre->setLieuArrive($request->get('Arrive'));
+        $Offre->setPrix($request->get('Prix'));
+        $Offre->setIdU($user);
+        $em->persist($Offre);
+        $em->flush();
+        $Longueur = $Offre->getLongueur();
+        $Prix = $Offre->getPrix();
+        $Hauteur = $Offre->getHauteur();
+        $Largeur = $Offre->getLargeur();
+        $Arrive=$Offre->getLieuArrive();
+        $Depart=$Offre->getLieuDepart();
+        $Date=$Offre->getDateCol();
+        //C:\Users\marwe\Documents\NetBeansProjects\FiThnitekMobile
+        $chaine = "Prix:" . $Prix . "  Largeur: " . $Largeur . "Hauteur:" . $Hauteur ."Longueur:".$Longueur ."user:".$user."Arrive:".$Arrive."Depart:".$Depart."Date:".$Date;
+        QRcode::png($chaine, "C:\Users\marwe\Documents\NetBeansProjects\FiThnitekMobile\QrAjouterOffre.png", "H", 20, 20);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($Offre);
+        return new JsonResponse($formatted);
+    }
+    public function myOffreAction(Request $request)
+    {
+        $tasks = $this->getDoctrine()->getManager()
+            ->getRepository('FiThnitekBundle:OffreColis')
+            ->findBy(array('idU'=>$request->get("id")));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($tasks);
+        return new JsonResponse($formatted);
+    }
+    public function allOffreAction(Request $request)
+    {
+
+        $tasks = $this->getDoctrine()->getManager()
+            ->getRepository('FiThnitekBundle:OffreColis')
+            ->MyOffre($request->get("id"));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($tasks);
+        return new JsonResponse($formatted);
+    }
+    public function myReservationAction(Request $request)
+    {
+        $tasks = $this->getDoctrine()->getManager()
+            ->getRepository('FiThnitekBundle:ReservationColis')
+            ->findBy(array('idUR'=>$request->get("id")));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($tasks);
+        return new JsonResponse($formatted);
+    }
+    public function trierAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getRepository(OffreColis::class)->trierm($request->get("id"));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($em);
+        return new JsonResponse($formatted);
+    }
+    public function trierprixAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getRepository(OffreColis::class)->trieprix($request->get("id"));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($em);
+        return new JsonResponse($formatted);
+    }
+    ////C:\Users\USER\Desktop\MOBILE\FiThnitekMobile
+    public function rechercheDateMobileAction(Request $request)
+    {
+        $Date=$request->get('Date');
+        $Prix=$request->get('prix');
+        $em=$this->getDoctrine()->getManager()->getRepository(OffreColis::class)->findDate($Date,$Prix,$request->get("id"));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($em);
+        return new JsonResponse($formatted);
+    }
+    public function supprimerOffreMobileAction(Request $request)
+    {
+        $supp=$this->getDoctrine()->getManager();
+        $ids=$this->getDoctrine()->getRepository(OffreColis::class)->find($request->get("ids"));
+        $supp->remove($ids);
+        $supp->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($ids);
+        return new JsonResponse($formatted);
+    }
+
+    public function supprimerReserverMobileAction(Request $request)
+    {
+        $supp=$this->getDoctrine()->getManager();
+        $ids=$this->getDoctrine()->getRepository(ReservationColis::class)->find($request->get("ids"));
+        $hauteur = $ids->getLongueurResv();
+        $largeur=$ids->getLargeurResv();
+        $id=$ids->getIdReservationColis();
+        $ido=$ids->getIdOffre();
+        $Offre = $this->getDoctrine()->getRepository(OffreColis::class)->find($ido);
+        $Offre->setLongueur($hauteur + $Offre->getLongueur() );
+        $Offre->setLargeur($largeur + $Offre->getLargeur());
+        $chaine = "Reservation d'id" .$id."longeur:" .  $hauteur ."largeur:".$largeur;
+        //    $chaine = "mshet" ;
+        QRcode::png($chaine, "C:\Users\marwe\Documents\NetBeansProjects\FiThnitekMobile\Reservationsupprimer.png", "H", 20, 20);
+        $supp->persist($Offre);
+        $supp->remove($ids);
+        $supp->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($ids);
+        return new JsonResponse($formatted);
+    }
+    public function ajouterReservationMobileAction(Request $request)
+    {
+        $upd = $this->getDoctrine()->getManager();
+        $Reservation = new ReservationColis();
+
+        $Offre = $this->getDoctrine()->getRepository(OffreColis::class)->find($request->get("idcolis"));
+        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get("iduser"));
+
+        $Prix = $Offre->getPrix();
+        // $idU=$Offre->getIdU()->getUsername();
+        $PrixOffre = $Reservation->getPrix();
+        $hauteur = $Offre->getHauteur();
+        $largeur = $Offre->getLargeur();
+        $longueur = $Offre->getlongueur();
+        $Reservation->setIdOffre($Offre);
+        $Reservation->setIdUR($user);
+        $Reservation->setHauteurResv($request->get('Hauteur'));
+        $Reservation->setLargeurResv($request->get('Largeur'));
+        $Reservation->setLongueurResv($request->get('Longueur'));
+
+        $Reservation->setPrix($request->get('Longueur') *$request->get('Hauteur') * $request->get('Largeur') * $Prix);
+        $Offre->setLongueur($longueur - $request->get('Longueur'));
+        $Offre->setLargeur($largeur - $request->get('Largeur'));
+        $m = $request->get('Largeur');
+        $Hauteur = $request->get('Hauteur');
+        $Longeur=$request->get('Longueur');
+        $PrixOffre = $Reservation->getPrix();
+        $chaine = "Prix d'offre:" . $Prix . "  Largeur: " . $m . "Hauteur:" . $Hauteur ."Longueur: ".$Longeur."prix Reservation:".$PrixOffre."..user:" .$user;
+        QRcode::png($chaine,"C:\Users\marwe\Documents\NetBeansProjects\FiThnitekMobile\Reservation.png", "H", 20, 20);
+        $upd->persist($Reservation);
+        $upd->persist($Offre);
+        $upd->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($Reservation);
+        return new JsonResponse($formatted);
+
+    }
+
 
 }

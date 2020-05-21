@@ -1,62 +1,92 @@
 ################Front####################################
 fi_thnitek_ajoutcovoiturageutilisateur:
-    path:     /ajoutcovoiturage1
-    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovoiturage }
+  path:     /ajoutcovoiturage1
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovoiturage }
+fi_thnitek_ajoutcovoiturageutilisateurmobile:
+  path:     /ajoutcovoituragemobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovoiturageMobile }
 fi_thnitek_affichcovoiturageutilisateur:
-    path:     /affichagebase
-    defaults: { _controller: FiThnitekBundle:Covoiturage:readoffre }
+  path:     /affichagebase
+  defaults: { _controller: FiThnitekBundle:Covoiturage:readoffre }
+fi_thnitek_affichcovoiturageutilisateurmobile:
+  path:     /affichagebasemobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:readoffreCovoituragemobile }
 fi_thnitek_supprimeroffrecov:
-    path:     /supprimeroffrecov/{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimeroffre }
+  path:     /supprimeroffrecov/{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:supprimeroffre }
+fi_thnitek_supprimeroffrecovMobile:
+  path:     /supprimeroffrecovmobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:supprimeroffrecovmobile }
 fi_thnitek_modifieroffrecov:
-    path:     /modifieroffrecov/{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:modifieroffrecovoiturage }
+  path:     /modifieroffrecov/{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:modifieroffrecovoiturage }
 fi_thnitek_afficheall:
-    path:     /afficheall
-    defaults: { _controller: FiThnitekBundle:Covoiturage:afficheall }
+  path:     /afficheall
+  defaults: { _controller: FiThnitekBundle:Covoiturage:afficheall }
+fi_thnitek_afficheallmobile:
+  path:     /afficheallmobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:afficheralloffercovoiturageMobile }
 fi_thnitek_ajoutreservation:
-    path:     /ajoutreserv/{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutreservation }
+  path:     /ajoutreserv/{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutreservation }
+fi_thnitek_ajoutreservationMobile:
+  path:     /addresmobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ajouterrescovMobile }
 fi_thnitek_readreservation:
-    path:     /readres
-    defaults: { _controller: FiThnitekBundle:Covoiturage:readreserver }
+  path:     /readres
+  defaults: { _controller: FiThnitekBundle:Covoiturage:readreserver }
+fi_thnitek_readreservationMobile:
+  path:     /readresmobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:readresMobile }
 fi_thnitek_supprimerReservCov:
-    path:     /supprimerrescov{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescov }
+  path:     /supprimerrescov{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescov }
+fi_thnitek_supprimerReservCovMobile:
+  path:     /suppresMobil
+  defaults: { _controller: FiThnitekBundle:Covoiturage:suprimerrescovMobile }
 fi_thnitek_ordonneroffreCov:
-    path:     /ordonnercov
-    defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecov }
+  path:     /ordonnercov
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecov }
+fi_thnitek_ordonneroffreCovMobile:
+  path:     /ordonnercovMobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecovMobile }
+fi_thnitek_ordonneroffreCovMobile2:
+  path:     /ordonnercovMobile2
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecovMobile2 }
 fi_thnitek_ordonneroffreCov1:
-    path:     /ordonnercov1
-    defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecov1 }
+  path:     /ordonnercov1
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ordonneroffrecov1 }
 fi_thnitek_maha:
   path:     /maha
   defaults: { _controller: FiThnitekBundle:Covoiturage:readoffre }
 fi_thnitek_rechercheReservCov:
   path:     /recherchecov
   defaults: { _controller: FiThnitekBundle:Covoiturage:recherchecov }
+fi_thnitek_rechercheReservCovmobile:
+  path:     /recherchecovmobile
+  defaults: { _controller: FiThnitekBundle:Covoiturage:recherchemobile }
 #######################Back################################
 fi_thnitek_ajoutcovback:
-    path:     /ajoutcovback
-    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovback }
+  path:     /ajoutcovback
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutoffrecovback }
 fi_thnitek_affichagecovback:
-    path:     /affichagecovback
-    defaults: { _controller: FiThnitekBundle:Covoiturage:afficheallcovback }
+  path:     /affichagecovback
+  defaults: { _controller: FiThnitekBundle:Covoiturage:afficheallcovback }
 fi_thnitek_supprimercovback:
-    path:     /supprimercovback/{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimercovback }
+  path:     /supprimercovback/{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:supprimercovback }
 fi_thnitek_modifierrcovback:
-    path:     /modifiercovback/{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:modifiercovback }
+  path:     /modifiercovback/{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:modifiercovback }
 fi_thnitek_resevcovback:
-    path:     /reservcovback/{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutreservationBack }
+  path:     /reservcovback/{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:ajoutreservationBack }
 fi_thnitek_affichageresevcovback:
-    path:     /affichageresback
-    defaults: { _controller: FiThnitekBundle:Covoiturage:afficheallreservationBack }
+  path:     /affichageresback
+  defaults: { _controller: FiThnitekBundle:Covoiturage:afficheallreservationBack }
 fi_thnitek_suppresevcovback:
-    path:     /supprimerrescovback/{id}
-    defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescovback }
+  path:     /supprimerrescovback/{id}
+  defaults: { _controller: FiThnitekBundle:Covoiturage:supprimerrescovback }
 fi_thnitek_recherchecovback:
   path:     /recherchecovback
   defaults: { _controller: FiThnitekBundle:Covoiturage:recherchecovBack }
